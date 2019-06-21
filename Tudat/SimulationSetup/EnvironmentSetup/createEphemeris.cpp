@@ -69,9 +69,14 @@ std::shared_ptr< ephemerides::Ephemeris > createBodyEphemeris(
             }
             else
             {
+                std::string bodyToUse = bodyName;
+                if( directEphemerisSettings->getBodyToRetrieve( ) != "" )
+                {
+                    bodyToUse = directEphemerisSettings->getBodyToRetrieve( );
+                }
                 // Create corresponding ephemeris object.
                 ephemeris = std::make_shared< SpiceEphemeris >(
-                            bodyName,
+                            bodyToUse,
                             directEphemerisSettings->getFrameOrigin( ),
                             directEphemerisSettings->getCorrectForStellarAberration( ),
                             directEphemerisSettings->getCorrectForLightTimeAberration( ),

@@ -39,6 +39,7 @@ LambertTargeterGooding::LambertTargeterGooding(
     if ( !rootFinder.get( ) )
     {
         rootFinder = std::make_shared< NewtonRaphson >( 1.0e-12, 1000 );
+//        rootFinder = std::make_shared< NewtonRaphson >( 1.0e-8, 3000 );
     }
 
     // Execute algorithm.

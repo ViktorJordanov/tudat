@@ -183,11 +183,13 @@ public:
                                   const bool correctForStellarAberration = false,
                                   const bool correctForLightTimeAberration = false,
                                   const bool convergeLighTimeAberration = false,
-                                  const EphemerisType ephemerisType = direct_spice_ephemeris ):
+                                  const EphemerisType ephemerisType = direct_spice_ephemeris,
+                                  const std::string& bodyToRetrieve = "" ):
         EphemerisSettings( ephemerisType, frameOrigin, frameOrientation ),
         correctForStellarAberration_( correctForStellarAberration ),
         correctForLightTimeAberration_( correctForLightTimeAberration ),
-        convergeLighTimeAberration_( convergeLighTimeAberration ){ }
+        convergeLighTimeAberration_( convergeLighTimeAberration ),
+    bodyToRetrieve_( bodyToRetrieve ){ }
 
 
     //! Destructor
@@ -216,6 +218,12 @@ public:
      *  calculating light time.
      */
     bool getConvergeLighTimeAberration( ){ return convergeLighTimeAberration_; }
+
+    std::string getBodyToRetrieve( )
+    {
+        return bodyToRetrieve_;
+    }
+
 protected:
 
     //! Boolean whether to correct for stellar aberration in retrieved values of (observed state).
@@ -226,6 +234,8 @@ protected:
 
     //! Boolean whether to use single iteration or max. 3 iterations for calculating light time.
     bool convergeLighTimeAberration_;
+
+    std::string bodyToRetrieve_;
 };
 
 //! EphemerisSettings derived class for defining settings of a ephemeris interpolated from Spice
