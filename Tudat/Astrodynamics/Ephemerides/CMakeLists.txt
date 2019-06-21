@@ -24,6 +24,7 @@ set(EPHEMERIDES_SOURCES
   "${SRCROOT}${EPHEMERIDESDIR}/frameManager.cpp"
   "${SRCROOT}${EPHEMERIDESDIR}/compositeEphemeris.cpp"
   "${SRCROOT}${EPHEMERIDESDIR}/tabulatedRotationalEphemeris.cpp"
+  "${SRCROOT}${EPHEMERIDESDIR}/synchronousRotationalEphemeris.cpp"
 )
 
 # Set the header files.
@@ -38,6 +39,7 @@ set(EPHEMERIDES_HEADERS
   "${SRCROOT}${EPHEMERIDESDIR}/keplerStateExtractor.h"
   "${SRCROOT}${EPHEMERIDESDIR}/keplerEphemeris.h"
   "${SRCROOT}${EPHEMERIDESDIR}/rotationalEphemeris.h"
+  "${SRCROOT}${EPHEMERIDESDIR}/constantRotationalEphemeris.h"
   "${SRCROOT}${EPHEMERIDESDIR}/simpleRotationalEphemeris.h"
   "${SRCROOT}${EPHEMERIDESDIR}/tabulatedEphemeris.h"
   "${SRCROOT}${EPHEMERIDESDIR}/frameManager.h"
@@ -47,6 +49,7 @@ set(EPHEMERIDES_HEADERS
   "${SRCROOT}${EPHEMERIDESDIR}/constantRotationalEphemeris.h"
   "${SRCROOT}${EPHEMERIDESDIR}/multiArcEphemeris.h"
   "${SRCROOT}${EPHEMERIDESDIR}/tabulatedRotationalEphemeris.h"
+  "${SRCROOT}${EPHEMERIDESDIR}/synchronousRotationalEphemeris.h"
 )
 
 # Add static libraries.
@@ -90,6 +93,10 @@ target_link_libraries(test_CompositeEphemeris ${TUDAT_PROPAGATION_LIBRARIES} ${B
 add_executable(test_TabulatedRotationalEphemeris "${SRCROOT}${EPHEMERIDESDIR}/UnitTests/unitTestTabulatedRotationalEphemeris.cpp")
 setup_custom_test_program(test_TabulatedRotationalEphemeris "${SRCROOT}${EPHEMERIDESDIR}")
 target_link_libraries(test_TabulatedRotationalEphemeris tudat_ephemerides tudat_reference_frames tudat_input_output tudat_basic_astrodynamics tudat_basic_mathematics tudat_spice_interface ${TUDAT_EXTERNAL_LIBRARIES} ${Boost_LIBRARIES})
+
+add_executable(test_SynchronousRotationalEphemeris "${SRCROOT}${EPHEMERIDESDIR}/UnitTests/unitTestSynchronousRotationalEphemeris.cpp")
+setup_custom_test_program(test_SynchronousRotationalEphemeris "${SRCROOT}${EPHEMERIDESDIR}")
+target_link_libraries(test_SynchronousRotationalEphemeris ${TUDAT_PROPAGATION_LIBRARIES} ${Boost_LIBRARIES})
 
 endif()
 
