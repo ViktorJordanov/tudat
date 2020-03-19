@@ -39,6 +39,7 @@
         "arcWiseBiasList": [
           [
             [
+<<<<<<< Updated upstream
 <<<<<<< HEAD
               1e-006
             ],
@@ -50,10 +51,17 @@
             [
               1e-06
 >>>>>>> origin/master
+=======
+              1e-006
+            ],
+            [
+              1e-006
+>>>>>>> Stashed changes
             ]
           ],
           [
             [
+<<<<<<< Updated upstream
 <<<<<<< HEAD
               1e-007
             ],
@@ -65,15 +73,25 @@
             [
               1e-07
 >>>>>>> origin/master
+=======
+              1e-007
+            ],
+            [
+              1e-007
+>>>>>>> Stashed changes
             ]
           ],
           [
             [
+<<<<<<< Updated upstream
 <<<<<<< HEAD
               2e-006
 =======
               2e-06
 >>>>>>> origin/master
+=======
+              2e-006
+>>>>>>> Stashed changes
             ],
             [
               100000.0
@@ -106,29 +124,41 @@
         "arcWiseBiasList": [
           [
             [
+<<<<<<< Updated upstream
 <<<<<<< HEAD
               1e-012
 =======
               1e-12
 >>>>>>> origin/master
+=======
+              1e-012
+>>>>>>> Stashed changes
             ]
           ],
           [
             [
+<<<<<<< Updated upstream
 <<<<<<< HEAD
               1e-013
 =======
               1e-13
 >>>>>>> origin/master
+=======
+              1e-013
+>>>>>>> Stashed changes
             ]
           ],
           [
             [
+<<<<<<< Updated upstream
 <<<<<<< HEAD
               2e-012
 =======
               2e-12
 >>>>>>> origin/master
+=======
+              2e-012
+>>>>>>> Stashed changes
             ]
           ]
         ],
@@ -147,11 +177,15 @@
             "biasType": "constantRelativeBias",
             "constantBias": [
               [
+<<<<<<< Updated upstream
 <<<<<<< HEAD
                 1e-006
 =======
                 1e-06
 >>>>>>> origin/master
+=======
+                1e-006
+>>>>>>> Stashed changes
               ]
             ]
           },
@@ -203,11 +237,15 @@
         "biasType": "constantAbsoluteBias",
         "constantBias": [
           [
+<<<<<<< Updated upstream
 <<<<<<< HEAD
             1e-012
 =======
             1e-12
 >>>>>>> origin/master
+=======
+            1e-012
+>>>>>>> Stashed changes
           ]
         ]
       },

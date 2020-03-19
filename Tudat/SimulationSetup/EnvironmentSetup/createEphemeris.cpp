@@ -1,8 +1,12 @@
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
 =======
 /*    Copyright (c) 2010-2019, Delft University of Technology
 >>>>>>> origin/master
+=======
+/*    Copyright (c) 2010-2018, Delft University of Technology
+>>>>>>> Stashed changes
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -73,12 +77,16 @@ std::shared_ptr< ephemerides::Ephemeris > createBodyEphemeris(
             }
             else
             {
+<<<<<<< Updated upstream
 <<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
                 std::string bodyToUse = bodyName;
                 if( directEphemerisSettings->getBodyToRetrieve( ) != "" )
                 {
                     bodyToUse = directEphemerisSettings->getBodyToRetrieve( );
                 }
+<<<<<<< Updated upstream
                 // Create corresponding ephemeris object.
                 ephemeris = std::make_shared< SpiceEphemeris >(
                             bodyToUse,
@@ -89,6 +97,11 @@ std::shared_ptr< ephemerides::Ephemeris > createBodyEphemeris(
                 ephemeris = std::make_shared< SpiceEphemeris >(
                             bodyName,
 >>>>>>> origin/master
+=======
+                // Create corresponding ephemeris object.
+                ephemeris = std::make_shared< SpiceEphemeris >(
+                            bodyToUse,
+>>>>>>> Stashed changes
                             directEphemerisSettings->getFrameOrigin( ),
                             directEphemerisSettings->getCorrectForStellarAberration( ),
                             directEphemerisSettings->getCorrectForLightTimeAberration( ),
@@ -112,7 +125,10 @@ std::shared_ptr< ephemerides::Ephemeris > createBodyEphemeris(
             {
                 // Since only the barycenters of planetary systems are included in the standard DE
                 // ephemerides, append 'Barycenter' to body name.
+<<<<<<< Updated upstream
 <<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
                 std::string inputName;
                 inputName = bodyName;
                 if( bodyName == "Mars" ||
@@ -123,9 +139,12 @@ std::shared_ptr< ephemerides::Ephemeris > createBodyEphemeris(
                     std::cerr << "Warning, position of " << bodyName << " taken as barycenter of that body's "
                               << "planetary system." << std::endl;
                 }
+<<<<<<< Updated upstream
 =======
                 std::string inputName = bodyName;
 >>>>>>> origin/master
+=======
+>>>>>>> Stashed changes
 
                 // Create corresponding ephemeris object.
                 if( !interpolatedEphemerisSettings->getUseLongDoubleStates( ) )
@@ -141,11 +160,15 @@ std::shared_ptr< ephemerides::Ephemeris > createBodyEphemeris(
                 }
                 else
                 {
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 #if( BUILD_EXTENDED_PRECISION_PROPAGATION_TOOLS )
 =======
 #if( BUILD_WITH_EXTENDED_PRECISION_PROPAGATION_TOOLS )
 >>>>>>> origin/master
+=======
+#if( BUILD_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+>>>>>>> Stashed changes
 
                     ephemeris = createTabulatedEphemerisFromSpice< long double, double >(
                                 inputName,
@@ -199,11 +222,15 @@ std::shared_ptr< ephemerides::Ephemeris > createBodyEphemeris(
                 }
                 else
                 {
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 #if( BUILD_EXTENDED_PRECISION_PROPAGATION_TOOLS )
 =======
 #if( BUILD_WITH_EXTENDED_PRECISION_PROPAGATION_TOOLS )
 >>>>>>> origin/master
+=======
+#if( BUILD_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+>>>>>>> Stashed changes
 
                     // Cast input history to required type.
                     if( tabulatedEphemerisSettings->getBodyStateHistory( ).size( ) != 0 )
