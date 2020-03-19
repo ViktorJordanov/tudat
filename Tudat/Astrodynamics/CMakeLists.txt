@@ -1,4 +1,8 @@
+<<<<<<< HEAD
  #    Copyright (c) 2010-2018, Delft University of Technology
+=======
+ #    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  #    All rigths reserved
  #
  #    This file is part of the Tudat. Redistribution and use in source and
@@ -23,6 +27,12 @@ set(RELATIVITYDIR "${ASTRODYNAMICSDIR}/Relativity")
 set(SYSTEMMODELSDIR "${ASTRODYNAMICSDIR}/SystemModels")
 set(TRAJECTORYDIR "${ASTRODYNAMICSDIR}/TrajectoryDesign")
 set(PROPULSIONDIR "${ASTRODYNAMICSDIR}/Propulsion")
+<<<<<<< HEAD
+=======
+if( BUILD_WITH_SOCIS_2019 )
+    set(LOWTHRUSTTRAJECTORIESDIR "${ASTRODYNAMICSDIR}/LowThrustTrajectories")
+endif( )
+>>>>>>> origin/master
 if( BUILD_WITH_ESTIMATION_TOOLS )
     set(OBSERVATIONMODELSDIR "${ASTRODYNAMICSDIR}/ObservationModels")
     set(ORBITDETERMINATIONDIR "${ASTRODYNAMICSDIR}/OrbitDetermination")
@@ -48,6 +58,9 @@ add_subdirectory("${SRCROOT}${RELATIVITYDIR}")
 add_subdirectory("${SRCROOT}${SYSTEMMODELSDIR}")
 add_subdirectory("${SRCROOT}${TRAJECTORYDIR}")
 add_subdirectory("${SRCROOT}${PROPULSIONDIR}")
+if( BUILD_WITH_SOCIS_2019 )
+  add_subdirectory("${SRCROOT}${LOWTHRUSTTRAJECTORIESDIR}")
+endif()
 add_subdirectory("${SRCROOT}${GROUNDSTATIONSDIR}")
 if(USE_SOFA)
   add_subdirectory("${SRCROOT}${EARTHORIENTATIONDIR}")
@@ -67,6 +80,10 @@ get_target_property(SYSTEMMODELSSOURCES tudat_system_models SOURCES)
 get_target_property(TRAJECTORYSOURCES tudat_trajectory_design SOURCES)
 get_target_property(PROPULSIONSOURCES tudat_propulsion SOURCES)
 get_target_property(GROUNDSTATIONSSOURCES tudat_ground_stations SOURCES)
+<<<<<<< HEAD
+=======
+get_target_property(LOWTHRUSTTRAJECTORIESDIRSOURCES tudat_low_thrust_trajectories SOURCES)
+>>>>>>> origin/master
 
 if( BUILD_WITH_ESTIMATION_TOOLS )
 get_target_property(OBSERVATIONMODELSDIR tudat_observation_models SOURCES)

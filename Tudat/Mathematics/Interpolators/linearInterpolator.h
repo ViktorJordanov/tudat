@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -248,7 +252,11 @@ extern template class LinearInterpolator< double, Eigen::VectorXd >;
 extern template class LinearInterpolator< double, Eigen::Vector6d >;
 extern template class LinearInterpolator< double, Eigen::MatrixXd >;
 
+<<<<<<< HEAD
 #if( BUILD_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+=======
+#if( BUILD_WITH_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+>>>>>>> origin/master
 extern template class LinearInterpolator< double, Eigen::Matrix< long double, Eigen::Dynamic, 1 > >;
 extern template class LinearInterpolator< double, Eigen::Matrix< long double, Eigen::Dynamic, 6 > >;
 extern template class LinearInterpolator< double, Eigen::Matrix< long double, Eigen::Dynamic,  Eigen::Dynamic > >;

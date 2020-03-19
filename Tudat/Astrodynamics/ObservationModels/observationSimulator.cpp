@@ -12,7 +12,11 @@ template class ObservationSimulator< 2, double, double >;
 template class ObservationSimulator< 3, double, double >;
 template class ObservationSimulator< 6, double, double >;
 
+<<<<<<< HEAD
 #if( BUILD_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+=======
+#if( BUILD_WITH_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+>>>>>>> origin/master
 template class ObservationSimulatorBase< double, Time >;
 template class ObservationSimulatorBase< long double, double >;
 template class ObservationSimulatorBase< long double, Time >;

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -36,6 +40,22 @@ void VariationalEquations::getBodyInitialStatePartialMatrix(
     // Add partials of body positions and velocities.
     currentMatrixDerivative.block( 0, 0, totalDynamicalStateSize_, numberOfParameterValues_ ) =
             ( variationalMatrix_.template cast< StateScalarType >( ) * stateTransitionAndSensitivityMatrices );
+<<<<<<< HEAD
+=======
+
+    if( couplingEntriesToSuppress_ > 0 )
+    {
+        int numberOfStaticParameters = numberOfParameterValues_ - totalDynamicalStateSize_;
+        int numberOfUncoupledEntries = totalDynamicalStateSize_ - couplingEntriesToSuppress_;
+
+        currentMatrixDerivative.block( couplingEntriesToSuppress_, totalDynamicalStateSize_, numberOfUncoupledEntries, numberOfStaticParameters ) =
+                variationalMatrix_.template cast< StateScalarType >( ).block(
+                    couplingEntriesToSuppress_, couplingEntriesToSuppress_,
+                    numberOfUncoupledEntries, numberOfUncoupledEntries ) *
+                stateTransitionAndSensitivityMatrices.block(
+                    couplingEntriesToSuppress_, totalDynamicalStateSize_, numberOfUncoupledEntries, numberOfStaticParameters );
+    }
+>>>>>>> origin/master
 }
 
 //! Calculates matrix containing partial derivatives of state derivatives w.r.t. body state.
@@ -55,8 +75,13 @@ void VariationalEquations::setBodyStatePartialMatrix( )
 
     if( dynamicalStatesToEstimate_.count( propagators::rotational_state ) > 0 )
     {
+<<<<<<< HEAD
          Eigen::VectorXd rotationalStates = currentStatesPerTypeInConventionalRepresentation_.at(
                      propagators::rotational_state );
+=======
+        Eigen::VectorXd rotationalStates = currentStatesPerTypeInConventionalRepresentation_.at(
+                    propagators::rotational_state );
+>>>>>>> origin/master
 
         int startIndex = stateTypeStartIndices_.at( propagators::rotational_state );
         for( unsigned int i = 0; i < dynamicalStatesToEstimate_.at( propagators::rotational_state ).size( ); i++ )
@@ -93,6 +118,7 @@ void VariationalEquations::setBodyStatePartialMatrix( )
         }
     }
 
+<<<<<<< HEAD
    for( unsigned int i = 0; i < statePartialAdditionIndices_.size( ); i++ )
    {
        variationalMatrix_.block( 0, statePartialAdditionIndices_.at( i ).second, totalDynamicalStateSize_, 3 ) +=
@@ -105,6 +131,20 @@ void VariationalEquations::setBodyStatePartialMatrix( )
                ( inertiaTensorsForMultiplication_.at( i ).second( ).inverse( ) ) *
                variationalMatrix_.block( inertiaTensorsForMultiplication_.at( i ).first, 0, 3, totalDynamicalStateSize_ ).eval( );
    }
+=======
+    for( unsigned int i = 0; i < statePartialAdditionIndices_.size( ); i++ )
+    {
+        variationalMatrix_.block( 0, statePartialAdditionIndices_.at( i ).second, totalDynamicalStateSize_, 3 ) +=
+                variationalMatrix_.block( 0, statePartialAdditionIndices_.at( i ).first, totalDynamicalStateSize_, 3 );
+    }
+
+    for( unsigned int i = 0; i < inertiaTensorsForMultiplication_.size( ); i++ )
+    {
+        variationalMatrix_.block( inertiaTensorsForMultiplication_.at( i ).first, 0, 3, totalDynamicalStateSize_ ) =
+                ( inertiaTensorsForMultiplication_.at( i ).second( ).inverse( ) ) *
+                variationalMatrix_.block( inertiaTensorsForMultiplication_.at( i ).first, 0, 3, totalDynamicalStateSize_ ).eval( );
+    }
+>>>>>>> origin/master
 
 }
 
@@ -181,6 +221,7 @@ void VariationalEquations::setStatePartialFunctionList( )
 
 
 template void VariationalEquations::getBodyInitialStatePartialMatrix< double >(
+<<<<<<< HEAD
         const Eigen::Matrix< double, Eigen::Dynamic, Eigen::Dynamic >& stateTransitionAndSensitivityMatrices,
         Eigen::Block< Eigen::Matrix< double, Eigen::Dynamic, Eigen::Dynamic > > currentMatrixDerivative );
 
@@ -188,6 +229,15 @@ template void VariationalEquations::getBodyInitialStatePartialMatrix< double >(
 template void VariationalEquations::getBodyInitialStatePartialMatrix< long double >(
         const Eigen::Matrix< long double, Eigen::Dynamic, Eigen::Dynamic >& stateTransitionAndSensitivityMatrices,
         Eigen::Block< Eigen::Matrix< long double, Eigen::Dynamic, Eigen::Dynamic > > currentMatrixDerivative );
+=======
+const Eigen::Matrix< double, Eigen::Dynamic, Eigen::Dynamic >& stateTransitionAndSensitivityMatrices,
+Eigen::Block< Eigen::Matrix< double, Eigen::Dynamic, Eigen::Dynamic > > currentMatrixDerivative );
+
+//#if( BUILD_WITH_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+template void VariationalEquations::getBodyInitialStatePartialMatrix< long double >(
+const Eigen::Matrix< long double, Eigen::Dynamic, Eigen::Dynamic >& stateTransitionAndSensitivityMatrices,
+Eigen::Block< Eigen::Matrix< long double, Eigen::Dynamic, Eigen::Dynamic > > currentMatrixDerivative );
+>>>>>>> origin/master
 //#endif
 
 } // namespace propagators

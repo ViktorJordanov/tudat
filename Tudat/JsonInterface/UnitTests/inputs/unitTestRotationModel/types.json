@@ -1,5 +1,10 @@
 [
   "simple",
   "spice",
+<<<<<<< HEAD
   "gcrsToItrs"
+=======
+  "gcrsToItrs",
+  "synchronous"
+>>>>>>> origin/master
 ]

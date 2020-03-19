@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -213,7 +217,7 @@ BOOST_AUTO_TEST_CASE( testEnckePopagatorForPointMassCentralBodies )
 
             for( int j = 12; j < 15; j++ )
             {
-                BOOST_CHECK_SMALL( ( enckeIterator->second - cowellIterator->second ).segment( j, 1 )( 0 ), 0.075 );
+                BOOST_CHECK_SMALL( ( enckeIterator->second - cowellIterator->second ).segment( j, 1 )( 0 ), 0.1 );
             }
 
             for( int j = 3; j < 6; j++ )

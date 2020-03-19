@@ -1,4 +1,8 @@
+<<<<<<< HEAD
  #    Copyright (c) 2010-2018, Delft University of Technology
+=======
+ #    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  #    All rigths reserved
  #
  #    This file is part of the Tudat. Redistribution and use in source and
@@ -20,7 +24,11 @@ set(OBSERVATION_MODELS_SOURCES
   "${SRCROOT}${OBSERVATIONMODELSDIR}/observationSimulator.cpp"
   "${SRCROOT}${OBSERVATIONMODELSDIR}/observationModel.cpp"
   "${SRCROOT}${OBSERVATIONMODELSDIR}/simulateObservations.cpp"
+<<<<<<< HEAD
   "${SRCROOT}${OBSERVABLECORRECTIONSDIR}/firstOrderRelativisticLightTimeCorrection.cpp"  
+=======
+  "${SRCROOT}${OBSERVABLECORRECTIONSDIR}/firstOrderRelativisticCorrection.cpp"
+>>>>>>> origin/master
 )
 
 # Set the header files.
@@ -45,7 +53,7 @@ set(OBSERVATION_MODELS_HEADERS
   "${SRCROOT}${OBSERVATIONMODELSDIR}/UnitTests/testLightTimeCorrections.h"
   "${SRCROOT}${OBSERVATIONMODELSDIR}/observationViabilityCalculator.h"
   "${SRCROOT}${OBSERVABLECORRECTIONSDIR}/lightTimeCorrection.h"
-  "${SRCROOT}${OBSERVABLECORRECTIONSDIR}/firstOrderRelativisticLightTimeCorrection.h"
+  "${SRCROOT}${OBSERVABLECORRECTIONSDIR}/firstOrderRelativisticCorrection.h"
 )
 
 

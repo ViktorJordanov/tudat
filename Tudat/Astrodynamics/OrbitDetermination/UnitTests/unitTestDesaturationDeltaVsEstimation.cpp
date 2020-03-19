@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -238,7 +242,11 @@ BOOST_AUTO_TEST_CASE( test_DesaturationDeltaVsEstimation )
 
         // Create parameters
         std::shared_ptr< estimatable_parameters::EstimatableParameterSet< double > > parametersToEstimate =
+<<<<<<< HEAD
                 createParametersToEstimate( parameterNames, bodyMap , accelerationModelMap);
+=======
+                createParametersToEstimate< double >( parameterNames, bodyMap , propagatorSettings );
+>>>>>>> origin/master
 
         printEstimatableParameterEntries( parametersToEstimate );
 
@@ -308,7 +316,12 @@ BOOST_AUTO_TEST_CASE( test_DesaturationDeltaVsEstimation )
         parameterPerturbation.segment( 3, 3 ) = Eigen::Vector3d::Constant( 1.E-3 );
 
         // Perturb deltaVs estimate.
+<<<<<<< HEAD
         for ( int i = 8 ; i < 8 + deltaVValues.size() * 3 ; i++){
+=======
+        for ( unsigned int i = 8 ; i < 8 + deltaVValues.size() * 3 ; i++)
+        {
+>>>>>>> origin/master
             parameterPerturbation[ i ] = 1.0e-3;
         }
 
@@ -354,7 +367,11 @@ BOOST_AUTO_TEST_CASE( test_DesaturationDeltaVsEstimation )
         // Momentum wheel desaturation deltaV values.
         for ( unsigned int i = 8 ; i < 8 + deltaVValues.size() * 3 ; i++ )
         {
+<<<<<<< HEAD
             BOOST_CHECK_SMALL( std::fabs( truthParameters( i ) - podOutput->parameterEstimate_( i ) ), 1.0E-10 );
+=======
+            BOOST_CHECK_SMALL( std::fabs( truthParameters( i ) - podOutput->parameterEstimate_( i ) ), 1.0E-9 );
+>>>>>>> origin/master
         }
 
         // Gravity field coefficients.

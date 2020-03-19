@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -193,7 +197,7 @@ std::shared_ptr< GravityFieldVariationsSet > getTestGravityFieldVariations( )
 BOOST_AUTO_TEST_CASE( testGravityFieldVariations )
 {
     // Load spice kernels.
-    spice_interface::loadStandardSpiceKernels( { input_output::getSpiceKernelPath( ) + "de430_jup310_small.bsp" } );
+    spice_interface::loadStandardSpiceKernels( );
 
     // Define properties of nominal field
     double gravitationalParameter = getBodyGravitationalParameter( "Jupiter" );
@@ -304,9 +308,9 @@ BOOST_AUTO_TEST_CASE( testGravityFieldVariations )
         for( unsigned int i = 0; i < 3; i++ )
         {
             BOOST_CHECK_SMALL( directCosineCorrections( 2, i )
-                               - tidalCorrectionsFromObject.first( 0, i ), 1.0E-20 );
+                               - tidalCorrectionsFromObject.first( 0, i ), 1.0E-19 );
             BOOST_CHECK_SMALL( directSineCorrections( 2, i )
-                               - tidalCorrectionsFromObject.second( 0, i ), 1.0E-20 );
+                               - tidalCorrectionsFromObject.second( 0, i ), 1.0E-19 );
         }
     }
 }

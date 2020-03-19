@@ -1,4 +1,8 @@
+<<<<<<< HEAD
  #    Copyright (c) 2010-2018, Delft University of Technology
+=======
+ #    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  #    All rigths reserved
  #
  #    This file is part of the Tudat. Redistribution and use in source and
@@ -19,7 +23,7 @@ set(OBSERVATION_PARTIALS_SOURCES
   "${SRCROOT}${OBSERVATIONPARTIALSDIR}/oneWayDopplerPartial.cpp"
   "${SRCROOT}${OBSERVATIONPARTIALSDIR}/observationPartial.cpp"
   "${SRCROOT}${LIGHTTIMECORRECTIONPARTIALSDIR}/lightTimeCorrectionPartial.cpp"
-  "${SRCROOT}${LIGHTTIMECORRECTIONPARTIALSDIR}/firstOrderRelativisticLightTimeCorrectionPartial.cpp"
+  "${SRCROOT}${LIGHTTIMECORRECTIONPARTIALSDIR}/firstOrderRelativisticPartial.cpp"
 )
 
 # Set the header files.
@@ -35,7 +39,7 @@ set(OBSERVATION_PARTIALS_HEADERS
   "${SRCROOT}${OBSERVATIONPARTIALSDIR}/observationPartial.h"
   "${SRCROOT}${OBSERVATIONPARTIALSDIR}/eulerAngleObservablePartials.h"
   "${SRCROOT}${LIGHTTIMECORRECTIONPARTIALSDIR}/lightTimeCorrectionPartial.h"
-  "${SRCROOT}${LIGHTTIMECORRECTIONPARTIALSDIR}/firstOrderRelativisticLightTimeCorrectionPartial.h"
+  "${SRCROOT}${LIGHTTIMECORRECTIONPARTIALSDIR}/firstOrderRelativisticPartial.h"
 )
 
 # Set the header files.
@@ -92,6 +96,10 @@ add_executable(test_RotationMatrixPartials "${SRCROOT}${OBSERVATIONPARTIALSDIR}/
 setup_custom_test_program(test_RotationMatrixPartials "${SRCROOT}${OBSERVATIONPARTIALSDIR}")
 target_link_libraries(test_RotationMatrixPartials ${TUDAT_ESTIMATION_LIBRARIES} ${Boost_LIBRARIES})
 
-add_executable(test_LightTimeCorrectionPartials "${SRCROOT}${LIGHTTIMECORRECTIONPARTIALSDIR}/UnitTests/unitTestLightTimeCorrectionPartials.cpp")
-setup_custom_test_program(test_LightTimeCorrectionPartials "${SRCROOT}${LIGHTTIMECORRECTIONPARTIALSDIR}")
-target_link_libraries(test_LightTimeCorrectionPartials tudat_observation_partials_test_functions ${TUDAT_ESTIMATION_LIBRARIES} ${Boost_LIBRARIES})
+add_executable(test_FullRotationPartials "${SRCROOT}${OBSERVATIONPARTIALSDIR}/UnitTests/unitTestFullRotationPartials.cpp")
+setup_custom_test_program(test_FullRotationPartials "${SRCROOT}${OBSERVATIONPARTIALSDIR}")
+target_link_libraries(test_FullRotationPartials ${TUDAT_PROPAGATION_LIBRARIES} ${TUDAT_ESTIMATION_LIBRARIES} ${Boost_LIBRARIES})
+
+add_executable(test_LightTimePartials "${SRCROOT}${LIGHTTIMECORRECTIONPARTIALSDIR}/UnitTests/unitTestLightTimePartials.cpp")
+setup_custom_test_program(test_LightTimePartials "${SRCROOT}${LIGHTTIMECORRECTIONPARTIALSDIR}")
+target_link_libraries(test_LightTimePartials tudat_observation_partials_test_functions ${TUDAT_ESTIMATION_LIBRARIES} ${Boost_LIBRARIES})

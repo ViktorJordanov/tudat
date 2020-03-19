@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -59,7 +63,11 @@ void to_json( nlohmann::json& jsonObject,
                     parameterSettings );
         assertNonnullptrPointer( stateEstimationSettings );
         jsonObject[ K::initialStateValue ] = stateEstimationSettings->initialStateValue_;
+<<<<<<< HEAD
         jsonObject[ K::centralBody ] = stateEstimationSettings->centralBody_;
+=======
+        jsonObject[ K::centralBody ] = stateEstimationSettings->centralBodies_;
+>>>>>>> origin/master
         jsonObject[ K::arcStartTimes ] = stateEstimationSettings->arcStartTimes_;
         jsonObject[ K::frameOrientation ] = stateEstimationSettings->frameOrientation_;
 
@@ -181,7 +189,11 @@ void to_json( nlohmann::json& jsonObject,
                 EmpiricalAccelerationEstimatableParameterSettings >(
                     parameterSettings );
         assertNonnullptrPointer( empiricalAccelerationSettings );
+<<<<<<< HEAD
         jsonObject[ K::centralBody ] = empiricalAccelerationSettings->centralBody_;
+=======
+        jsonObject[ K::centralBody ] = empiricalAccelerationSettings->parameterType_.second.second;
+>>>>>>> origin/master
         jsonObject[ K::componentsToEstimate ] = empiricalAccelerationSettings->componentsToEstimate_;
 
         return;
@@ -204,7 +216,11 @@ void to_json( nlohmann::json& jsonObject,
                 ArcWiseEmpiricalAccelerationEstimatableParameterSettings >(
                     parameterSettings );
         assertNonnullptrPointer( empiricalAccelerationSettings );
+<<<<<<< HEAD
         jsonObject[ K::centralBody ] = empiricalAccelerationSettings->centralBody_;
+=======
+        jsonObject[ K::centralBody ] = empiricalAccelerationSettings->parameterType_.second.second;
+>>>>>>> origin/master
         jsonObject[ K::componentsToEstimate ] = empiricalAccelerationSettings->componentsToEstimate_;
         jsonObject[ K::arcStartTimes ] = empiricalAccelerationSettings->arcStartTimeList_;
 
@@ -267,6 +283,7 @@ void from_json( const nlohmann::json& jsonObject,
                     bodyName,
                     getValue< Eigen::Matrix< double, 6, 1 > >(
                         jsonObject, K::initialStateValue, Eigen::Matrix< double, 6, 1 >::Constant( TUDAT_NAN ) ),
+<<<<<<< HEAD
                         getValue< std::string >( jsonObject, K::centralBody ),
                         getValue< std::string >( jsonObject, K::frameOrientation ) );
 
@@ -281,6 +298,35 @@ void from_json( const nlohmann::json& jsonObject,
                     getValue< std::vector< double > >( jsonObject, K::arcStartTimes ),
                     getValue< std::string >( jsonObject, K::centralBody ),
                     getValue< std::string >( jsonObject, K::frameOrientation ) );
+=======
+                    getValue< std::string >( jsonObject, K::centralBody ),
+                    getValue< std::string >( jsonObject, K::frameOrientation ) );
+
+        return;
+    }
+    case arc_wise_initial_body_state:
+    {
+        try
+        {
+            parameterSettings =
+                    std::make_shared< ArcWiseInitialTranslationalStateEstimatableParameterSettings< double > >(
+                        bodyName,
+                        getValue< Eigen::Matrix< double, Eigen::Dynamic, 1 > >( jsonObject, K::initialStateValue ),
+                        getValue< std::vector< double > >( jsonObject, K::arcStartTimes ),
+                        getValue< std::string >( jsonObject, K::centralBody ),
+                        getValue< std::string >( jsonObject, K::frameOrientation ) );
+        }
+        catch( std::runtime_error )
+        {
+            parameterSettings =
+                    std::make_shared< ArcWiseInitialTranslationalStateEstimatableParameterSettings< double > >(
+                        bodyName,
+                        getValue< Eigen::Matrix< double, Eigen::Dynamic, 1 > >( jsonObject, K::initialStateValue ),
+                        getValue< std::vector< double > >( jsonObject, K::arcStartTimes ),
+                        getValue< std::vector< std::string > >( jsonObject, K::centralBody ),
+                        getValue< std::string >( jsonObject, K::frameOrientation ) );
+        }
+>>>>>>> origin/master
         return;
     }
     case direct_dissipation_tidal_time_lag:
@@ -292,6 +338,7 @@ void from_json( const nlohmann::json& jsonObject,
         return;
     }
     case constant_additive_observation_bias:
+<<<<<<< HEAD
     {
         parameterSettings = std::make_shared< ConstantObservationBiasEstimatableParameterSettings >(
                     getValue< observation_models::LinkEnds >( jsonObject, K::linkEnds ),
@@ -326,6 +373,45 @@ void from_json( const nlohmann::json& jsonObject,
                     getValue< observation_models::LinkEndType >( jsonObject, K::referenceLinkEnd ), false );
 
         return;
+=======
+//    {
+//        parameterSettings = std::make_shared< ConstantObservationBiasEstimatableParameterSettings >(
+//                    getValue< observation_models::LinkEnds >( jsonObject, K::linkEnds ),
+//                    getValue< observation_models::ObservableType >( jsonObject, K::observableType ), true );
+
+//        return;
+//    }
+    case constant_relative_observation_bias:
+//    {
+//        parameterSettings = std::make_shared< ConstantObservationBiasEstimatableParameterSettings >(
+//                    getValue< observation_models::LinkEnds >( jsonObject, K::linkEnds ),
+//                    getValue< observation_models::ObservableType >( jsonObject, K::observableType ), false );
+
+//        return;
+//    }
+    case arcwise_constant_additive_observation_bias:
+//    {
+//        parameterSettings = std::make_shared< ArcWiseConstantObservationBiasEstimatableParameterSettings >(
+//                    getValue< observation_models::LinkEnds >( jsonObject, K::linkEnds ),
+//                    getValue< observation_models::ObservableType >( jsonObject, K::observableType ),
+//                    getValue< std::vector< double > >( jsonObject, K::arcStartTimes ),
+//                    getValue< observation_models::LinkEndType >( jsonObject, K::referenceLinkEnd ), true );
+
+//        return;
+//    }
+    case arcwise_constant_relative_observation_bias:
+//    {
+//        parameterSettings = std::make_shared< ArcWiseConstantObservationBiasEstimatableParameterSettings >(
+//                    getValue< observation_models::LinkEnds >( jsonObject, K::linkEnds ),
+//                    getValue< observation_models::ObservableType >( jsonObject, K::observableType ),
+//                    getValue< std::vector< double > >( jsonObject, K::arcStartTimes ),
+//                    getValue< observation_models::LinkEndType >( jsonObject, K::referenceLinkEnd ), false );
+
+//        return;
+//    }
+    {
+        throw std::runtime_error( "Error, reading bias parameters from JSON files disabled." );
+>>>>>>> origin/master
     }
     case spherical_harmonics_cosine_coefficient_block:
     {

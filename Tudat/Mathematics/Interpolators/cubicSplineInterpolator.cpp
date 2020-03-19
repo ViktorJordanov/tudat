@@ -9,7 +9,11 @@ template class CubicSplineInterpolator< double, Eigen::VectorXd >;
 template class CubicSplineInterpolator< double, Eigen::Vector6d >;
 template class CubicSplineInterpolator< double, Eigen::MatrixXd >;
 
+<<<<<<< HEAD
 #if( BUILD_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+=======
+#if( BUILD_WITH_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+>>>>>>> origin/master
 template class CubicSplineInterpolator< Time, Eigen::VectorXd, long double >;
 template class CubicSplineInterpolator< Time, Eigen::Vector6d, long double >;
 template class CubicSplineInterpolator< Time, Eigen::MatrixXd, long double >;

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -61,7 +65,11 @@ public:
     /*!
      * Function that calculates the rotation quaternion from target frame to base
      * frame at specified time.
+<<<<<<< HEAD
      * \param secondsSinceEpoch Seconds since epoch at which ephemeris is to be evaluated.
+=======
+     * \param currentTime Seconds since epoch at which ephemeris is to be evaluated.
+>>>>>>> origin/master
      * \return Rotation quaternion computed.
      */
     Eigen::Quaterniond getRotationToBaseFrame( const double currentTime );
@@ -69,7 +77,11 @@ public:
     //! Calculate rotation quaternion from base frame to target frame.
     /*!
      * Returns the rotation quaternion from base frame to target frame at specified time.
+<<<<<<< HEAD
      * \param secondsSinceEpoch Seconds since epoch at which ephemeris is to be evaluated.
+=======
+     * \param currentTime Seconds since epoch at which ephemeris is to be evaluated.
+>>>>>>> origin/master
      * \return Rotation quaternion computed.
      */
     Eigen::Quaterniond getRotationToTargetFrame(
@@ -82,7 +94,11 @@ public:
     /*!
      *  Function to calculate the derivative of the rotation matrix from target frame to base
      *  frame at specified time.
+<<<<<<< HEAD
      *  \param secondsSinceEpoch Seconds since epoch at which ephemeris is to be evaluated.
+=======
+     *  \param currentTime Seconds since epoch at which ephemeris is to be evaluated.
+>>>>>>> origin/master
      *  \return Derivative of rotation from target to base frame at specified time.
      */
     Eigen::Matrix3d getDerivativeOfRotationToBaseFrame( const double currentTime );
@@ -91,7 +107,11 @@ public:
     /*!
      *  Function to calculate the derivative of the rotation matrix from base frame to target
      *  frame at specified time.
+<<<<<<< HEAD
      *  \param secondsSinceEpoch Seconds since epoch at which ephemeris is to be evaluated.
+=======
+     *  \param currentTime Seconds since epoch at which ephemeris is to be evaluated.
+>>>>>>> origin/master
      *  \return Derivative of rotation from base to target frame at specified time.
      */
     Eigen::Matrix3d getDerivativeOfRotationToTargetFrame(
@@ -110,6 +130,20 @@ public:
         isBodyInPropagation_ = isBodyInPropagation;
     }
 
+<<<<<<< HEAD
+=======
+    //! Function to retrieve the current relative translational state of the synchronously rotating body
+    /*!
+     * Function to retrieve the current relative translational state of the synchronously rotating body
+     * \param currentTime Time at which to evaluate state function
+     * \return Current relative translational state of the synchronously rotating body
+     */
+    Eigen::Vector6d getCurrentRelativeState( const double currentTime )
+    {
+        return relativeStateFunction_( currentTime, isBodyInPropagation_ );
+    }
+
+>>>>>>> origin/master
 private:
 
     //! Function returning the current state of the body relative to the central body, in the base frame

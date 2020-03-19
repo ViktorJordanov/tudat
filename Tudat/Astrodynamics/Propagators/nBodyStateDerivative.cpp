@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -229,7 +233,11 @@ std::vector< std::string > determineEphemerisUpdateorder( std::vector< std::stri
 
 template class NBodyStateDerivative< double, double >;
 
+<<<<<<< HEAD
 #if( BUILD_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+=======
+#if( BUILD_WITH_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+>>>>>>> origin/master
 template class NBodyStateDerivative< long double, double >;
 template class NBodyStateDerivative< double, Time >;
 template class NBodyStateDerivative< long double, Time >;

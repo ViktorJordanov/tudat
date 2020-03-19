@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -51,8 +55,11 @@ using namespace tudat::unit_conversions;
 template< typename ObservationScalarType = double , typename TimeType = double , typename StateScalarType  = double >
 Eigen::VectorXd  executeParameterEstimation(
         const Eigen::Matrix< StateScalarType, 12, 1 > initialStateDifference = Eigen::Matrix< StateScalarType, 12, 1 >::Zero( ),
+<<<<<<< HEAD
         const Eigen::VectorXd parameterPerturbation = Eigen::VectorXd::Zero( 2 ),
         const bool propagateVariationalEquations = 1,
+=======
+>>>>>>> origin/master
         const bool patchMultiArcs = 0,
         const std::vector< Eigen::Matrix< StateScalarType, Eigen::Dynamic, 1 > > forcedMultiArcInitialStates =
         std::vector< Eigen::Matrix< StateScalarType, Eigen::Dynamic, 1 > >( ),
@@ -248,13 +255,18 @@ Eigen::VectorXd  executeParameterEstimation(
 
     // Define links and observables in simulation.
     std::vector< LinkEnds > linkEnds2;
+<<<<<<< HEAD
     linkEnds2.resize( 4 );
+=======
+    linkEnds2.resize( 2 );
+>>>>>>> origin/master
     linkEnds2[ 0 ][ transmitter ] = grazStation;
     linkEnds2[ 0 ][ receiver ] = std::make_pair( "Orbiter", "" );
 
     linkEnds2[ 1 ][ receiver ] = grazStation;
     linkEnds2[ 1 ][ transmitter ] = std::make_pair( "Orbiter", "" );
 
+<<<<<<< HEAD
     linkEnds2[ 2 ][ transmitter ] = grazStation;
     linkEnds2[ 2 ][ receiver ] = std::make_pair( "Mars", "" );
 
@@ -263,6 +275,16 @@ Eigen::VectorXd  executeParameterEstimation(
 
     observation_models::ObservationSettingsMap observationSettingsMap;
     for( unsigned int i = 0; i  < 4; i++ )
+=======
+//    linkEnds2[ 2 ][ transmitter ] = grazStation;
+//    linkEnds2[ 2 ][ receiver ] = std::make_pair( "Mars", "" );
+
+//    linkEnds2[ 3 ][ receiver ] = grazStation;
+//    linkEnds2[ 3 ][ transmitter ] = std::make_pair( "Mars", "" );
+
+    observation_models::ObservationSettingsMap observationSettingsMap;
+    for( unsigned int i = 0; i  < linkEnds2.size( ); i++ )
+>>>>>>> origin/master
     {
         observationSettingsMap.insert( std::make_pair( linkEnds2[ i ], std::make_shared< ObservationSettings >(
                                                            one_way_range ) ) );
@@ -299,7 +321,11 @@ Eigen::VectorXd  executeParameterEstimation(
     }
 
     std::map< ObservableType, std::map< LinkEnds, std::pair< std::vector< TimeType >, LinkEndType > > > measurementSimulationInput;
+<<<<<<< HEAD
     for( unsigned int i = 0; i < 4; i++ )
+=======
+    for( unsigned int i = 0; i < linkEnds2.size( ); i++ )
+>>>>>>> origin/master
     {
         measurementSimulationInput[ one_way_range ][ linkEnds2[ i ] ] = std::make_pair( initialObservationTimes, receiver );
         measurementSimulationInput[ angular_position ][ linkEnds2[ i ] ] = std::make_pair( initialObservationTimes, receiver );
@@ -351,7 +377,11 @@ Eigen::VectorXd  executeParameterEstimation(
 
     // Estimate parameters and return postfit error
     std::shared_ptr< PodOutput< StateScalarType > > podOutput = orbitDeterminationManager.estimateParameters(
+<<<<<<< HEAD
                 podInput );
+=======
+                podInput, std::make_shared< EstimationConvergenceChecker >( 6 ) );
+>>>>>>> origin/master
 
 //    input_output::writeMatrixToFile( podOutput->normalizedInformationMatrix_, "hybridArcPartials.dat" );
 //    input_output::writeMatrixToFile( podOutput->informationMatrixTransformationDiagonal_, "hybridArcNormalization.dat" );
@@ -368,6 +398,7 @@ BOOST_AUTO_TEST_CASE( test_HybridArcStateEstimation )
     Eigen::VectorXd parameterError = executeParameterEstimation< double, double, double >( );
     int numberOfEstimatedArcs = ( parameterError.rows( ) - 8 ) / 6;
 
+<<<<<<< HEAD
     // Test error range: 2 m in-plane position and 1 micron/s in-plane velocity for Mars
     for( unsigned int j = 0; j < 2; j++ )
     {
@@ -380,12 +411,31 @@ BOOST_AUTO_TEST_CASE( test_HybridArcStateEstimation )
     BOOST_CHECK_SMALL( std::fabs( parameterError( 5 ) ), 5.0E-4  );
 
     // Test error range: 0.1 m position and 10 micron/s velocity for orbiter
+=======
+    std::cout<<std::endl<<std::endl<<"Final error: "<<parameterError.transpose( )<<std::endl;
+    // Test error range: 4 m in-plane position and 1 micron/s in-plane velocity for Mars
+    for( unsigned int j = 0; j < 2; j++ )
+    {
+        BOOST_CHECK_SMALL( std::fabs( parameterError( j ) ), 4.0 );
+        BOOST_CHECK_SMALL( std::fabs( parameterError( j + 3 ) ), 2.0E-6  );
+    }
+
+    // Test error range: 750 m in-plane position and 0.5 mm/s in-plane velocity for Mars (poor values due to short arc)
+    BOOST_CHECK_SMALL( std::fabs( parameterError( 2 ) ), 750.0 );
+    BOOST_CHECK_SMALL( std::fabs( parameterError( 5 ) ), 5.0E-4  );
+
+    // Test error range: 0.1 m position and 50 micron/s velocity for orbiter
+>>>>>>> origin/master
     for( int i = 0; i < numberOfEstimatedArcs; i++ )
     {
         for( unsigned int j = 0; j < 3; j++ )
         {
             BOOST_CHECK_SMALL( std::fabs( parameterError( ( i + 1 )* 6 + j ) ), 1E-1 );
+<<<<<<< HEAD
             BOOST_CHECK_SMALL( std::fabs( parameterError( ( i + 1 ) * 6 + j + 3 ) ), 2.0E-5  );
+=======
+            BOOST_CHECK_SMALL( std::fabs( parameterError( ( i + 1 ) * 6 + j + 3 ) ), 5.0E-5  );
+>>>>>>> origin/master
         }
     }
 

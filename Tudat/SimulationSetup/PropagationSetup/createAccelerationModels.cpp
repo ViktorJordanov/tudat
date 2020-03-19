@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -9,6 +13,8 @@
  */
 
 #include <algorithm>
+#include <functional>
+#include <memory>
 
 #include <boost/make_shared.hpp>
 #include <boost/bind.hpp>
@@ -701,6 +707,7 @@ std::shared_ptr< aerodynamics::AerodynamicAcceleration > createAerodynamicAccele
             std::dynamic_pointer_cast< AtmosphericFlightConditions >( bodyUndergoingAcceleration->getFlightConditions( ) );
 
     if( bodyFlightConditions == nullptr && bodyUndergoingAcceleration->getFlightConditions( ) == nullptr )
+<<<<<<< HEAD
     {
         bodyFlightConditions = createAtmosphericFlightConditions( bodyUndergoingAcceleration,
                                                                   bodyExertingAcceleration,
@@ -710,6 +717,17 @@ std::shared_ptr< aerodynamics::AerodynamicAcceleration > createAerodynamicAccele
     }
     else if( bodyFlightConditions == nullptr && bodyUndergoingAcceleration->getFlightConditions( ) != nullptr )
     {
+=======
+    {
+        bodyFlightConditions = createAtmosphericFlightConditions( bodyUndergoingAcceleration,
+                                                                  bodyExertingAcceleration,
+                                                                  nameOfBodyUndergoingAcceleration,
+                                                                  nameOfBodyExertingAcceleration );
+        bodyUndergoingAcceleration->setFlightConditions( bodyFlightConditions );
+    }
+    else if( bodyFlightConditions == nullptr && bodyUndergoingAcceleration->getFlightConditions( ) != nullptr )
+    {
+>>>>>>> origin/master
         throw std::runtime_error( "Error when making aerodynamic acceleration, found flight conditions that are not atmospheric." );
     }
 
@@ -782,9 +800,46 @@ createCannonballRadiationPressureAcceleratioModel(
                 std::bind( &RadiationPressureInterface::getRadiationPressureCoefficient, radiationPressureInterface ),
                 std::bind( &RadiationPressureInterface::getArea, radiationPressureInterface ),
                 std::bind( &Body::getBodyMass, bodyUndergoingAcceleration ) );
+<<<<<<< HEAD
+=======
 
 }
 
+//! Function to create a panelled radiation pressure acceleration model.
+std::shared_ptr< electro_magnetism::PanelledRadiationPressureAcceleration > createPanelledRadiationPressureAcceleration(
+        const std::shared_ptr< Body > bodyUndergoingAcceleration,
+        const std::shared_ptr< Body > bodyExertingAcceleration,
+        const std::string& nameOfBodyUndergoingAcceleration,
+        const std::string& nameOfBodyExertingAcceleration )
+{
+    using namespace tudat::electro_magnetism;
+>>>>>>> origin/master
+
+    // Declare pointer to return object.
+    std::shared_ptr< PanelledRadiationPressureAcceleration > accelerationModel;
+
+    // Get radiation pressure interface from body undergoing acceleration, containing data on how body responds to radiation pressure.
+    std::shared_ptr< PanelledRadiationPressureInterface > radiationPressureInterface =
+            std::dynamic_pointer_cast< PanelledRadiationPressureInterface >(
+                bodyUndergoingAcceleration->getRadiationPressureInterfaces( ).at( nameOfBodyExertingAcceleration ) );
+
+    if( radiationPressureInterface == NULL )
+    {
+        throw std::runtime_error(
+                    "Error, body undergoing acceleration, " + nameOfBodyUndergoingAcceleration +
+                    " possesses no radiation pressure coefficient interface when making panelled radiation pressure acceleration due to " +
+                    nameOfBodyExertingAcceleration );
+    }
+    else
+    {
+        // Create acceleration model.
+        accelerationModel = std::make_shared< PanelledRadiationPressureAcceleration >(
+                    radiationPressureInterface, std::bind( &Body::getBodyMass, bodyUndergoingAcceleration ) );
+    }
+    return accelerationModel;
+}
+
+<<<<<<< HEAD
 //! Function to create a panelled radiation pressure acceleration model.
 std::shared_ptr< electro_magnetism::PanelledRadiationPressureAcceleration > createPanelledRadiationPressureAcceleration(
         const std::shared_ptr< Body > bodyUndergoingAcceleration,
@@ -816,6 +871,49 @@ std::shared_ptr< electro_magnetism::PanelledRadiationPressureAcceleration > crea
                     radiationPressureInterface, std::bind( &Body::getBodyMass, bodyUndergoingAcceleration ) );
     }
     return accelerationModel;
+=======
+//! Function to create a solar sail radiation pressure acceleration model.
+std::shared_ptr< SolarSailAcceleration > createSolarSailAccelerationModel(
+    const std::shared_ptr< Body > bodyUndergoingAcceleration,
+    const std::shared_ptr< Body > bodyExertingAcceleration,
+    const std::shared_ptr< Body > centralBody,
+    const std::string& nameOfBodyUndergoingAcceleration,
+    const std::string& nameOfBodyExertingAcceleration )
+{
+    // Retrieve radiation pressure interface.
+    if( bodyUndergoingAcceleration->getRadiationPressureInterfaces( ).count(
+            nameOfBodyExertingAcceleration ) == 0 )
+    {
+        throw std::runtime_error(
+            "Error when making radiation pressure, no radiation pressure interface found  in " +
+            nameOfBodyUndergoingAcceleration +
+            " for body " + nameOfBodyExertingAcceleration );
+    }
+
+    // Get radiation pressure interface from body undergoing acceleration, containing data on how body responds to radiation pressure.
+    std::shared_ptr< SolarSailingRadiationPressureInterface > radiationPressureInterface =
+            std::dynamic_pointer_cast< SolarSailingRadiationPressureInterface >(
+                bodyUndergoingAcceleration->getRadiationPressureInterfaces( ).at( nameOfBodyExertingAcceleration ) );
+
+    // Create and return solar sailing acceleration model.
+    return std::make_shared< SolarSailAcceleration >(
+                std::bind( &Body::getPosition, bodyExertingAcceleration ),
+                std::bind( &Body::getPosition, bodyUndergoingAcceleration ),
+                std::bind( &Body::getVelocity, bodyUndergoingAcceleration ),
+                std::bind( &Body::getVelocity, centralBody ),
+                std::bind( &SolarSailingRadiationPressureInterface::getCurrentRadiationPressure, radiationPressureInterface ),
+                std::bind( &SolarSailingRadiationPressureInterface::getCurrentConeAngle, radiationPressureInterface ),
+                std::bind( &SolarSailingRadiationPressureInterface::getCurrentClockAngle, radiationPressureInterface ),
+                std::bind( &SolarSailingRadiationPressureInterface::getFrontEmissivityCoefficient, radiationPressureInterface ),
+                std::bind( &SolarSailingRadiationPressureInterface::getBackEmissivityCoefficient, radiationPressureInterface ),
+                std::bind( &SolarSailingRadiationPressureInterface::getFrontLambertianCoefficient, radiationPressureInterface ),
+                std::bind( &SolarSailingRadiationPressureInterface::getBackLambertianCoefficient, radiationPressureInterface ),
+                std::bind( &SolarSailingRadiationPressureInterface::getReflectivityCoefficient, radiationPressureInterface ),
+                std::bind( &SolarSailingRadiationPressureInterface::getSpecularReflectionCoefficient, radiationPressureInterface ),
+                std::bind( &RadiationPressureInterface::getArea, radiationPressureInterface ),
+                std::bind( &Body::getBodyMass, bodyUndergoingAcceleration ) );
+
+>>>>>>> origin/master
 }
 
 
@@ -1342,6 +1440,17 @@ std::shared_ptr< AccelerationModel< Eigen::Vector3d > > createAccelerationModel(
                     nameOfBodyExertingAcceleration,
                     accelerationSettings );
         break;
+<<<<<<< HEAD
+=======
+    case solar_sail_acceleration:
+        accelerationModelPointer = createSolarSailAccelerationModel(
+                    bodyUndergoingAcceleration,
+                    bodyExertingAcceleration,
+                    centralBody,
+                    nameOfBodyUndergoingAcceleration,
+                    nameOfBodyExertingAcceleration );
+        break;
+>>>>>>> origin/master
     default:
         throw std::runtime_error(
                     std::string( "Error, acceleration model ") +

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -13,6 +17,10 @@
 
 #include <memory>
 #include <boost/make_shared.hpp>
+<<<<<<< HEAD
+=======
+#include <boost/lexical_cast.hpp>
+>>>>>>> origin/master
 #include <functional>
 #include <iostream>
 #include <map>
@@ -358,7 +366,11 @@ public:
                     isToleranceReached = true;
                     std::string errorMessage  =
                             "Warning, light time unconverged at level " +
+<<<<<<< HEAD
                             std::to_string(
+=======
+                            boost::lexical_cast< std::string >(
+>>>>>>> origin/master
                                 std::fabs( newLightTimeCalculation - previousLightTimeCalculation ) ) +
                             "; current light-time corrections are: "  +
                             std::to_string( currentCorrection_ ) + " and input time was " +

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -99,6 +103,21 @@ std::string getParameterTypeString( const EstimatebleParametersEnum parameterTyp
     case mean_moment_of_inertia:
         parameterDescription = " mean moment of inertia ";
         break;
+<<<<<<< HEAD
+=======
+    case periodic_spin_variation:
+        parameterDescription = " periodic spin variation for full planetary rotational model ";
+        break;
+    case polar_motion_amplitude:
+        parameterDescription = " polar motion amplitude for full planetary rotational model";
+        break;
+    case core_factor:
+        parameterDescription = " core factor of the celestial body ";
+        break;
+    case free_core_nutation_rate:
+        parameterDescription = " free core nutation rate of the celestial body";
+        break;
+>>>>>>> origin/master
     case desaturation_delta_v_values:
         parameterDescription = " momentum wheel desaturation Delta V ";
         break;
@@ -210,6 +229,21 @@ bool isDoubleParameter( const EstimatebleParametersEnum parameterType )
     case desaturation_delta_v_values:
         isDoubleParameter = false;
        break;
+<<<<<<< HEAD
+=======
+    case periodic_spin_variation:
+        isDoubleParameter = false;
+        break;
+    case polar_motion_amplitude:
+        isDoubleParameter = false;
+        break;
+    case core_factor:
+        isDoubleParameter = true;
+        break;
+    case free_core_nutation_rate:
+        isDoubleParameter = true;
+        break;
+>>>>>>> origin/master
     default:
         throw std::runtime_error( "Error, parameter type " + std::to_string( parameterType ) +
                                   " not found when getting parameter type" );
@@ -232,6 +266,21 @@ bool isParameterRotationMatrixProperty( const EstimatebleParametersEnum paramete
     case initial_rotational_body_state:
         flag = true;
         break;
+<<<<<<< HEAD
+=======
+    case periodic_spin_variation:
+        flag = true;
+        break;
+    case polar_motion_amplitude:
+        flag = true;
+        break;
+    case core_factor:
+        flag = true;
+        break;
+    case free_core_nutation_rate:
+        flag = true;
+        break;
+>>>>>>> origin/master
     default:
         flag = false;
         break;
@@ -283,14 +332,22 @@ bool isParameterTidalProperty( const EstimatebleParametersEnum parameterType )
     return flag;
 }
 
+<<<<<<< HEAD
 //#if( BUILD_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+=======
+//#if( BUILD_WITH_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+>>>>>>> origin/master
 //template class EstimatableParameter< Eigen::VectorXd >;
 //template class EstimatableParameter< Eigen::Matrix< long double, Eigen::Dynamic, 1 > >;
 //#endif
 
 //template class EstimatableParameterSet< double >;
 
+<<<<<<< HEAD
 //#if( BUILD_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+=======
+//#if( BUILD_WITH_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+>>>>>>> origin/master
 //template class EstimatableParameterSet< long double >;
 //#endif
 

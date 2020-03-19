@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -55,14 +59,22 @@ public:
      * \param parametersToEstimate Object containing all parameters that are to be estimated and their current settings and
      * values.
      * \param stateTypeStartIndices Start index (value) in vector of propagated state for each type of state (key)
+     * \param currentArcIndex Index of current arc (-1 if not multi-arc)
      */
     template< typename ParameterType >
     VariationalEquations(
             const std::map< IntegratedStateType, orbit_determination::StateDerivativePartialsMap >
             stateDerivativePartialList,
             const std::shared_ptr< estimatable_parameters::EstimatableParameterSet< ParameterType > > parametersToEstimate,
+<<<<<<< HEAD
             const std::map< IntegratedStateType, int >& stateTypeStartIndices ):
         stateDerivativePartialList_( stateDerivativePartialList ), stateTypeStartIndices_( stateTypeStartIndices )
+=======
+            const std::map< IntegratedStateType, int >& stateTypeStartIndices,
+            const int currentArcIndex = -1 ):
+        stateDerivativePartialList_( stateDerivativePartialList ), stateTypeStartIndices_( stateTypeStartIndices ),
+        couplingEntriesToSuppress_( -1 )
+>>>>>>> origin/master
     {
         dynamicalStatesToEstimate_ =
                 estimatable_parameters::getListOfInitialDynamicalStateParametersEstimate< ParameterType >(
@@ -101,7 +113,11 @@ public:
 
         // Set parameter partial functions.
         setStatePartialFunctionList( );
+<<<<<<< HEAD
         setTranslationalStatePartialFrameScalingFunctions( parametersToEstimate );
+=======
+        setTranslationalStatePartialFrameScalingFunctions( parametersToEstimate, currentArcIndex );
+>>>>>>> origin/master
         setRotationalStatePartialScalingFunctions( parametersToEstimate );
         setParameterPartialFunctionList( parametersToEstimate );
     }
@@ -280,7 +296,17 @@ public:
     {
         return numberOfParameterValues_;
     }
+
+    std::vector< std::pair< int, int > > getStatePartialAdditionIndices( )
+    {
+        return statePartialAdditionIndices_;
+    }
     
+    void suppressParameterCoupling( const int couplingEntriesToSuppress )
+    {
+        couplingEntriesToSuppress_ = couplingEntriesToSuppress;
+    }
+
 protected:
     
 private:
@@ -414,11 +440,17 @@ private:
      *  the state of body A is estimated w.r.t. body B, and body B is itself estimated w.r.t. to some third body (or inertial
      *  point) C.
      *  \param parametersToEstimate Total list of parameters to estimate.
+     *  \param currentArcIndex Index of current arc (-1 if not multi-arc)
      */
     template< typename ParameterType >
     void setTranslationalStatePartialFrameScalingFunctions(
             const std::shared_ptr< estimatable_parameters::EstimatableParameterSet< ParameterType > >
+<<<<<<< HEAD
             parametersToEstimate )
+=======
+            parametersToEstimate,
+            const int currentArcIndex = -1 )
+>>>>>>> origin/master
     {
         std::vector< std::shared_ptr< estimatable_parameters::EstimatableParameter<
                 Eigen::Matrix< ParameterType, Eigen::Dynamic, 1 > > > > initialDynamicalParameters =
@@ -440,10 +472,18 @@ private:
             }
             else if( initialDynamicalParameters.at( i )->getParameterName( ).first == estimatable_parameters::arc_wise_initial_body_state )
             {
+                if( currentArcIndex < 0 )
+                {
+                    throw std::runtime_error( "Error in setTranslationalStatePartialFrameScalingFunctions, cpuld not find xurrent arc index " );
+                }
                 propagatedBodies.push_back(
                             initialDynamicalParameters.at( i )->getParameterName( ).second.first );
                 centralBodies.push_back( std::dynamic_pointer_cast< estimatable_parameters::ArcWiseInitialTranslationalStateParameter< ParameterType > >(
+<<<<<<< HEAD
                                              initialDynamicalParameters.at( i ) )->getCentralBody( ) );
+=======
+                                             initialDynamicalParameters.at( i ) )->getCentralBodies( ).at( currentArcIndex ) );
+>>>>>>> origin/master
             }
         }
 
@@ -574,6 +614,8 @@ private:
     //! Total size of (single-arc) state vector of dynamics that is to be estimated.
     int totalDynamicalStateSize_;
 
+    int couplingEntriesToSuppress_;
+
     //! Total matrix of partial derivatives of state derivatives w.r.t. current states.
     Eigen::MatrixXd variationalMatrix_;
 
@@ -588,7 +630,11 @@ extern template void VariationalEquations::getBodyInitialStatePartialMatrix< dou
         const Eigen::Matrix< double, Eigen::Dynamic, Eigen::Dynamic >& stateTransitionAndSensitivityMatrices,
         Eigen::Block< Eigen::Matrix< double, Eigen::Dynamic, Eigen::Dynamic > > currentMatrixDerivative );
 
+<<<<<<< HEAD
 //#if( BUILD_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+=======
+//#if( BUILD_WITH_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+>>>>>>> origin/master
 extern template void VariationalEquations::getBodyInitialStatePartialMatrix< long double >(
         const Eigen::Matrix< long double, Eigen::Dynamic, Eigen::Dynamic >& stateTransitionAndSensitivityMatrices,
         Eigen::Block< Eigen::Matrix< long double, Eigen::Dynamic, Eigen::Dynamic > > currentMatrixDerivative );

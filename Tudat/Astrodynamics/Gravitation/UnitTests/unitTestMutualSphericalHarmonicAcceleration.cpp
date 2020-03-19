@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -228,7 +232,7 @@ BOOST_AUTO_TEST_CASE( testMutualSphericalHarmonicGravity )
     for( unsigned int i = 0; i < 3; i++ )
     {
         BOOST_CHECK_SMALL( std::fabs( expectedAcceleration( i ) - mutualDirectJupiterIoShGravityAcceleration( i ) ),
-                           12.0 * std::numeric_limits< double >::epsilon( ) * expectedAcceleration.norm( ) );
+                           15.0 * std::numeric_limits< double >::epsilon( ) * expectedAcceleration.norm( ) );
     }
 
     // Create mutual spherical harmonic gravity between Io and Jupiter on Jupiter, Io fixed (mu = Io + Jupiter)

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -113,7 +117,11 @@ extern template std::map< propagators::IntegratedStateType, orbit_determination:
         const std::shared_ptr< estimatable_parameters::EstimatableParameterSet< double > >
         parametersToEstimate );
 
+<<<<<<< HEAD
 #if( BUILD_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+=======
+#if( BUILD_WITH_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+>>>>>>> origin/master
 extern template std::map< propagators::IntegratedStateType, orbit_determination::StateDerivativePartialsMap > createStateDerivativePartials< long double, double >(
         const std::unordered_map< propagators::IntegratedStateType,
         std::vector< std::shared_ptr< propagators::SingleStateTypeDerivative< long double, double > > > >

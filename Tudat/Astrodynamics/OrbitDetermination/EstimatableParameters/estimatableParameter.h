@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -59,6 +63,13 @@ enum EstimatebleParametersEnum
     direct_dissipation_tidal_time_lag,
     mean_moment_of_inertia,
     arc_wise_constant_drag_coefficient,
+<<<<<<< HEAD
+=======
+    periodic_spin_variation,
+    polar_motion_amplitude,
+    core_factor,
+    free_core_nutation_rate,
+>>>>>>> origin/master
     desaturation_delta_v_values
 };
 
@@ -265,7 +276,11 @@ bool isDynamicalParameterSingleArc(
 //extern template class EstimatableParameter< double >;
 //extern template class EstimatableParameter< Eigen::VectorXd >;
 
+<<<<<<< HEAD
 //#if( BUILD_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+=======
+//#if( BUILD_WITH_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+>>>>>>> origin/master
 //extern template class EstimatableParameter< Eigen::Matrix< long double, Eigen::Dynamic, 1 > >;
 //#endif
 
@@ -314,6 +329,7 @@ public:
                 estimateMultiArcInitialStateParameters_.push_back( estimateInitialStateParameters[ i ] );
             }
         }
+<<<<<<< HEAD
 
         estimateInitialStateParameters_ = estimateSingleArcInitialStateParameters_;
         estimateInitialStateParameters_.insert(
@@ -349,6 +365,43 @@ public:
         }
 
 
+=======
+
+        estimateInitialStateParameters_ = estimateSingleArcInitialStateParameters_;
+        estimateInitialStateParameters_.insert(
+                    estimateInitialStateParameters_.end( ), estimateMultiArcInitialStateParameters_.begin( ),
+                    estimateMultiArcInitialStateParameters_.end( ) );
+
+        for( unsigned int i = 0; i < estimateSingleArcInitialStateParameters_.size( ); i++ )
+        {
+            initialStateParameters_[ estimatedParameterSetSize_ ] = estimateSingleArcInitialStateParameters_[ i ];
+            parameterIndices_.push_back( std::make_pair( estimatedParameterSetSize_,
+                                                         estimateInitialStateParameters_[ i ]->getParameterSize( ) ) );
+            totalConstraintSize_ += estimateInitialStateParameters_[ i ]->getConstraintSize( );
+
+            initialDynamicalSingleArcStateParameterSize_ += estimateSingleArcInitialStateParameters_[ i ]->getParameterSize( );
+            initialSingleArcStateParameters_[ estimatedParameterSetSize_ ] = estimateSingleArcInitialStateParameters_[ i ];
+
+            initialDynamicalStateParameterSize_ += estimateSingleArcInitialStateParameters_[ i ]->getParameterSize( );
+            estimatedParameterSetSize_ += estimateSingleArcInitialStateParameters_[ i ]->getParameterSize( );
+        }
+
+
+        for( unsigned int i = 0; i < estimateMultiArcInitialStateParameters_.size( ); i++ )
+        {
+            initialStateParameters_[ estimatedParameterSetSize_ ] = estimateMultiArcInitialStateParameters_[ i ];
+            parameterIndices_.push_back( std::make_pair( estimatedParameterSetSize_,
+                                                         estimateMultiArcInitialStateParameters_[ i ]->getParameterSize( ) ) );
+
+            initialDynamicalMultiArcStateParameterSize_ += estimateMultiArcInitialStateParameters_[ i ]->getParameterSize( );
+            initialMultiArcStateParameters_[ estimatedParameterSetSize_ ] = estimateMultiArcInitialStateParameters_[ i ];
+
+            initialDynamicalStateParameterSize_ += estimateMultiArcInitialStateParameters_[ i ]->getParameterSize( );
+            estimatedParameterSetSize_ += estimateMultiArcInitialStateParameters_[ i ]->getParameterSize( );
+        }
+
+
+>>>>>>> origin/master
         // Iterate over all double parameters and add to parameter size and set indices in parameterIndices_
         for( unsigned int i = 0; i < estimatedDoubleParameters_.size( ); i++ )
         {
@@ -569,6 +622,52 @@ public:
     std::vector< std::shared_ptr< EstimatableParameter< Eigen::VectorXd > > > getEstimatedVectorParameters( )
     {
         return estimatedVectorParameters_;
+    }
+
+    //! Function to retrieve the start index and size of (a) parameters(s) with a given identifier
+    /*!
+     * Function to retrieve the start index and size of (a) parameters(s) with a given identifier
+     * \param requiredParameterId Parameter identifier that is to be searched in full list of patameters
+     * \return List of start indices and sizes of parameters corresponding to requiredParameterId
+     */
+    std::vector< std::pair< int, int > > getIndicesForParameterType(
+            const EstimatebleParameterIdentifier requiredParameterId )
+    {
+        std::vector< std::pair< int, int > > typeIndices;
+
+        for( auto parameterIterator : initialSingleArcStateParameters_ )
+        {
+            if( parameterIterator.second->getParameterName( ) == requiredParameterId )
+            {
+                typeIndices.push_back( std::make_pair( parameterIterator.first, parameterIterator.second->getParameterSize( ) ) );
+            }
+        }
+
+        for( auto parameterIterator : initialMultiArcStateParameters_ )
+        {
+            if( parameterIterator.second->getParameterName( ) == requiredParameterId )
+            {
+                typeIndices.push_back( std::make_pair( parameterIterator.first, parameterIterator.second->getParameterSize( ) ) );
+            }
+        }
+
+        for( auto parameterIterator : doubleParameters_ )
+        {
+            if( parameterIterator.second->getParameterName( ) == requiredParameterId )
+            {
+                typeIndices.push_back( std::make_pair( parameterIterator.first, parameterIterator.second->getParameterSize( ) ) );
+            }
+        }
+
+        for( auto parameterIterator : vectorParameters_ )
+        {
+            if( parameterIterator.second->getParameterName( ) == requiredParameterId )
+            {
+                typeIndices.push_back( std::make_pair( parameterIterator.first, parameterIterator.second->getParameterSize( ) ) );
+            }
+        }
+
+        return typeIndices;
     }
 
     //! Function to get list of initial dynamical states that are to be estimated.

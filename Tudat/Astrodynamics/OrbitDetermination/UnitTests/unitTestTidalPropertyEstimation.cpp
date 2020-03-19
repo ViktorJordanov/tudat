@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -46,7 +50,7 @@ using namespace tudat::basic_astrodynamics;
 BOOST_AUTO_TEST_CASE( test_DissipationParameterEstimation )
 {
     //Load spice kernels
-    spice_interface::loadStandardSpiceKernels( { std::string( input_output::getSpiceKernelPath( ) + "de430_jup310_small.bsp" ) } );
+    spice_interface::loadStandardSpiceKernels( );
 
     //Define list of bodies
     std::vector< std::string > bodyNames;
@@ -127,6 +131,12 @@ BOOST_AUTO_TEST_CASE( test_DissipationParameterEstimation )
                     bodyMap, accelerationMap, bodiesToEstimate, centralBodies );
 
 
+        std::shared_ptr< PropagatorSettings< double > > propagatorSettings =
+                std::make_shared< TranslationalStatePropagatorSettings< double > >
+                ( centralBodies, accelerationModelMap, bodiesToEstimate,
+                  getInitialStatesOfBodies( bodiesToEstimate, centralBodies, bodyMap, initialEphemerisTime ),
+                  finalEphemerisTime );
+
         // Set parameters that are to be estimated.
         std::vector< std::shared_ptr< EstimatableParameterSettings > > parameterNames;
         parameterNames.push_back(
@@ -159,7 +169,11 @@ BOOST_AUTO_TEST_CASE( test_DissipationParameterEstimation )
                             "Jupiter", "Europa" ) );
         }
         std::shared_ptr< tudat::estimatable_parameters::EstimatableParameterSet< double > > parametersToEstimate =
+<<<<<<< HEAD
                 createParametersToEstimate< double >( parameterNames, bodyMap, accelerationModelMap );
+=======
+                createParametersToEstimate< double >( parameterNames, bodyMap, propagatorSettings );
+>>>>>>> origin/master
 
 
         // Define links in simulation.
@@ -179,12 +193,15 @@ BOOST_AUTO_TEST_CASE( test_DissipationParameterEstimation )
                 ( 0.0, fixedStepSize,
                   RungeKuttaCoefficients::rungeKuttaFehlberg78, fixedStepSize, fixedStepSize, 1.0, 1.0 );
 
+<<<<<<< HEAD
         std::shared_ptr< PropagatorSettings< double > > propagatorSettings =
                 std::make_shared< TranslationalStatePropagatorSettings< double > >
                 ( centralBodies, accelerationModelMap, bodiesToEstimate,
                   getInitialStatesOfBodies( bodiesToEstimate, centralBodies, bodyMap, initialEphemerisTime ),
                   finalEphemerisTime );
 
+=======
+>>>>>>> origin/master
         // Create orbit determination object.
         OrbitDeterminationManager< double, double > orbitDeterminationManager =
                 OrbitDeterminationManager< double, double >(

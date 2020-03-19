@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -111,11 +115,19 @@ public:
             conventionalStateIndices_[ stateDerivativeModels.at( i )->getIntegratedStateType( ) ].push_back(
                         std::make_pair( totalConventionalStateSize_, stateDerivativeModels.at( i )->getConventionalStateSize( ) ) );
             totalConventionalStateSize_ += stateDerivativeModels.at( i )->getConventionalStateSize( );
+<<<<<<< HEAD
 
             propagatedStateIndices_[ stateDerivativeModels.at( i )->getIntegratedStateType( ) ].push_back(
                         std::make_pair( totalPropagatedStateSize_, stateDerivativeModels.at( i )->getPropagatedStateSize( ) ) );
             totalPropagatedStateSize_ += stateDerivativeModels.at( i )->getPropagatedStateSize( );
 
+=======
+
+            propagatedStateIndices_[ stateDerivativeModels.at( i )->getIntegratedStateType( ) ].push_back(
+                        std::make_pair( totalPropagatedStateSize_, stateDerivativeModels.at( i )->getPropagatedStateSize( ) ) );
+            totalPropagatedStateSize_ += stateDerivativeModels.at( i )->getPropagatedStateSize( );
+
+>>>>>>> origin/master
             conventionalStateTypeSize_[ stateDerivativeModels.at( i )->getIntegratedStateType( ) ] +=
                     stateDerivativeModels.at( i )->getConventionalStateSize( );
             propagatedStateTypeSize_[ stateDerivativeModels.at( i )->getIntegratedStateType( ) ] +=
@@ -529,6 +541,53 @@ public:
     std::map< IntegratedStateType, int > getStateTypeStartIndices( )
     {
         return conventionalStateTypeStartIndex_;
+<<<<<<< HEAD
+    }
+
+    //! Function to retrieve number of calls to the computeStateDerivative function
+    /*!
+     * Function to retrieve number of calls to the computeStateDerivative function since object creation/last call to
+     * resetFunctionEvaluationCounter function
+     * \return Number of calls to the computeStateDerivative function since object creation/last call to
+     * resetFunctionEvaluationCounter function
+     */
+    unsigned int getNumberOfFunctionEvaluations( )
+    {
+        return functionEvaluationCounter_;
+    }
+
+    //! Function to reset the number of calls to the computeStateDerivative function to zero.
+    /*!
+     * Function to resetr the number of calls to the computeStateDerivative function to zero.  Typically called before any
+     * start of numerical integration of dynamics (automatically by DynamicsSimulator)
+     */
+    void resetFunctionEvaluationCounter( )
+    {
+        functionEvaluationCounter_ = 0;
+    }
+
+    //! Function to retrieve number of calls to the computeStateDerivative function per time step
+    /*!
+     * Function to retrieve number of calls to the computeStateDerivative function per time step since object
+     * reation/last call to resetFunctionEvaluationCounter function
+     * \return Number of calls to the computeStateDerivative function since object creation/last call to
+     * resetFunctionEvaluationCounter function
+     */
+    std::map< TimeType, unsigned int > getCumulativeNumberOfFunctionEvaluations( )
+    {
+        return cumulativeFunctionEvaluationCounter_;
+    }
+
+    //! Function to reset the number of calls to the computeStateDerivative function to zero.
+    /*!
+     * Function to resetr the number of calls to the computeStateDerivative function to zero.  Typically called before any
+     * start of numerical integration of dynamics (automatically by DynamicsSimulator)
+     */
+    void resetCumulativeFunctionEvaluationCounter( )
+    {
+        cumulativeFunctionEvaluationCounter_.clear( );
+=======
+>>>>>>> origin/master
     }
 
     //! Function to retrieve number of calls to the computeStateDerivative function
@@ -574,6 +633,17 @@ public:
     {
         cumulativeFunctionEvaluationCounter_.clear( );
     }
+
+    //! Function to retrieve the object used for computing the state derivative in the variational equations
+    /*!
+     * Function to retrieve the object used for computing the state derivative in the variational equations
+     * \return Object used for computing the state derivative in the variational equations
+     */
+    std::shared_ptr< VariationalEquations > getVariationalEquationsCalculator( )
+    {
+        return variationalEquations_;
+    }
+
 
 private:
 
@@ -705,7 +775,11 @@ private:
 
 extern template class DynamicsStateDerivativeModel< double, double >;
 
+<<<<<<< HEAD
 #if( BUILD_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+=======
+#if( BUILD_WITH_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+>>>>>>> origin/master
 extern template class DynamicsStateDerivativeModel< Time, double >;
 extern template class DynamicsStateDerivativeModel< double, long double >;
 extern template class DynamicsStateDerivativeModel< Time, long double >;

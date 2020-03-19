@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -547,7 +551,18 @@ protected:
         }
 
         // Update dependent variables to save
+<<<<<<< HEAD
         resetDependentVariableSaveSettings< StateScalarType >( propagatorSettings_, exportSettingsVector_ );
+=======
+        bool printOutputVariables = false;
+        try
+        {
+            printOutputVariables = getValue< bool >( jsonObject_, "printVariableTypes", false );
+        }
+        catch( std::runtime_error ){ }
+
+        resetDependentVariableSaveSettings< StateScalarType >( propagatorSettings_, exportSettingsVector_, printOutputVariables );
+>>>>>>> origin/master
 
         if ( profiling )
         {
@@ -646,7 +661,11 @@ protected:
 
 extern template class JsonSimulationManager< double, double >;
 
+<<<<<<< HEAD
 #if( BUILD_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+=======
+#if( BUILD_WITH_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+>>>>>>> origin/master
 extern template class JsonSimulationManager< double, long double >;
 //extern template class JsonSimulationManager< Time, double >;
 //extern template class JsonSimulationManager< Time, long double >;

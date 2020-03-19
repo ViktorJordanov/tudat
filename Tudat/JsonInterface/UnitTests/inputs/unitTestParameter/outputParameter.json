@@ -5,6 +5,7 @@
   "frameOrientation": "ECLIPJ2000",
   "initialStateValue": [
    [
+<<<<<<< HEAD
     -121328597860.406
    ],
    [
@@ -21,6 +22,24 @@
    ],
    [
     1.06644083113316
+=======
+    -121328597907.141
+   ],
+   [
+    -89136317796.8461
+   ],
+   [
+    302245.73437497
+   ],
+   [
+    17142.7089769371
+   ],
+   [
+    -24123.8944221423
+   ],
+   [
+    1.06642290742975
+>>>>>>> origin/master
    ]
   ],
   "parameterType": "initialBodyState"
@@ -32,6 +51,7 @@
    44905600.0
   ],
   "associatedBody": "Mars",
+<<<<<<< HEAD
   "centralBody": "Sun",
   "frameOrientation": "ECLIPJ2000",
   "initialStateValue": [
@@ -88,6 +108,68 @@
    ],
    [
     767.943938244597
+=======
+  "centralBody": [
+   "Sun",
+   "Sun",
+   "Sun"
+  ],
+  "frameOrientation": "ECLIPJ2000",
+  "initialStateValue": [
+   [
+    89168784319.7726
+   ],
+   [
+    207896122290.862
+   ],
+   [
+    2163042413.67611
+   ],
+   [
+    -21346.7391279872
+   ],
+   [
+    11611.2328055375
+   ],
+   [
+    767.943947498854
+   ],
+   [
+    89168784319.7726
+   ],
+   [
+    207896122290.862
+   ],
+   [
+    2163042413.67611
+   ],
+   [
+    -21346.7391279872
+   ],
+   [
+    11611.2328055375
+   ],
+   [
+    767.943947498854
+   ],
+   [
+    89168784319.7726
+   ],
+   [
+    207896122290.862
+   ],
+   [
+    2163042413.67611
+   ],
+   [
+    -21346.7391279872
+   ],
+   [
+    11611.2328055375
+   ],
+   [
+    767.943947498854
+>>>>>>> origin/master
    ]
   ],
   "parameterType": "arcWiseInitialBodyState"
@@ -123,6 +205,7 @@
   "secondaryIdentifier": "Station2"
  },
  {
+<<<<<<< HEAD
   "associatedBody": "Vehicle",
   "linkEnds": {
    "receiver": [
@@ -197,6 +280,8 @@
   "referenceLinkEnd": "reflector1"
  },
  {
+=======
+>>>>>>> origin/master
   "associatedBody": "Earth",
   "maximumDegree": 8,
   "maximumOrder": 8,
@@ -260,7 +345,12 @@
     "sine"
    ]
   },
+<<<<<<< HEAD
   "parameterType": "arcWiseEmpiricalAccelerationCoefficients"
+=======
+  "parameterType": "arcWiseEmpiricalAccelerationCoefficients",
+  "secondaryIdentifier": "Earth"
+>>>>>>> origin/master
  },
  {
   "associatedBody": "Vehicle",
@@ -278,7 +368,12 @@
     "sine"
    ]
   },
+<<<<<<< HEAD
   "parameterType": "empiricalAccelerationCoefficients"
+=======
+  "parameterType": "empiricalAccelerationCoefficients",
+  "secondaryIdentifier": "Earth"
+>>>>>>> origin/master
  },
  {
   "arcStartTimes": [
@@ -350,4 +445,8 @@
   ],
   "parameterType": "directDissipationTidalTimeLag"
  }
+<<<<<<< HEAD
 ]
+=======
+]
+>>>>>>> origin/master

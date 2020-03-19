@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -47,6 +51,7 @@ void readGaussianQuadratureNodes(
                 input_output::readStlVectorMapFromFile< unsigned int, IndependentVariableType >(
                     input_output::getTudatRootPath( ) + "/Mathematics/NumericalQuadrature/gaussianNodes.txt" ) );
 }
+
 
 //! Read Gaussian weight factors from text file
 /*!
@@ -207,10 +212,14 @@ static const std::shared_ptr< GaussQuadratureNodesAndWeights< float > > floatGau
  */
 template< typename IndependentVariableType >
 std::shared_ptr< GaussQuadratureNodesAndWeights< IndependentVariableType > >
+<<<<<<< HEAD
 getGaussQuadratureNodesAndWeights( )
 {
     return std::make_shared< GaussQuadratureNodesAndWeights< IndependentVariableType > >( );
 }
+=======
+getGaussQuadratureNodesAndWeights( );
+>>>>>>> origin/master
 
 //! Function to create Gauss quadrature node/weight container with long double precision.
 /*!
@@ -219,10 +228,14 @@ getGaussQuadratureNodesAndWeights( )
  */
 template< >
 std::shared_ptr< GaussQuadratureNodesAndWeights< long double > >
+<<<<<<< HEAD
 getGaussQuadratureNodesAndWeights( )
 {
     return longDoubleGaussQuadratureNodesAndWeights;
 }
+=======
+getGaussQuadratureNodesAndWeights( );
+>>>>>>> origin/master
 
 //! Function to create Gauss quadrature node/weight container with double precision.
 /*!
@@ -231,10 +244,14 @@ getGaussQuadratureNodesAndWeights( )
  */
 template< >
 std::shared_ptr< GaussQuadratureNodesAndWeights< double > >
+<<<<<<< HEAD
 getGaussQuadratureNodesAndWeights( )
 {
     return doubleGaussQuadratureNodesAndWeights;
 }
+=======
+getGaussQuadratureNodesAndWeights( );
+>>>>>>> origin/master
 
 //! Function to create Gauss quadrature node/weight container with float precision.
 /*!
@@ -243,10 +260,14 @@ getGaussQuadratureNodesAndWeights( )
  */
 template< >
 std::shared_ptr< GaussQuadratureNodesAndWeights< float > >
+<<<<<<< HEAD
 getGaussQuadratureNodesAndWeights( )
 {
     return floatGaussQuadratureNodesAndWeights;
 }
+=======
+getGaussQuadratureNodesAndWeights( );
+>>>>>>> origin/master
 
 //! Gaussian numerical quadrature wrapper class.
 /*!

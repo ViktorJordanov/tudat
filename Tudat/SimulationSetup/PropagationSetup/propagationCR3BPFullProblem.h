@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2017, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -37,6 +41,12 @@ std::map< std::string, std::shared_ptr< simulation_setup::BodySettings > > setup
  * \param namePrimaryBody Name of the primary body.
  * \param nameSecondaryBody Name of the secondary body.
  * \param nameBodyToPropagate Name of the third, smaller body to be propagated.
+<<<<<<< HEAD
+=======
+ * \param frameOrientation Orientation of frame in which to propagate
+ * \param primaryGravitationalParameter Gravitational parameter of primary
+ * \param secondaryGravitationalParameter Gravitational parameter of secondary
+>>>>>>> origin/master
  * \return Body Map modelling the CR3BP.
  */
 simulation_setup::NamedBodyMap setupBodyMapCR3BP(

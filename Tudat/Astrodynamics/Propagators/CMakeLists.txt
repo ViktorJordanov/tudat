@@ -1,4 +1,8 @@
+<<<<<<< HEAD
  #    Copyright (c) 2010-2018, Delft University of Technology
+=======
+ #    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  #    All rigths reserved
  #
  #    This file is part of the Tudat. Redistribution and use in source and
@@ -30,6 +34,10 @@ set(PROPAGATORS_SOURCES
   "${SRCROOT}${PROPAGATORSDIR}/stateDerivativeCircularRestrictedThreeBodyProblem.cpp"
   "${SRCROOT}${PROPAGATORSDIR}/integrateEquations.cpp"
   "${SRCROOT}${PROPAGATORSDIR}/dynamicsStateDerivativeModel.cpp"
+<<<<<<< HEAD
+=======
+  "${SRCROOT}${PROPAGATORSDIR}/propagateCovariance.cpp"
+>>>>>>> origin/master
 )
 
 # Add header files.
@@ -57,6 +65,10 @@ set(PROPAGATORS_HEADERS
   "${SRCROOT}${PROPAGATORSDIR}/rotationalMotionExponentialMapStateDerivative.h"
   "${SRCROOT}${PROPAGATORSDIR}/stateDerivativeCircularRestrictedThreeBodyProblem.h"
   "${SRCROOT}${PROPAGATORSDIR}/getZeroProperModeRotationalInitialState.h"
+<<<<<<< HEAD
+=======
+  "${SRCROOT}${PROPAGATORSDIR}/propagateCovariance.h"
+>>>>>>> origin/master
 )
 
 # Add static libraries.
@@ -73,7 +85,11 @@ target_link_libraries(test_CentralBodyData tudat_propagators tudat_basic_mathema
 
 if(USE_CSPICE)
 
+<<<<<<< HEAD
 if( BUILD_PROPAGATION_TESTS )
+=======
+if( BUILD_WITH_PROPAGATION_TESTS )
+>>>>>>> origin/master
 
 add_executable(test_CowellStateDerivative "${SRCROOT}${PROPAGATORSDIR}/UnitTests/unitTestCowellStateDerivative.cpp")
 setup_custom_test_program(test_CowellStateDerivative "${SRCROOT}${PROPAGATORSDIR}")

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -231,12 +235,12 @@ BOOST_AUTO_TEST_CASE( testGaussPopagatorForPointMassCentralBodies )
 
             for( int j= 0; j< 3; j++ )
             {
-                BOOST_CHECK_SMALL( ( gaussIterator->second - cowellIterator->second ).segment( j, 1 )( 0 ), 0.01 );
+                BOOST_CHECK_SMALL( ( gaussIterator->second - cowellIterator->second ).segment( j, 1 )( 0 ), 0.05 );
             }
 
             for( int j = 6; j < 9; j++ )
             {
-                BOOST_CHECK_SMALL( ( gaussIterator->second - cowellIterator->second ).segment( j, 1 )( 0 ), 0.01 );
+                BOOST_CHECK_SMALL( ( gaussIterator->second - cowellIterator->second ).segment( j, 1 )( 0 ), 0.05 );
             }
 
             for( int j = 12; j < 15; j++ )

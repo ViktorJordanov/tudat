@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -13,6 +17,8 @@
 
 #include <vector>
 #include <string>
+#include <memory>
+#include <functional>
 
 #include "Tudat/Astrodynamics/BasicAstrodynamics/accelerationModel.h"
 #include "Tudat/Astrodynamics/Gravitation/centralGravityModel.h"
@@ -20,6 +26,7 @@
 #include "Tudat/Astrodynamics/Aerodynamics/aerodynamicAcceleration.h"
 #include "Tudat/SimulationSetup/PropagationSetup/accelerationSettings.h"
 #include "Tudat/Astrodynamics/ElectroMagnetism/cannonBallRadiationPressureAcceleration.h"
+#include "Tudat/Astrodynamics/ElectroMagnetism/solarSailAcceleration.h"
 #include "Tudat/Astrodynamics/Gravitation/thirdBodyPerturbation.h"
 #include "Tudat/Astrodynamics/BasicAstrodynamics/empiricalAcceleration.h"
 #include "Tudat/Astrodynamics/Ephemerides/frameManager.h"
@@ -304,6 +311,26 @@ std::shared_ptr< electro_magnetism::CannonBallRadiationPressureAcceleration >
 createCannonballRadiationPressureAcceleratioModel(
         const std::shared_ptr< Body > bodyUndergoingAcceleration,
         const std::shared_ptr< Body > bodyExertingAcceleration,
+<<<<<<< HEAD
+        const std::string& nameOfBodyUndergoingAcceleration,
+        const std::string& nameOfBodyExertingAcceleration );
+
+//! Function to create a panelled radiation pressure acceleration model.
+/*!
+ *  Function to create a panelled radiation pressure automatically creates all required
+ *  links to environment models, vehicle properies and frame conversions
+ *  \param bodyUndergoingAcceleration Pointer to object of body that is being accelerated.
+ *  \param bodyExertingAcceleration Pointer to object of body that is exerting the acceleration,
+ *  i.e. body emitting the radiation.
+ *  \param nameOfBodyUndergoingAcceleration Name of object of body that is being accelerated.
+ *  \param nameOfBodyExertingAcceleration Name of object of body that is exerting the acceleration.
+ *  \return Pointer to object for calculating cannonball radiation pressures acceleration.
+ */
+std::shared_ptr< electro_magnetism::PanelledRadiationPressureAcceleration > createPanelledRadiationPressureAcceleration(
+        const std::shared_ptr< Body > bodyUndergoingAcceleration,
+        const std::shared_ptr< Body > bodyExertingAcceleration,
+=======
+>>>>>>> origin/master
         const std::string& nameOfBodyUndergoingAcceleration,
         const std::string& nameOfBodyExertingAcceleration );
 
@@ -323,6 +350,23 @@ std::shared_ptr< electro_magnetism::PanelledRadiationPressureAcceleration > crea
         const std::shared_ptr< Body > bodyExertingAcceleration,
         const std::string& nameOfBodyUndergoingAcceleration,
         const std::string& nameOfBodyExertingAcceleration );
+
+//! Function to create a non-ideal solar pressure radiation acceleration.
+/*!
+ * Function to create a non-ideal solar pressure radiation acceleration.
+ *  \param bodyUndergoingAcceleration Pointer to object of body that is being accelerated.
+ *  \param bodyExertingAcceleration Pointer to object of body that is exerting the acceleration.
+ *  \param centralBody Pointer to object of central body.
+ *  \param nameOfBodyUndergoingAcceleration Name of body that is being accelerated.
+ *  \param nameOfBodyExertingAcceleration Name of body that is exerting the acceleration.
+ *  \return Solar sail acceleration model pointer.
+ */
+std::shared_ptr< electro_magnetism::SolarSailAcceleration >
+createSolarSailAccelerationModel(const std::shared_ptr< Body > bodyUndergoingAcceleration,
+                                 const std::shared_ptr< Body > bodyExertingAcceleration,
+                                 const std::shared_ptr< Body > centralBody,
+                                 const std::string& nameOfBodyUndergoingAcceleration,
+                                 const std::string& nameOfBodyExertingAcceleration);
 
 //! Function to create a thrust acceleration model.
 /*!
@@ -353,6 +397,7 @@ createThrustAcceleratioModel(
 std::shared_ptr< gravitation::DirectTidalDissipationAcceleration > createDirectTidalDissipationAcceleration(
         const std::shared_ptr< Body > bodyUndergoingAcceleration,
         const std::shared_ptr< Body > bodyExertingAcceleration,
+<<<<<<< HEAD
         const std::string& nameOfBodyUndergoingAcceleration,
         const std::string& nameOfBodyExertingAcceleration,
         const  std::shared_ptr< AccelerationSettings > accelerationSettings );
@@ -373,6 +418,28 @@ std::shared_ptr< propulsion::MomentumWheelDesaturationThrustAcceleration > creat
         const std::string& nameOfBodyUndergoingAcceleration,
         const std::string& nameOfBodyExertingAcceleration,
         const  std::shared_ptr< AccelerationSettings > accelerationSettings );
+=======
+        const std::string& nameOfBodyUndergoingAcceleration,
+        const std::string& nameOfBodyExertingAcceleration,
+        const  std::shared_ptr< AccelerationSettings > accelerationSettings );
+
+//! Function to create a momentum wheel desaturation acceleration model.
+/*!
+ *  Function to create a momentum wheel desaturation acceleration model.
+ *  \param bodyUndergoingAcceleration Pointer to object of body that is being accelerated.
+ *  \param bodyExertingAcceleration Pointer to object of main body that is exerting the acceleration.
+ *  \param nameOfBodyUndergoingAcceleration Name of object of body that is being accelerated.
+ *  \param nameOfBodyExertingAcceleration Name of object of body that is exerting the acceleration.
+ *  \param accelerationSettings Settings for the acceleration model.
+ *  \return Pointer to object for calculating acceleration.
+ */
+std::shared_ptr< propulsion::MomentumWheelDesaturationThrustAcceleration > createMomentumWheelDesaturationAcceleration(
+        const std::shared_ptr< Body > bodyUndergoingAcceleration,
+        const std::shared_ptr< Body > bodyExertingAcceleration,
+        const std::string& nameOfBodyUndergoingAcceleration,
+        const std::string& nameOfBodyExertingAcceleration,
+        const  std::shared_ptr< AccelerationSettings > accelerationSettings );
+>>>>>>> origin/master
 
 //! Function to create an orbiter relativistic correction acceleration model
 /*!

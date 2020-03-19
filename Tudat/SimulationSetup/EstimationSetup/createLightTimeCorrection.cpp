@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -10,7 +14,7 @@
 
 #include "Tudat/SimulationSetup/EnvironmentSetup/body.h"
 #include "Tudat/SimulationSetup/EstimationSetup/createLightTimeCorrection.h"
-#include "Tudat/Astrodynamics/ObservationModels/ObservableCorrections/firstOrderRelativisticLightTimeCorrection.h"
+#include "Tudat/Astrodynamics/ObservationModels/ObservableCorrections/firstOrderRelativisticCorrection.h"
 #include "Tudat/Astrodynamics/Relativity/metric.h"
 
 namespace tudat

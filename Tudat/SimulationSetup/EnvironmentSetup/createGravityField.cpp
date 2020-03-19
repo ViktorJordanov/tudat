@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -164,7 +168,7 @@ std::pair< double, double  > readGravityFieldFile(
 
     // Read coefficients up to required maximum degree and order.
     while ( !stream.fail( ) && !stream.eof( ) &&
-            ( currentDegree <= maximumDegree || currentOrder <= maximumOrder )  )
+            ( currentDegree <= maximumDegree && currentOrder < maximumOrder )  )
     {
         // Read current line
         std::getline( stream, line );

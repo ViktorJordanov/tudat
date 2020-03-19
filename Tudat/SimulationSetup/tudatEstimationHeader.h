@@ -18,6 +18,10 @@
 #include "Tudat/SimulationSetup/EstimationSetup/orbitDeterminationManager.h"
 #include "Tudat/SimulationSetup/EstimationSetup/podProcessing.h"
 #include "Tudat/Astrodynamics/ObservationModels/simulateObservations.h"
+<<<<<<< HEAD
+=======
+#include "Tudat/Astrodynamics/Propagators/propagateCovariance.h"
+>>>>>>> origin/master
 
 #include "Tudat/Mathematics/Statistics/basicStatistics.h"
 #include "Tudat/Mathematics/Statistics/randomVariableGenerator.h"

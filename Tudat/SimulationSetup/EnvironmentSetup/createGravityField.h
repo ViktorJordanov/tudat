@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -168,6 +172,10 @@ public:
      *  \return Sine spherical harmonic coefficients (geodesy normalized).
      */
     Eigen::MatrixXd getSineCoefficients( ){ return sineCoefficients_; }
+
+    void resetCosineCoefficients( const Eigen::MatrixXd& cosineCoefficients ){ cosineCoefficients_ = cosineCoefficients; }
+
+    void resetSineCoefficients( const Eigen::MatrixXd& sineCoefficients ){ sineCoefficients_ = sineCoefficients; }
 
     //! Function to return identifier for body-fixed reference frame.
     /*!

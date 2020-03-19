@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -198,7 +202,11 @@ public:
             const bool biasIsAbsolute ):
         EstimatableParameter< Eigen::VectorXd >(
             biasIsAbsolute ? arcwise_constant_additive_observation_bias : arcwise_constant_relative_observation_bias,
+<<<<<<< HEAD
             linkEnds.begin( )->second. first ),
+=======
+            linkEnds.begin( )->second.first ),
+>>>>>>> origin/master
         arcStartTimes_( arcStartTimes ), getBiasList_( getBiasList ), resetBiasList_( resetBiasList ),
         linkEndIndex_( linkEndIndex ), linkEnds_( linkEnds ), observableType_( observableType )
     {

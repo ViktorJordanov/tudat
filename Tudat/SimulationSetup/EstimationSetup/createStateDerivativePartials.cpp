@@ -14,7 +14,11 @@ template std::map< propagators::IntegratedStateType, orbit_determination::StateD
         const std::shared_ptr< estimatable_parameters::EstimatableParameterSet< double > >
         parametersToEstimate );
 
+<<<<<<< HEAD
 #if( BUILD_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+=======
+#if( BUILD_WITH_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+>>>>>>> origin/master
 template std::map< propagators::IntegratedStateType, orbit_determination::StateDerivativePartialsMap > createStateDerivativePartials< long double, double >(
         const std::unordered_map< propagators::IntegratedStateType,
         std::vector< std::shared_ptr< propagators::SingleStateTypeDerivative< long double, double > > > >

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -273,13 +277,13 @@ BOOST_AUTO_TEST_CASE( testCowellPopagatorCentralBodies )
                 }
                 else
                 {
-                    BOOST_CHECK_SMALL( std::fabs( stateDifference( 0 + 6 * j ) ), 1.0E-1 );
-                    BOOST_CHECK_SMALL( std::fabs( stateDifference( 1 + 6 * j ) ), 1.0E-1 );
-                    BOOST_CHECK_SMALL( std::fabs( stateDifference( 2 + 6 * j ) ), 1.0E-1 );
+                    BOOST_CHECK_SMALL( std::fabs( stateDifference( 0 + 6 * j ) ), 2.0E-1 );
+                    BOOST_CHECK_SMALL( std::fabs( stateDifference( 1 + 6 * j ) ), 2.0E-1 );
+                    BOOST_CHECK_SMALL( std::fabs( stateDifference( 2 + 6 * j ) ), 2.0E-1 );
 
-                    BOOST_CHECK_SMALL( std::fabs( stateDifference( 3 + 6 * j ) ), 2.0E-7 );
-                    BOOST_CHECK_SMALL( std::fabs( stateDifference( 4 + 6 * j ) ), 2.0E-7 );
-                    BOOST_CHECK_SMALL( std::fabs( stateDifference( 5 + 6 * j ) ), 2.0E-7 );
+                    BOOST_CHECK_SMALL( std::fabs( stateDifference( 3 + 6 * j ) ), 5.0E-7 );
+                    BOOST_CHECK_SMALL( std::fabs( stateDifference( 4 + 6 * j ) ), 5.0E-7 );
+                    BOOST_CHECK_SMALL( std::fabs( stateDifference( 5 + 6 * j ) ), 5.0E-7 );
                 }
             }
         }
@@ -320,13 +324,13 @@ BOOST_AUTO_TEST_CASE( testCowellPopagatorCentralBodies )
             }
             else
             {
-                BOOST_CHECK_SMALL( std::fabs( stateDifference( 0 + 6 * j ) ), 1.0E-1 );
-                BOOST_CHECK_SMALL( std::fabs( stateDifference( 1 + 6 * j ) ), 1.0E-1 );
-                BOOST_CHECK_SMALL( std::fabs( stateDifference( 2 + 6 * j ) ), 1.0E-1 );
+                BOOST_CHECK_SMALL( std::fabs( stateDifference( 0 + 6 * j ) ), 2.0E-1 );
+                BOOST_CHECK_SMALL( std::fabs( stateDifference( 1 + 6 * j ) ), 2.0E-1 );
+                BOOST_CHECK_SMALL( std::fabs( stateDifference( 2 + 6 * j ) ), 2.0E-1 );
 
-                BOOST_CHECK_SMALL( std::fabs( stateDifference( 3 + 6 * j ) ), 2.0E-7 );
-                BOOST_CHECK_SMALL( std::fabs( stateDifference( 4 + 6 * j ) ), 2.0E-7 );
-                BOOST_CHECK_SMALL( std::fabs( stateDifference( 5 + 6 * j ) ), 2.0E-7 );
+                BOOST_CHECK_SMALL( std::fabs( stateDifference( 3 + 6 * j ) ), 5.0E-7 );
+                BOOST_CHECK_SMALL( std::fabs( stateDifference( 4 + 6 * j ) ), 5.0E-7 );
+                BOOST_CHECK_SMALL( std::fabs( stateDifference( 5 + 6 * j ) ), 5.0E-7 );
             }
         }
 
@@ -483,7 +487,11 @@ BOOST_AUTO_TEST_CASE( testCowellPropagatorKeplerCompare )
 {
     testCowellPropagationOfKeplerOrbit< double, double >( );
 
+<<<<<<< HEAD
     #if( BUILD_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+=======
+    #if( BUILD_WITH_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+>>>>>>> origin/master
     testCowellPropagationOfKeplerOrbit< double, long double >( );
     testCowellPropagationOfKeplerOrbit< Time, double >( );
     testCowellPropagationOfKeplerOrbit< Time, long double >( );

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -473,6 +477,13 @@ createTranslationalEquationsOfMotionEnvironmentUpdaterSettings(
                     break;
                 case momentum_wheel_desaturation_acceleration:
                     break;
+<<<<<<< HEAD
+=======
+                case solar_sail_acceleration:
+                    singleAccelerationUpdateNeeds[ radiation_pressure_interface_update ].push_back( acceleratedBodyIterator->first );
+                    singleAccelerationUpdateNeeds[ body_mass_update ].push_back( acceleratedBodyIterator->first );
+                    break;
+>>>>>>> origin/master
                 default:
                     throw std::runtime_error( std::string( "Error when setting acceleration model update needs, model type not recognized: " ) +
                                               std::to_string( currentAccelerationModelType ) );
@@ -535,6 +546,7 @@ createMassPropagationEnvironmentUpdaterSettings(
 
     return environmentModelsToUpdate;
 }
+<<<<<<< HEAD
 
 //! Function to update environment to allow all required updates to be made
 void checkAndModifyEnvironmentForDependentVariableSaving(
@@ -826,6 +838,301 @@ std::map< propagators::EnvironmentModelsToUpdate, std::vector< std::string > > c
     return environmentModelsToUpdate;
 }
 
+=======
+
+//! Function to update environment to allow all required updates to be made
+void checkAndModifyEnvironmentForDependentVariableSaving(
+        const EnvironmentModelsToUpdate updateType,
+        const std::shared_ptr< SingleDependentVariableSaveSettings > dependentVariableSaveSettings,
+        const simulation_setup::NamedBodyMap& bodyMap )
+{
+    switch( updateType )
+    {
+    case vehicle_flight_conditions_update:
+        if( bodyMap.at( dependentVariableSaveSettings->associatedBody_ )->getFlightConditions( ) == nullptr )
+        {
+            if( ( bodyMap.at( dependentVariableSaveSettings->secondaryBody_ )->getAtmosphereModel( ) ) != nullptr &&
+                    ( bodyMap.at( dependentVariableSaveSettings->associatedBody_ )->getAerodynamicCoefficientInterface( ) != nullptr ) )
+            {
+                bodyMap.at( dependentVariableSaveSettings->associatedBody_ )->setFlightConditions(
+                            simulation_setup::createAtmosphericFlightConditions(
+                                bodyMap.at( dependentVariableSaveSettings->associatedBody_ ),
+                                bodyMap.at( dependentVariableSaveSettings->secondaryBody_ ),
+                                dependentVariableSaveSettings->associatedBody_,
+                                dependentVariableSaveSettings->secondaryBody_ ) );
+            }
+            else
+            {
+                bodyMap.at( dependentVariableSaveSettings->associatedBody_ )->setFlightConditions(
+                            simulation_setup::createFlightConditions(
+                                bodyMap.at( dependentVariableSaveSettings->associatedBody_ ),
+                                bodyMap.at( dependentVariableSaveSettings->secondaryBody_ ),
+                                dependentVariableSaveSettings->associatedBody_,
+                                dependentVariableSaveSettings->secondaryBody_ ) );
+            }
+        }
+        break;
+    default:
+        break;
+    }
+}
+
+//! Function to create environment update settings for a single dependent variable
+std::map< propagators::EnvironmentModelsToUpdate,
+std::vector< std::string > > createEnvironmentUpdaterSettingsForDependentVariables(
+        const std::shared_ptr< SingleDependentVariableSaveSettings > dependentVariableSaveSettings,
+        const simulation_setup::NamedBodyMap& bodyMap )
+{
+    std::map< propagators::EnvironmentModelsToUpdate, std::vector< std::string > >  variablesToUpdate;
+    switch( dependentVariableSaveSettings->dependentVariableType_ )
+    {
+    case mach_number_dependent_variable:
+        variablesToUpdate[ vehicle_flight_conditions_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_rotational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        break;
+    case altitude_dependent_variable:
+        variablesToUpdate[ vehicle_flight_conditions_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_rotational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        break;
+    case airspeed_dependent_variable:
+        variablesToUpdate[ vehicle_flight_conditions_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_rotational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        break;
+    case local_density_dependent_variable:
+        variablesToUpdate[ vehicle_flight_conditions_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_rotational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        break;
+    case relative_speed_dependent_variable:
+        if( dependentVariableSaveSettings->associatedBody_ != "SSB" )
+        {
+            variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        }
+        if( dependentVariableSaveSettings->secondaryBody_ != "SSB" )
+        {
+            variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        }
+        break;
+    case relative_position_dependent_variable:
+        if( dependentVariableSaveSettings->associatedBody_ != "SSB" )
+        {
+            variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        }
+        if( dependentVariableSaveSettings->secondaryBody_ != "SSB" )
+        {
+            variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        }
+        break;
+    case relative_distance_dependent_variable:
+        if( dependentVariableSaveSettings->associatedBody_ != "SSB" )
+        {
+            variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        }
+        if( dependentVariableSaveSettings->secondaryBody_ != "SSB" )
+        {
+            variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        }
+        break;
+    case relative_velocity_dependent_variable:
+        if( dependentVariableSaveSettings->associatedBody_ != "SSB" )
+        {
+            variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        }
+        if( dependentVariableSaveSettings->secondaryBody_ != "SSB" )
+        {
+            variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        }
+        break;
+    case total_acceleration_norm_dependent_variable:
+        break;
+    case single_acceleration_norm_dependent_variable:
+        break;
+    case total_acceleration_dependent_variable:
+        break;
+    case single_acceleration_dependent_variable:
+        break;
+    case aerodynamic_force_coefficients_dependent_variable:
+        variablesToUpdate[ vehicle_flight_conditions_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_rotational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        break;
+    case aerodynamic_moment_coefficients_dependent_variable:
+        variablesToUpdate[ vehicle_flight_conditions_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_rotational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        break;
+    case rotation_matrix_to_body_fixed_frame_variable:
+        variablesToUpdate[ body_rotational_state_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        break;
+    case intermediate_aerodynamic_rotation_matrix_variable:
+        variablesToUpdate[ vehicle_flight_conditions_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_rotational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        break;
+    case relative_body_aerodynamic_orientation_angle_variable:
+        variablesToUpdate[ vehicle_flight_conditions_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_rotational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        break;
+    case body_fixed_airspeed_based_velocity_variable:
+        variablesToUpdate[ vehicle_flight_conditions_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_rotational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        break;
+    case total_aerodynamic_g_load_variable:
+        variablesToUpdate[ vehicle_flight_conditions_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_rotational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        break;
+    case stagnation_point_heat_flux_dependent_variable:
+        variablesToUpdate[ vehicle_flight_conditions_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_rotational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        break;
+    case local_temperature_dependent_variable:
+        variablesToUpdate[ vehicle_flight_conditions_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_rotational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        break;
+    case local_dynamic_pressure_dependent_variable:
+        variablesToUpdate[ vehicle_flight_conditions_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_rotational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        break;
+    case local_aerodynamic_heat_rate_dependent_variable:
+        variablesToUpdate[ vehicle_flight_conditions_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_rotational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        break;
+    case geodetic_latitude_dependent_variable:
+        variablesToUpdate[ vehicle_flight_conditions_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_rotational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        break;
+    case body_fixed_groundspeed_based_velocity_variable:
+        variablesToUpdate[ vehicle_flight_conditions_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_rotational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        break;
+    case total_mass_rate_dependent_variables:
+        break;
+    case total_torque_norm_dependent_variable:
+        break;
+    case single_torque_norm_dependent_variable:
+        break;
+    case total_torque_dependent_variable:
+        break;
+    case single_torque_dependent_variable:
+        break;
+    case keplerian_state_dependent_variable:
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        break;
+    case modified_equinocial_state_dependent_variable:
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        break;
+    case spherical_harmonic_acceleration_terms_dependent_variable:
+        break;
+    case spherical_harmonic_acceleration_norm_terms_dependent_variable:
+        break;
+    case body_fixed_relative_cartesian_position:
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        variablesToUpdate[ body_rotational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        break;
+    case body_fixed_relative_spherical_position:
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        variablesToUpdate[ body_rotational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        break;
+    case euler_angles_to_body_fixed_313:
+        variablesToUpdate[ body_rotational_state_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        break;
+    case lvlh_to_inertial_frame_rotation_dependent_variable:
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        break;
+    case control_surface_deflection_dependent_variable:
+        variablesToUpdate[ vehicle_flight_conditions_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        break;
+    case radiation_pressure_dependent_variable:
+        variablesToUpdate[ radiation_pressure_interface_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+        break;
+    case periapsis_altitude_dependent_variable:
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        variablesToUpdate[ body_translational_state_update ].push_back( dependentVariableSaveSettings->secondaryBody_ );
+    case total_gravity_field_variation_acceleration:
+        break;
+    case single_gravity_field_variation_acceleration:
+        break;
+    case single_gravity_field_variation_acceleration_terms:
+        break;
+    case acceleration_partial_wrt_body_translational_state:
+        break;
+    case current_body_mass_dependent_variable:
+        variablesToUpdate[ body_mass_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        break;
+    case radiation_pressure_coefficient_dependent_variable:
+        variablesToUpdate[ radiation_pressure_interface_update ].push_back( dependentVariableSaveSettings->associatedBody_ );
+        break;
+    default:
+        throw std::runtime_error( "Error when getting environment updates for dependent variables, parameter " +
+                                  std::to_string( dependentVariableSaveSettings->dependentVariableType_ ) + " not found." );
+    }
+
+    if( variablesToUpdate.count( vehicle_flight_conditions_update ) > 0 )
+    {
+        checkAndModifyEnvironmentForDependentVariableSaving(
+                    vehicle_flight_conditions_update, dependentVariableSaveSettings, bodyMap );
+    }
+
+    return variablesToUpdate;
+}
+
+//! Create environment update settings for dependent variables
+std::map< propagators::EnvironmentModelsToUpdate, std::vector< std::string > > createEnvironmentUpdaterSettings(
+        const std::shared_ptr< DependentVariableSaveSettings > dependentVariableSaveSettings,
+        const simulation_setup::NamedBodyMap& bodyMap )
+{
+    std::map< propagators::EnvironmentModelsToUpdate, std::vector< std::string > > environmentModelsToUpdate;
+
+    if( dependentVariableSaveSettings != nullptr )
+    {
+        std::vector< std::shared_ptr< SingleDependentVariableSaveSettings > > dependentVariableList =
+                dependentVariableSaveSettings->dependentVariables_;
+        for( unsigned int i = 0; i < dependentVariableList.size( ); i++ )
+        {
+            std::map< propagators::EnvironmentModelsToUpdate, std::vector< std::string > > currentEnvironmentModelsToUpdate =
+                    createEnvironmentUpdaterSettingsForDependentVariables( dependentVariableList.at( i ), bodyMap );
+            addEnvironmentUpdates( environmentModelsToUpdate, currentEnvironmentModelsToUpdate );
+        }
+    }
+    return environmentModelsToUpdate;
+}
+
+>>>>>>> origin/master
 //! Create environment update settings for termination settings
 std::map< propagators::EnvironmentModelsToUpdate, std::vector< std::string > > createEnvironmentUpdaterSettings(
         const std::shared_ptr< PropagationTerminationSettings > terminationSettings,
@@ -953,7 +1260,11 @@ template std::map< propagators::EnvironmentModelsToUpdate, std::vector< std::str
         const simulation_setup::NamedBodyMap& bodyMap,
         const bool isPartOfMultiTypePropagation );
 
+<<<<<<< HEAD
 #if( BUILD_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+=======
+#if( BUILD_WITH_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+>>>>>>> origin/master
 template std::shared_ptr< propagators::EnvironmentUpdater< double, Time > > createEnvironmentUpdaterForDynamicalEquations< double, Time >(
         const std::shared_ptr< SingleArcPropagatorSettings< double > > propagatorSettings,
         const simulation_setup::NamedBodyMap& bodyMap );

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -33,6 +37,10 @@
 #include "Tudat/SimulationSetup/EnvironmentSetup/defaultBodies.h"
 #include "Tudat/Astrodynamics/Aerodynamics/UnitTests/testApolloCapsuleCoefficients.h"
 #include "Tudat/Astrodynamics/Ephemerides/constantRotationalEphemeris.h"
+<<<<<<< HEAD
+=======
+#include "Tudat/Astrodynamics/ElectroMagnetism/radiationPressureInterface.h"
+>>>>>>> origin/master
 
 namespace tudat
 {
@@ -776,7 +784,11 @@ BOOST_AUTO_TEST_CASE( test_panelledRadiationPressureAcceleration )
 
 
     // Manually calculate acceleration
+<<<<<<< HEAD
     for (int currentPanel = 0 ; currentPanel < areas.size() ; currentPanel++){
+=======
+    for ( unsigned int currentPanel = 0 ; currentPanel < areas.size() ; currentPanel++){
+>>>>>>> origin/master
 
         double cosinusCurrentPanelInclination = expectedVehicleToSunNormalisedVector.dot( panelSurfaceNormals[ currentPanel ] );
 
@@ -801,6 +813,7 @@ BOOST_AUTO_TEST_CASE( test_panelledRadiationPressureAcceleration )
     }
 
 
+<<<<<<< HEAD
 
 
 
@@ -810,6 +823,148 @@ BOOST_AUTO_TEST_CASE( test_panelledRadiationPressureAcceleration )
                 expectedAcceleration, calculatedAcceleration, ( 2.0 * std::numeric_limits< double >::epsilon( ) ) );
 
 
+=======
+    // Compare results
+    TUDAT_CHECK_MATRIX_CLOSE_FRACTION(
+                expectedAcceleration, calculatedAcceleration, ( 2.0 * std::numeric_limits< double >::epsilon( ) ) );
+
+}
+
+//! Test solar sailing radiation pressure acceleration
+BOOST_AUTO_TEST_CASE( test_solarSailingRadiationPressureAcceleration )
+{
+    using namespace tudat::simulation_setup;
+    using namespace tudat;
+
+    // Load Spice kernels
+    spice_interface::loadStandardSpiceKernels( );
+
+    // Get settings for celestial bodies
+    std::map< std::string, std::shared_ptr< BodySettings > > bodySettings;
+    bodySettings[ "Earth" ] = getDefaultSingleBodySettings( "Earth", 0.0, 10.0 * 86400.0 );
+    bodySettings[ "Sun" ] = getDefaultSingleBodySettings( "Sun", 0.0,10.0 * 86400.0 );
+
+
+    // Create solar sailing radiation pressure settings.
+
+    // Define area subject to radiation pressure [m^2].
+    double area = 2.0;
+
+    // Set cone angle of the solar sail [rad].
+    double coneAngle = 0.25;
+
+    // Get cone angle of the solar sail [rad].
+    std::function< double( const double ) > coneAngleFunction
+            = [ = ]( const double ){ return coneAngle; };
+
+    // Define clock angle of the solar sail [rad].
+    double clockAngle = 0.2;
+
+    // Get clock angle of the solar sail [rad].
+    std::function< double( const double ) > clockAngleFunction
+            = [ = ]( const double ){ return clockAngle; };
+
+    // Define front emissivity coefficient of the solar sail [-].
+    double frontEmissivityCoefficient = 0.4;
+
+    // Define back emissivity coefficient of the solar sail [-].
+    double backEmissivityCoefficient = 0.4;
+
+    // Define front Lambertian coefficient of the solar sail [-].
+    double frontLambertianCoefficient = 0.4;
+
+    // Define back Lambertian coefficient of the solar sail [-].
+    double backLambertianCoefficient = 0.4;
+
+    // Define reflectivity coefficient of the solar sail [-].
+    double reflectivityCoefficient = 0.3;
+
+    // Define specular reflection coefficient of the solar sail [-].
+    double specularReflectionCoefficient = 1.0;
+
+    std::string centralBody = "Earth";
+
+    bodySettings[ "Vehicle" ] = std::make_shared< BodySettings >( );
+    bodySettings[ "Vehicle" ]->radiationPressureSettings[ "Sun" ] =
+            std::make_shared< SolarSailRadiationInterfaceSettings >( "Sun", area, coneAngleFunction, clockAngleFunction, frontEmissivityCoefficient,
+                                                                     backEmissivityCoefficient, frontLambertianCoefficient, backLambertianCoefficient,
+                                                                     reflectivityCoefficient, specularReflectionCoefficient, std::vector< std::string >( ),
+                                                                     centralBody );
+
+    bodySettings[ "Vehicle" ]->ephemerisSettings = std::make_shared< KeplerEphemerisSettings >(
+                ( Eigen::Vector6d( ) << 12000.0E3, 0.13, 0.3, 0.0, 0.0, 0.0 ).finished( ),
+                0.0, spice_interface::getBodyGravitationalParameter( "Earth" ), "Earth", "ECLIPJ2000" );
+
+
+    // Create bodies
+    NamedBodyMap bodyMap = createBodies( bodySettings );
+    setGlobalFrameBodyEphemerides( bodyMap, "SSB", "ECLIPJ2000" );
+
+    // Define rotational ephemeris of the vehicle.
+    Eigen::Vector7d rotationalStateVehicle;
+    rotationalStateVehicle.segment( 0, 4 ) = linear_algebra::convertQuaternionToVectorFormat( Eigen::Quaterniond( Eigen::Matrix3d::Identity() ));
+    rotationalStateVehicle.segment( 4, 3 ) = Eigen::Vector3d::Zero();
+    bodyMap[ "Vehicle" ]->setRotationalEphemeris( std::make_shared< ephemerides::ConstantRotationalEphemeris >(
+                    rotationalStateVehicle, "ECLIPJ2000", "VehicleFixed" ) );
+
+    // Define settings for accelerations
+    SelectedAccelerationMap accelerationSettingsMap;
+    accelerationSettingsMap[ "Vehicle" ][ "Sun" ].push_back(
+                std::make_shared< AccelerationSettings >( solar_sail_acceleration ) );
+
+    // Define origin of integration
+    std::map< std::string, std::string > centralBodiesMap;
+    centralBodiesMap[ "Vehicle" ] = "Earth";
+
+    // Create accelerations
+    AccelerationMap accelerationsMap = createAccelerationModelsMap( bodyMap, accelerationSettingsMap, centralBodiesMap );
+    std::shared_ptr< AccelerationModel3d > radiationPressureAcceleration = accelerationsMap[ "Vehicle" ][ "Sun" ][ 0 ];
+
+    // Set (arbitrary) test time.
+    double testTime = 5.0 * 86400.0;
+
+    // Set vehicle mass
+    double bodyMass = 500.0;
+    bodyMap[ "Vehicle" ]->setBodyMassFunction( [ & ]( const double ){ return bodyMass; } );
+    bodyMap[ "Vehicle" ]->updateMass( testTime );
+
+    // Update environment to current time.
+    bodyMap[ "Sun" ]->setStateFromEphemeris< double, double >( testTime );
+    bodyMap[ "Earth" ]->setStateFromEphemeris< double, double >( testTime );
+    bodyMap[ "Vehicle" ]->setStateFromEphemeris< double, double >( testTime );
+    bodyMap[ "Vehicle" ]->setCurrentRotationToLocalFrameFromEphemeris( testTime );
+    bodyMap[ "Vehicle" ]->getRadiationPressureInterfaces( ).at( "Sun" )->updateInterface( testTime );
+
+    // Get acceleration
+    Eigen::Vector3d calculatedAcceleration = updateAndGetAcceleration( radiationPressureAcceleration );
+
+   // Retrieve solar sailing radiation pressure interface.
+   std::shared_ptr< electro_magnetism::SolarSailingRadiationPressureInterface > radiationPressureInterface =
+           std::dynamic_pointer_cast< electro_magnetism::SolarSailingRadiationPressureInterface >(
+               bodyMap[ "Vehicle" ]->getRadiationPressureInterfaces().at( "Sun" ) );
+
+    // Manually calculate acceleration.
+   std::shared_ptr< AccelerationModel3d > manualAccelerationModel =
+           std::make_shared< electro_magnetism::SolarSailAcceleration >(
+               std::bind( &Body::getPosition, bodyMap[ "Sun" ] ),
+               std::bind( &Body::getPosition, bodyMap[ "Vehicle" ] ),
+               std::bind( &Body::getVelocity, bodyMap[ "Vehicle" ] ),
+               std::bind( &Body::getVelocity, bodyMap[ centralBodiesMap[ "Vehicle" ] ] ),
+               std::bind( &electro_magnetism::SolarSailingRadiationPressureInterface::getCurrentRadiationPressure,
+                           radiationPressureInterface ),
+               std::bind( &electro_magnetism::SolarSailingRadiationPressureInterface::getCurrentConeAngle,
+                           radiationPressureInterface ),
+               std::bind( &electro_magnetism::SolarSailingRadiationPressureInterface::getCurrentClockAngle,
+                           radiationPressureInterface ),
+               frontEmissivityCoefficient, backEmissivityCoefficient, frontLambertianCoefficient, backLambertianCoefficient,
+               reflectivityCoefficient, specularReflectionCoefficient, area, bodyMass );
+
+   Eigen::Vector3d manualAcceleration = updateAndGetAcceleration( manualAccelerationModel );
+
+
+    // Compare results.
+    TUDAT_CHECK_MATRIX_CLOSE_FRACTION( manualAcceleration, calculatedAcceleration, ( 2.0 * std::numeric_limits< double >::epsilon( ) ) );
+>>>>>>> origin/master
 }
 
 BOOST_AUTO_TEST_SUITE_END( )

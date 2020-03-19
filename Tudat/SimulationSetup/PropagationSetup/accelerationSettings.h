@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -11,7 +15,10 @@
 #ifndef TUDAT_ACCELERATIONSETTINGS_H
 #define TUDAT_ACCELERATIONSETTINGS_H
 
+#include <functional>
+#include <memory>
 #include "Tudat/Astrodynamics/ElectroMagnetism/cannonBallRadiationPressureAcceleration.h"
+#include "Tudat/Astrodynamics/ElectroMagnetism/solarSailAcceleration.h"
 #include "Tudat/Astrodynamics/Gravitation/centralGravityModel.h"
 #include "Tudat/Astrodynamics/Gravitation/sphericalHarmonicsGravityModel.h"
 #include "Tudat/Astrodynamics/Gravitation/thirdBodyPerturbation.h"

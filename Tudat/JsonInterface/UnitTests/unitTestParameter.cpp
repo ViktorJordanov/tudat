@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -28,7 +32,11 @@ namespace unit_tests
 BOOST_AUTO_TEST_SUITE( test_json_observation )
 
 //// Test 1: sphericalHarmonicGravity
+<<<<<<< HEAD
 BOOST_AUTO_TEST_CASE( test_json_acceleration_sphericalHarmonicGravity )
+=======
+BOOST_AUTO_TEST_CASE( test_json_acceleration_parameters )
+>>>>>>> origin/master
 {
     using namespace tudat::simulation_setup;
     using namespace tudat::observation_models;
@@ -111,6 +119,7 @@ BOOST_AUTO_TEST_CASE( test_json_acceleration_sphericalHarmonicGravity )
     parameterNames.push_back( std::make_shared< EstimatableParameterSettings >( "Earth", rotation_pole_position ) );
     parameterNames.push_back( std::make_shared< EstimatableParameterSettings >( "Earth", ground_station_position, "Station1" ) );
     parameterNames.push_back( std::make_shared< EstimatableParameterSettings >( "Earth", ground_station_position, "Station2" ) );
+<<<<<<< HEAD
     parameterNames.push_back( std::make_shared< ConstantObservationBiasEstimatableParameterSettings >(
                                   linkEndsPerObservable.at( one_way_range ).at( 0 ), one_way_range, true ) );
     parameterNames.push_back( std::make_shared< ConstantObservationBiasEstimatableParameterSettings >(
@@ -120,6 +129,17 @@ BOOST_AUTO_TEST_CASE( test_json_acceleration_sphericalHarmonicGravity )
                                   linkEndsPerObservable.at( one_way_range ).at( 1 ), one_way_range, arcStartTimes, receiver, true ) );
     parameterNames.push_back( std::make_shared< ArcWiseConstantObservationBiasEstimatableParameterSettings >(
                                   linkEndsPerObservable.at( one_way_range ).at( 0 ), one_way_range, arcStartTimes, retransmitter, false ) );
+=======
+//    parameterNames.push_back( std::make_shared< ConstantObservationBiasEstimatableParameterSettings >(
+//                                  linkEndsPerObservable.at( one_way_range ).at( 0 ), one_way_range, true ) );
+//    parameterNames.push_back( std::make_shared< ConstantObservationBiasEstimatableParameterSettings >(
+//                                  linkEndsPerObservable.at( one_way_range ).at( 1 ), one_way_range, false ) );
+
+//    parameterNames.push_back( std::make_shared< ArcWiseConstantObservationBiasEstimatableParameterSettings >(
+//                                  linkEndsPerObservable.at( one_way_range ).at( 1 ), one_way_range, arcStartTimes, receiver, true ) );
+//    parameterNames.push_back( std::make_shared< ArcWiseConstantObservationBiasEstimatableParameterSettings >(
+//                                  linkEndsPerObservable.at( one_way_range ).at( 0 ), one_way_range, arcStartTimes, retransmitter, false ) );
+>>>>>>> origin/master
 
     parameterNames.push_back( std::make_shared< SphericalHarmonicEstimatableParameterSettings >(
                                   2, 0, 8, 8, "Earth", spherical_harmonics_cosine_coefficient_block ) );

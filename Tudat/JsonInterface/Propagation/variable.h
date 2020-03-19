@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -90,6 +94,10 @@ static std::map< PropagationDependentVariables, std::string > dependentVariableT
     { keplerian_state_dependent_variable, "keplerElements" },
     { modified_equinocial_state_dependent_variable, "modifiedEquinoctialElements" },
     { spherical_harmonic_acceleration_terms_dependent_variable, "sphericalHarmonicsAccelerationTerms" },
+<<<<<<< HEAD
+=======
+    { spherical_harmonic_acceleration_norm_terms_dependent_variable, "sphericalHarmonicsAccelerationTermNorms" },
+>>>>>>> origin/master
     { body_fixed_relative_cartesian_position, "bodyFixedRelativeCartesianPosition" },
     { body_fixed_relative_spherical_position, "bodyFixedRelativeSphericalPosition" },
     { total_gravity_field_variation_acceleration, "totalGravityFieldVariationAcceleration" },

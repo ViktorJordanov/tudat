@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -107,6 +111,28 @@ BOOST_AUTO_TEST_CASE( test_json_rotationModel_gcrs_itrs )
     // Compare
     BOOST_CHECK_EQUAL_JSON( fromFileSettings, manualSettings );
 }
+<<<<<<< HEAD
+=======
+
+// Test 3: Synchronous rotation model
+BOOST_AUTO_TEST_CASE( test_json_rotationModel_synchronous )
+{
+    using namespace simulation_setup;
+    using namespace json_interface;
+
+    // Create RotationModelSettings from JSON file
+    const std::shared_ptr< RotationModelSettings > fromFileSettings =
+            parseJSONFile< std::shared_ptr< RotationModelSettings > >( INPUT( "synchronous" ) );
+
+    // Create RotationModelSettings manually
+    const std::shared_ptr< RotationModelSettings > manualSettings =
+            std::make_shared< SynchronousRotationModelSettings >(
+                "Sun", "ECLIPJ2000", "IAU_Earth" );
+
+    // Compare
+    BOOST_CHECK_EQUAL_JSON( fromFileSettings, manualSettings );
+}
+>>>>>>> origin/master
 BOOST_AUTO_TEST_SUITE_END( )
 
 } // namespace unit_tests

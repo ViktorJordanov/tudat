@@ -1,4 +1,8 @@
+<<<<<<< HEAD:Tudat/SimulationSetup/EstimationSetup/orbitDeterminationManager.h
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master:Tudat/SimulationSetup/EstimationSetup/orbitDeterminationManager.h
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -124,9 +128,29 @@ public:
     OrbitDeterminationManager(
             const NamedBodyMap &bodyMap,
             const std::shared_ptr< estimatable_parameters::EstimatableParameterSet< ObservationScalarType > >
+<<<<<<< HEAD:Tudat/SimulationSetup/EstimationSetup/orbitDeterminationManager.h
             parametersToEstimate,
             const observation_models::SortedObservationSettingsMap& observationSettingsMap,
             const std::shared_ptr< numerical_integrators::IntegratorSettings< TimeType > > integratorSettings,
+=======
+            parametersToEstimate,
+            const observation_models::SortedObservationSettingsMap& observationSettingsMap,
+            const std::shared_ptr< numerical_integrators::IntegratorSettings< TimeType > > integratorSettings,
+            const std::shared_ptr< propagators::PropagatorSettings< ObservationScalarType > > propagatorSettings,
+            const bool propagateOnCreation = true ):
+        parametersToEstimate_( parametersToEstimate )
+    {
+        initializeOrbitDeterminationManager( bodyMap, observationSettingsMap, { integratorSettings }, propagatorSettings,
+                                             propagateOnCreation );
+    }
+
+    OrbitDeterminationManager(
+            const NamedBodyMap &bodyMap,
+            const std::shared_ptr< estimatable_parameters::EstimatableParameterSet< ObservationScalarType > >
+            parametersToEstimate,
+            const observation_models::SortedObservationSettingsMap& observationSettingsMap,
+            const std::vector< std::shared_ptr< numerical_integrators::IntegratorSettings< TimeType > > > integratorSettings,
+>>>>>>> origin/master:Tudat/SimulationSetup/EstimationSetup/orbitDeterminationManager.h
             const std::shared_ptr< propagators::PropagatorSettings< ObservationScalarType > > propagatorSettings,
             const bool propagateOnCreation = true ):
         parametersToEstimate_( parametersToEstimate )
@@ -151,9 +175,30 @@ public:
     OrbitDeterminationManager(
             const NamedBodyMap &bodyMap,
             const std::shared_ptr< estimatable_parameters::EstimatableParameterSet< ObservationScalarType > >
+<<<<<<< HEAD:Tudat/SimulationSetup/EstimationSetup/orbitDeterminationManager.h
             parametersToEstimate,
             const observation_models::ObservationSettingsMap& observationSettingsMap,
             const std::shared_ptr< numerical_integrators::IntegratorSettings< TimeType > > integratorSettings,
+=======
+            parametersToEstimate,
+            const observation_models::ObservationSettingsMap& observationSettingsMap,
+            const std::shared_ptr< numerical_integrators::IntegratorSettings< TimeType > > integratorSettings,
+            const std::shared_ptr< propagators::PropagatorSettings< ObservationScalarType > > propagatorSettings,
+            const bool propagateOnCreation = true ):
+        parametersToEstimate_( parametersToEstimate )
+    {
+        initializeOrbitDeterminationManager( bodyMap, observation_models::convertUnsortedToSortedObservationSettingsMap(
+                                                 observationSettingsMap ), { integratorSettings }, propagatorSettings,
+                                             propagateOnCreation );
+    }
+
+    OrbitDeterminationManager(
+            const NamedBodyMap &bodyMap,
+            const std::shared_ptr< estimatable_parameters::EstimatableParameterSet< ObservationScalarType > >
+            parametersToEstimate,
+            const observation_models::ObservationSettingsMap& observationSettingsMap,
+            const std::vector< std::shared_ptr< numerical_integrators::IntegratorSettings< TimeType > > > integratorSettings,
+>>>>>>> origin/master:Tudat/SimulationSetup/EstimationSetup/orbitDeterminationManager.h
             const std::shared_ptr< propagators::PropagatorSettings< ObservationScalarType > > propagatorSettings,
             const bool propagateOnCreation = true ):
         parametersToEstimate_( parametersToEstimate )
@@ -445,7 +490,11 @@ public:
         int numberOfIterations = 0;
         do
         {
+<<<<<<< HEAD:Tudat/SimulationSetup/EstimationSetup/orbitDeterminationManager.h
             try
+=======
+//            try
+>>>>>>> origin/master:Tudat/SimulationSetup/EstimationSetup/orbitDeterminationManager.h
             {
                 // Re-integrate equations of motion and variational equations with new parameter estimate.
                 if( ( numberOfIterations > 0 ) ||( podInput->getReintegrateEquationsOnFirstIteration( ) ) )
@@ -460,6 +509,7 @@ public:
                     dependentVariableHistoryPerIteration.push_back(
                                 variationalEquationsSolver_->getDynamicsSimulatorBase( )->getDependentVariableNumericalSolutionBase( ) );
                 }
+<<<<<<< HEAD:Tudat/SimulationSetup/EstimationSetup/orbitDeterminationManager.h
             }
             catch( std::runtime_error& error )
             {
@@ -467,7 +517,16 @@ public:
                            error.what( )<<std::endl<<"Terminating estimation"<<std::endl;
                 exceptionDuringPropagation = true;
                 break;
+=======
+>>>>>>> origin/master:Tudat/SimulationSetup/EstimationSetup/orbitDeterminationManager.h
             }
+//            catch( std::runtime_error& error )
+//            {
+//                std::cerr<<"Error when resetting parameters during parameter estimation: "<<std::endl<<
+//                           error.what( )<<std::endl<<"Terminating estimation"<<std::endl;
+//                exceptionDuringPropagation = true;
+//                break;
+//            }
 
             oldParameterEstimate = newParameterEstimate;
 
@@ -745,7 +804,11 @@ protected:
     void initializeOrbitDeterminationManager(
             const NamedBodyMap &bodyMap,
             const observation_models::SortedObservationSettingsMap& observationSettingsMap,
+<<<<<<< HEAD:Tudat/SimulationSetup/EstimationSetup/orbitDeterminationManager.h
             const std::shared_ptr< numerical_integrators::IntegratorSettings< TimeType > > integratorSettings,
+=======
+            const std::vector< std::shared_ptr< numerical_integrators::IntegratorSettings< TimeType > > > integratorSettings,
+>>>>>>> origin/master:Tudat/SimulationSetup/EstimationSetup/orbitDeterminationManager.h
             const std::shared_ptr< propagators::PropagatorSettings< ObservationScalarType > > propagatorSettings,
             const bool propagateOnCreation = true )
     {
@@ -859,7 +922,11 @@ protected:
 
 extern template class OrbitDeterminationManager< double, double >;
 
+<<<<<<< HEAD:Tudat/SimulationSetup/EstimationSetup/orbitDeterminationManager.h
 #if( BUILD_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+=======
+#if( BUILD_WITH_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+>>>>>>> origin/master:Tudat/SimulationSetup/EstimationSetup/orbitDeterminationManager.h
 extern template class OrbitDeterminationManager< double, Time >;
 extern template class OrbitDeterminationManager< long double, double >;
 extern template class OrbitDeterminationManager< long double, Time >;

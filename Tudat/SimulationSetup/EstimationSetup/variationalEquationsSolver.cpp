@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -71,7 +75,11 @@ template class SingleArcVariationalEquationsSolver< double, double >;
 template class MultiArcVariationalEquationsSolver< double, double >;
 template class HybridArcVariationalEquationsSolver< double, double >;
 
+<<<<<<< HEAD
 #if( BUILD_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+=======
+#if( BUILD_WITH_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+>>>>>>> origin/master
 template class VariationalEquationsSolver< long double, double >;
 template class VariationalEquationsSolver< double, Time >;
 template class VariationalEquationsSolver< long double, Time >;

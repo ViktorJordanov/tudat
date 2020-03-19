@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -289,7 +293,7 @@ void loadStandardSpiceKernels( const std::vector< std::string > alternativeEphem
 
     if( alternativeEphemerisKernels.size( ) == 0  )
     {
-        loadSpiceKernelInTudat( kernelPath + "de430_small.bsp" );
+        loadSpiceKernelInTudat( kernelPath + "tudat_merged_spk_kernel.bsp" );
     }
     else
     {

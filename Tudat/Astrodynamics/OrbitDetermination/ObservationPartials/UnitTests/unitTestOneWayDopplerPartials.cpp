@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -157,7 +161,7 @@ BOOST_AUTO_TEST_CASE( testOneWayDopplerPartials )
 
             }
             BOOST_CHECK_SMALL( std::fabs( analyticalProjectedVelocityDerivative / physical_constants::SPEED_OF_LIGHT -
-                                          numericalProjectedVelocityDerivative ), 1.0E-22 );
+                                          numericalProjectedVelocityDerivative ), 1.0E-21 );
         }
 
 

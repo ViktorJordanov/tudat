@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -27,6 +31,7 @@
 #include "Tudat/Astrodynamics/Relativity/relativisticAccelerationCorrection.h"
 #include "Tudat/Astrodynamics/BasicAstrodynamics/empiricalAcceleration.h"
 #include "Tudat/Astrodynamics/Propulsion/massRateFromThrust.h"
+#include "Tudat/Astrodynamics/ElectroMagnetism/solarSailAcceleration.h"
 
 namespace tudat
 {
@@ -59,7 +64,12 @@ enum AvailableAcceleration
     direct_tidal_dissipation_in_central_body_acceleration,
     direct_tidal_dissipation_in_orbiting_body_acceleration,
     panelled_radiation_pressure_acceleration,
+<<<<<<< HEAD
     momentum_wheel_desaturation_acceleration
+=======
+    momentum_wheel_desaturation_acceleration,
+    solar_sail_acceleration
+>>>>>>> origin/master
 };
 
 //! Function to get a string representing a 'named identification' of an acceleration type

@@ -69,7 +69,11 @@ std::shared_ptr< acceleration_partials::AccelerationPartial > getAccelerationPar
 
 template class DynamicsStateDerivativeModel< double, double >;
 
+<<<<<<< HEAD
 #if( BUILD_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+=======
+#if( BUILD_WITH_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+>>>>>>> origin/master
 template class DynamicsStateDerivativeModel< Time, double >;
 template class DynamicsStateDerivativeModel< double, long double >;
 template class DynamicsStateDerivativeModel< Time, long double >;

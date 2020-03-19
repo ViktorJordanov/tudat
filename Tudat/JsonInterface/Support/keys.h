@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -196,6 +200,10 @@ struct Keys
             static const std::string initialTime;
             static const std::string rotationRate;
             static const std::string precessionNutationTheory;
+<<<<<<< HEAD
+=======
+            static const std::string centralBodyName;
+>>>>>>> origin/master
         };
 
         static const std::string shapeModel;
@@ -250,6 +258,10 @@ struct Keys
         static const std::string relativeToBody;
         static const std::string componentIndex;
         static const std::string componentIndices;
+<<<<<<< HEAD
+=======
+        static const std::string useAccelerationNorm;
+>>>>>>> origin/master
         static const std::string accelerationType;
 //        static const std::string bodyUndergoingAcceleration;
         static const std::string bodyExertingAcceleration;

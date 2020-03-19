@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -43,15 +47,13 @@ void computePotentialSphericalHessian(
         const double legendrePolynomialSecondDerivative,
         Eigen::Matrix3d& sphericalHessian )
 {
-    sphericalHessian.setZero( );
-
-    sphericalHessian( 0, 0 ) += static_cast< double >( degree + 1 ) * static_cast< double >( degree + 2 ) /
+    sphericalHessian( 0, 0 ) = static_cast< double >( ( degree + 1 ) * ( degree + 2 ) )/
             ( distance * distance ) * legendrePolynomial *
             (  cosineHarmonicCoefficient * cosineOfOrderLongitude + sineHarmonicCoefficient * sineOfOrderLongitude );
-    sphericalHessian( 1, 0 ) += -static_cast< double >( degree + 1 ) / distance * cosineOfLatitude *
+    sphericalHessian( 1, 0 ) = -static_cast< double >( degree + 1 ) / distance * cosineOfLatitude *
             legendrePolynomialDerivative *
             (  cosineHarmonicCoefficient * cosineOfOrderLongitude + sineHarmonicCoefficient * sineOfOrderLongitude );
-    sphericalHessian( 2, 0 ) += -static_cast< double >( order ) * static_cast< double >( degree + 1 ) / distance *
+    sphericalHessian( 2, 0 ) = -static_cast< double >( order * ( degree + 1 ) ) / distance *
             legendrePolynomial *
             ( -cosineHarmonicCoefficient * sineOfOrderLongitude + sineHarmonicCoefficient * cosineOfOrderLongitude );
 
@@ -64,7 +66,7 @@ void computePotentialSphericalHessian(
 
     sphericalHessian( 0, 2 ) = sphericalHessian( 2, 0 );
     sphericalHessian( 1, 2 ) = sphericalHessian( 2, 1 );
-    sphericalHessian( 2, 2 ) += static_cast< double >( order ) * static_cast< double >( order ) * legendrePolynomial *
+    sphericalHessian( 2, 2 ) = static_cast< double >( order * order ) * legendrePolynomial *
             (  -cosineHarmonicCoefficient * cosineOfOrderLongitude - sineHarmonicCoefficient * sineOfOrderLongitude );
 
 
@@ -219,7 +221,9 @@ void calculateSphericalHarmonicGravityWrtCCoefficients(
         const std::vector< std::pair< int, int > >& blockIndices,
         const Eigen::Matrix3d& sphericalToCartesianGradientMatrix,
         const Eigen::Matrix3d& bodyFixedToIntegrationFrame,
-        Eigen::MatrixXd& partialsMatrix )
+        Eigen::MatrixXd& partialsMatrix,
+        const int maximumAccelerationDegree,
+        const int maximumAccelerationOrder  )
 {
     double preMultiplier = gravitionalParameter / referenceRadius;
     const std::shared_ptr< basic_mathematics::LegendreCache > legendreCache = sphericalHarmonicsCache->getLegendreCache( );
@@ -231,16 +235,23 @@ void calculateSphericalHarmonicGravityWrtCCoefficients(
         order = blockIndices.at( i ).second;
 
         // Calculate and set partial of current degree and order.
-        partialsMatrix.block( 0, i, 3, 1 ) =
-                basic_mathematics::computePotentialGradient(
-                    sphericalPosition( radiusIndex ),
-                    sphericalHarmonicsCache->getReferenceRadiusRatioPowers( degree + 1 ),
-                    sphericalHarmonicsCache->getCosineOfMultipleLongitude( order ),
-                    sphericalHarmonicsCache->getSineOfMultipleLongitude( order ),
-                    sphericalHarmonicsCache->getLegendreCache( )->getCurrentPolynomialParameterComplement( ),
-                    preMultiplier, degree, order,
-                    1.0, 0.0, legendreCache->getLegendrePolynomial( degree, order ),
-                    legendreCache->getLegendrePolynomialDerivative( degree, order ) );
+        if( degree <= maximumAccelerationDegree && order <= maximumAccelerationOrder )
+        {
+            partialsMatrix.block( 0, i, 3, 1 ) =
+                    basic_mathematics::computePotentialGradient(
+                        sphericalPosition( radiusIndex ),
+                        sphericalHarmonicsCache->getReferenceRadiusRatioPowers( degree + 1 ),
+                        sphericalHarmonicsCache->getCosineOfMultipleLongitude( order ),
+                        sphericalHarmonicsCache->getSineOfMultipleLongitude( order ),
+                        sphericalHarmonicsCache->getLegendreCache( )->getCurrentPolynomialParameterComplement( ),
+                        preMultiplier, degree, order,
+                        1.0, 0.0, legendreCache->getLegendrePolynomial( degree, order ),
+                        legendreCache->getLegendrePolynomialDerivative( degree, order ) );
+        }
+        else
+        {
+            partialsMatrix.block( 0, i, 3, 1 ).setZero( );
+        }
 
     }
 
@@ -257,7 +268,9 @@ void calculateSphericalHarmonicGravityWrtSCoefficients(
         const std::vector< std::pair< int, int > >& blockIndices,
         const Eigen::Matrix3d& sphericalToCartesianGradientMatrix,
         const Eigen::Matrix3d& bodyFixedToIntegrationFrame,
-        Eigen::MatrixXd& partialsMatrix )
+        Eigen::MatrixXd& partialsMatrix,
+        const int maximumAccelerationDegree,
+        const int maximumAccelerationOrder )
 {
     double preMultiplier = gravitionalParameter / referenceRadius;
     const std::shared_ptr< basic_mathematics::LegendreCache > legendreCache = sphericalHarmonicsCache->getLegendreCache( );
@@ -268,8 +281,11 @@ void calculateSphericalHarmonicGravityWrtSCoefficients(
         degree = blockIndices.at( i ).first;
         order = blockIndices.at( i ).second;
 
+
         // Calculate and set partial of current degree and order.
-        partialsMatrix.block( 0, i, 3, 1 ) =
+        if( degree <= maximumAccelerationDegree && order <= maximumAccelerationOrder )
+        {
+            partialsMatrix.block( 0, i, 3, 1 ) =
                 basic_mathematics::computePotentialGradient(
                     sphericalPosition( radiusIndex ),
                     sphericalHarmonicsCache->getReferenceRadiusRatioPowers( degree + 1 ),
@@ -279,6 +295,11 @@ void calculateSphericalHarmonicGravityWrtSCoefficients(
                     preMultiplier, degree, order,
                     0.0, 1.0, legendreCache->getLegendrePolynomial( degree, order ),
                     legendreCache->getLegendrePolynomialDerivative( degree, order ) );
+        }
+        else
+        {
+            partialsMatrix.block( 0, i, 3, 1 ).setZero( );
+        }
 
     }
 

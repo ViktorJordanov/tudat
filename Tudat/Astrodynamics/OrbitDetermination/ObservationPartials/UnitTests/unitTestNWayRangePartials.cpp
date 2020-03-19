@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -124,7 +128,7 @@ BOOST_AUTO_TEST_CASE( testnWayRangePartials )
 
             // Test observation partials
             testObservationPartials< 1 >(
-                        nWayRangeModel, bodyMap, fullEstimatableParameterSet, linkEnds, n_way_range, 1.0E-6, true, true, 1.0,
+                        nWayRangeModel, bodyMap, fullEstimatableParameterSet, linkEnds, n_way_range, 2.0E-6, true, true, 1.0,
                         ( Eigen::Vector4d( ) << 10.0, 1.0, 1.0, 10.0 ).finished( ) );
         }
 
@@ -155,7 +159,7 @@ BOOST_AUTO_TEST_CASE( testnWayRangePartials )
 
             // Test observation partials
             testObservationPartials< 1 >(
-                        nWayRangeModel, bodyMap, fullEstimatableParameterSet, linkEnds, n_way_range, 1.0E-6, false, true, 1.0,
+                        nWayRangeModel, bodyMap, fullEstimatableParameterSet, linkEnds, n_way_range, 2.0E-6, false, true, 1.0,
                         ( Eigen::Vector4d( ) << 10.0, 1.0, 1.0, 20.0 ).finished( ) );
         }
     }

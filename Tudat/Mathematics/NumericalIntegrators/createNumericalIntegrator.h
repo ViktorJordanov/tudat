@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -22,8 +26,6 @@
 #include "Tudat/Mathematics/NumericalIntegrators/euler.h"
 #include "Tudat/Mathematics/NumericalIntegrators/adamsBashforthMoultonIntegrator.h"
 #include "Tudat/Mathematics/NumericalIntegrators/rungeKuttaVariableStepSizeIntegrator.h"
-
-#include "Tudat/Mathematics/NumericalIntegrators/createNumericalIntegrator.h"
 
 namespace tudat
 {
@@ -173,10 +175,17 @@ public:
      *  Virtual destructor.
      */
     virtual ~RungeKuttaVariableStepSizeBaseSettings( ) { }
+<<<<<<< HEAD
 
     //! Boolean denoting whether integration error tolerances are defined as a scalar (or vector).
     bool areTolerancesDefinedAsScalar_;
 
+=======
+
+    //! Boolean denoting whether integration error tolerances are defined as a scalar (or vector).
+    bool areTolerancesDefinedAsScalar_;
+
+>>>>>>> origin/master
     //! Type of numerical integrator (must be an RK variable step type).
     numerical_integrators::RungeKuttaCoefficients::CoefficientSets coefficientSet_;
 
@@ -226,6 +235,7 @@ public:
      *      conditions should be evaluated during the intermediate sub-steps of the integrator (`true`) or only at the end of
      *      each integration step (`false`).
      *  \param safetyFactorForNextStepSize Safety factor for step size control.
+<<<<<<< HEAD
      *  \param maximumFactorIncreaseForNextStepSize Maximum increase factor in time step in subsequent iterations.
      *  \param minimumFactorDecreaseForNextStepSize Minimum decrease factor in time step in subsequent iterations.
      */
@@ -410,6 +420,192 @@ public:
      *  \param safetyFactorForNextStepSize Safety factor for step size control.
      *  \param maximumFactorIncreaseForNextStepSize Maximum increase factor in time step in subsequent iterations.
      *  \param minimumFactorDecreaseForNextStepSize Minimum decrease factor in time step in subsequent iterations.
+=======
+     *  \param maximumFactorIncreaseForNextStepSize Maximum increase factor in time step in subsequent iterations.
+     *  \param minimumFactorDecreaseForNextStepSize Minimum decrease factor in time step in subsequent iterations.
+     */
+    RungeKuttaVariableStepSizeSettingsScalarTolerances(
+            const IndependentVariableType initialTime,
+            const IndependentVariableType initialTimeStep,
+            const numerical_integrators::RungeKuttaCoefficients::CoefficientSets coefficientSet,
+            const IndependentVariableType minimumStepSize, const IndependentVariableType maximumStepSize,
+            const IndependentVariableType relativeErrorTolerance = 1.0E-12,
+            const IndependentVariableType absoluteErrorTolerance = 1.0E-12,
+            const int saveFrequency = 1,
+            const bool assessPropagationTerminationConditionDuringIntegrationSubsteps = false,
+            const IndependentVariableType safetyFactorForNextStepSize = 0.8,
+            const IndependentVariableType maximumFactorIncreaseForNextStepSize = 4.0,
+            const IndependentVariableType minimumFactorDecreaseForNextStepSize = 0.1 ) :
+        RungeKuttaVariableStepSizeBaseSettings< IndependentVariableType >(
+            true, initialTime, initialTimeStep, coefficientSet, minimumStepSize, maximumStepSize, saveFrequency,
+            assessPropagationTerminationConditionDuringIntegrationSubsteps, safetyFactorForNextStepSize,
+            maximumFactorIncreaseForNextStepSize, minimumFactorDecreaseForNextStepSize ),
+        relativeErrorTolerance_( relativeErrorTolerance ), absoluteErrorTolerance_( absoluteErrorTolerance )
+    { }
+
+    //! Constructor.
+    /*!
+     *  Constructor for variable step RK integrator settings with scalar tolerances (also requires the input of the integratorType,
+     *  which has to be rungeKyttaVariableStepSize by definition).
+     *  \param integratorType Type of numerical integrator.
+     *  \param initialTime Start time (independent variable) of numerical integration.
+     *  \param initialTimeStep Initial time (independent variable) step used in numerical integration. Adapted during integration.
+     *  \param coefficientSet Coefficient set (butcher tableau) to use in integration.
+     *  \param minimumStepSize Minimum step size for integration. Integration stops (exception thrown) if time step
+     *      comes below this value.
+     *  \param maximumStepSize Maximum step size for integration.
+     *  \param relativeErrorTolerance Relative error tolerance for step size control, expressed as a scalar.
+     *  \param absoluteErrorTolerance Absolute error tolerance for step size control, expressed as a scalar.
+     *  \param saveFrequency Frequency at which to save the numerical integrated states (in units of i.e. per n integration
+     *      time steps, with n = saveFrequency).
+     *  \param assessPropagationTerminationConditionDuringIntegrationSubsteps Whether the propagation termination
+     *      conditions should be evaluated during the intermediate sub-steps of the integrator (`true`) or only at the end of
+     *      each integration step (`false`).
+     *  \param safetyFactorForNextStepSize Safety factor for step size control.
+     *  \param maximumFactorIncreaseForNextStepSize Maximum increase factor in time step in subsequent iterations.
+     *  \param minimumFactorDecreaseForNextStepSize Minimum decrease factor in time step in subsequent iterations.
+     */
+    RungeKuttaVariableStepSizeSettingsScalarTolerances(
+            const AvailableIntegrators integratorType,
+            const IndependentVariableType initialTime,
+            const IndependentVariableType initialTimeStep,
+            const numerical_integrators::RungeKuttaCoefficients::CoefficientSets coefficientSet,
+            const IndependentVariableType minimumStepSize, const IndependentVariableType maximumStepSize,
+            const IndependentVariableType relativeErrorTolerance = 1.0E-12,
+            const IndependentVariableType absoluteErrorTolerance = 1.0E-12,
+            const int saveFrequency = 1,
+            const bool assessPropagationTerminationConditionDuringIntegrationSubsteps = false,
+            const IndependentVariableType safetyFactorForNextStepSize = 0.8,
+            const IndependentVariableType maximumFactorIncreaseForNextStepSize = 4.0,
+            const IndependentVariableType minimumFactorDecreaseForNextStepSize = 0.1 ) :
+        RungeKuttaVariableStepSizeSettingsScalarTolerances(
+            initialTime, initialTimeStep, coefficientSet, minimumStepSize, maximumStepSize,
+            relativeErrorTolerance, absoluteErrorTolerance, saveFrequency,
+            assessPropagationTerminationConditionDuringIntegrationSubsteps, safetyFactorForNextStepSize,
+            maximumFactorIncreaseForNextStepSize, minimumFactorDecreaseForNextStepSize )
+    {
+        // Give error if integrator type is wrong
+        if ( integratorType != rungeKuttaVariableStepSize )
+        {
+            throw std::runtime_error( "Error while creating numerical integrator. The integrator settings are of class "
+                                      "RungeKuttaVariableStepSizeSettingsScalarTolerances, but the input integrator type is not of type "
+                                      "rungeKuttaVariableStepSize." );
+        }
+
+        // Warn of different constructor
+        std::cerr << "Warning in numerical integrator. The Runge-Kutta variable step size integrator settings no longer require the "
+                     "input of the integrator type, i.e., rungeKuttaVariableStepSize. You can thus safely remove the first input, especially "
+                     "if you do not want this warning to show up again. Note that this constructor will be removed in a "
+                     "future release." << std::endl;
+    }
+
+    //! Destructor.
+    /*!
+     *  Destructor.
+     */
+    ~RungeKuttaVariableStepSizeSettingsScalarTolerances( ) { }
+
+    //! Relative error tolerance for step size control.
+    IndependentVariableType relativeErrorTolerance_;
+
+    //! Absolute error tolerance for step size control.
+    IndependentVariableType absoluteErrorTolerance_;
+
+};
+
+//! Alias for variable step RK numerical integrator with scalar tolerances (added for compatibility with old code).
+template< typename IndependentVariableType = double >
+using RungeKuttaVariableStepSizeSettings = RungeKuttaVariableStepSizeSettingsScalarTolerances< IndependentVariableType >;
+
+//! Class to define settings of variable step RK numerical integrator with vector tolerances.
+/*!
+ *  Class to define settings of variable step RK numerical integrator with vector tolerances.
+ */
+template< typename IndependentVariableType = double, typename DependentVariableType = Eigen::VectorXd >
+class RungeKuttaVariableStepSizeSettingsVectorTolerances: public RungeKuttaVariableStepSizeBaseSettings< IndependentVariableType >
+{
+public:
+
+    //! Default constructor.
+    /*!
+     *  Constructor for variable step RK integrator settings with vector tolerances.
+     *  \param initialTime Start time (independent variable) of numerical integration.
+     *  \param initialTimeStep Initial time (independent variable) step used in numerical integration. Adapted during integration.
+     *  \param coefficientSet Coefficient set (butcher tableau) to use in integration.
+     *  \param minimumStepSize Minimum step size for integration. Integration stops (exception thrown) if time step
+     *      comes below this value.
+     *  \param maximumStepSize Maximum step size for integration.
+     *  \param relativeErrorTolerance Relative error tolerance for step size control, expressed as a vector.
+     *  \param absoluteErrorTolerance Absolute error tolerance for step size control, expressed as a vector.
+     *  \param saveFrequency Frequency at which to save the numerical integrated states (in units of i.e. per n integration
+     *      time steps, with n = saveFrequency).
+     *  \param assessPropagationTerminationConditionDuringIntegrationSubsteps Whether the propagation termination
+     *      conditions should be evaluated during the intermediate sub-steps of the integrator (`true`) or only at the end of
+     *      each integration step (`false`).
+     *  \param safetyFactorForNextStepSize Safety factor for step size control.
+     *  \param maximumFactorIncreaseForNextStepSize Maximum increase factor in time step in subsequent iterations.
+     *  \param minimumFactorDecreaseForNextStepSize Minimum decrease factor in time step in subsequent iterations.
+     */
+    RungeKuttaVariableStepSizeSettingsVectorTolerances(
+            const IndependentVariableType initialTime,
+            const IndependentVariableType initialTimeStep,
+            const numerical_integrators::RungeKuttaCoefficients::CoefficientSets coefficientSet,
+            const IndependentVariableType minimumStepSize, const IndependentVariableType maximumStepSize,
+            const DependentVariableType& relativeErrorTolerance,
+            const DependentVariableType& absoluteErrorTolerance,
+            const int saveFrequency = 1,
+            const bool assessPropagationTerminationConditionDuringIntegrationSubsteps = false,
+            const IndependentVariableType safetyFactorForNextStepSize = 0.8,
+            const IndependentVariableType maximumFactorIncreaseForNextStepSize = 4.0,
+            const IndependentVariableType minimumFactorDecreaseForNextStepSize = 0.1 ) :
+        RungeKuttaVariableStepSizeBaseSettings< IndependentVariableType >(
+            false, initialTime, initialTimeStep, coefficientSet, minimumStepSize, maximumStepSize, saveFrequency,
+            assessPropagationTerminationConditionDuringIntegrationSubsteps, safetyFactorForNextStepSize,
+            maximumFactorIncreaseForNextStepSize, minimumFactorDecreaseForNextStepSize ),
+        relativeErrorTolerance_( relativeErrorTolerance ), absoluteErrorTolerance_( absoluteErrorTolerance )
+    { }
+
+    //! Destructor.
+    /*!
+     *  Destructor.
+     */
+    ~RungeKuttaVariableStepSizeSettingsVectorTolerances( ) { }
+
+    //! Relative error tolerance for step size control.
+    DependentVariableType relativeErrorTolerance_;
+
+    //! Absolute error tolerance for step size control.
+    DependentVariableType absoluteErrorTolerance_;
+
+};
+
+template< typename IndependentVariableType = double >
+class BulirschStoerIntegratorSettings: public IntegratorSettings< IndependentVariableType >
+{
+public:
+
+    //! Constructor.
+    /*!
+     *  Constructor for variable step RK integrator settings.
+     *  \param initialTime Start time (independent variable) of numerical integration.
+     *  \param initialTimeStep Initial time (independent variable) step used in numerical integration. Adapted during integration.
+     *  \param extrapolationSequence Type of sequence that is to be used for Bulirsch-Stoer integrator.
+     *  \param maximumNumberOfSteps Number of entries in the sequence, e.g. number of integrations used for a single
+     *      extrapolation.
+     *  \param minimumStepSize Minimum step size for integration. Integration stops (exception thrown) if time step
+     *      comes below this value.
+     *  \param maximumStepSize Maximum step size for integration.
+     *  \param relativeErrorTolerance Relative error tolerance for step size control.
+     *  \param absoluteErrorTolerance Absolute error tolerance for step size control.
+     *  \param saveFrequency Frequency at which to save the numerical integrated states (in units of i.e. per n integration
+     *      time steps, with n = saveFrequency).
+     *  \param assessPropagationTerminationConditionDuringIntegrationSubsteps Whether the propagation termination
+     *      conditions should be evaluated during the intermediate sub-steps of the integrator (`true`) or only at the end of
+     *      each integration step (`false`).
+     *  \param safetyFactorForNextStepSize Safety factor for step size control.
+     *  \param maximumFactorIncreaseForNextStepSize Maximum increase factor in time step in subsequent iterations.
+     *  \param minimumFactorDecreaseForNextStepSize Minimum decrease factor in time step in subsequent iterations.
+>>>>>>> origin/master
      */
     BulirschStoerIntegratorSettings(
             const IndependentVariableType initialTime,

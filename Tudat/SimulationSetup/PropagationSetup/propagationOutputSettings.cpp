@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -170,6 +174,12 @@ std::string getDependentVariableName( const PropagationDependentVariables propag
     case modified_equinocial_state_dependent_variable:
         variableName = "Modified equinoctial elements ";
         break;
+<<<<<<< HEAD
+=======
+    case spherical_harmonic_acceleration_norm_terms_dependent_variable:
+        variableName = "Spherical harmonic acceleration term norms ";
+        break;
+>>>>>>> origin/master
     case spherical_harmonic_acceleration_terms_dependent_variable:
         variableName = "Spherical harmonic acceleration terms ";
         break;
@@ -279,7 +289,12 @@ std::string getDependentVariableId(
 
     if( ( dependentVariableSettings->dependentVariableType_ == single_acceleration_dependent_variable ) ||
             ( dependentVariableSettings->dependentVariableType_ == single_acceleration_norm_dependent_variable ) ||
+<<<<<<< HEAD
             ( dependentVariableSettings->dependentVariableType_ == spherical_harmonic_acceleration_terms_dependent_variable ) )
+=======
+            ( dependentVariableSettings->dependentVariableType_ == spherical_harmonic_acceleration_terms_dependent_variable ) ||
+            ( dependentVariableSettings->dependentVariableType_ == spherical_harmonic_acceleration_norm_terms_dependent_variable ) )
+>>>>>>> origin/master
     {
         variableId += ", acting on " + dependentVariableSettings->associatedBody_;
         if( dependentVariableSettings->secondaryBody_ != dependentVariableSettings->associatedBody_ )

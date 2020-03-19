@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
  *    All rigths reserved
  *
@@ -867,3 +868,5 @@ std::shared_ptr< EstimatableParameter< Eigen::VectorXd > > createVectorParameter
 }
 
 }
+=======
+>>>>>>> origin/master

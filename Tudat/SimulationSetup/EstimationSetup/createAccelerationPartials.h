@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -434,7 +438,11 @@ extern template std::shared_ptr< acceleration_partials::AccelerationPartial > cr
         const simulation_setup::NamedBodyMap& bodyMap,
         const std::shared_ptr< estimatable_parameters::EstimatableParameterSet< double > >
         parametersToEstimate );
+<<<<<<< HEAD
 #if( BUILD_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+=======
+#if( BUILD_WITH_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+>>>>>>> origin/master
 extern template std::shared_ptr< acceleration_partials::AccelerationPartial > createAnalyticalAccelerationPartial< long double >(
         std::shared_ptr< basic_astrodynamics::AccelerationModel< Eigen::Vector3d > > accelerationModel,
         const std::pair< std::string, std::shared_ptr< simulation_setup::Body > > acceleratedBody,
@@ -542,7 +550,11 @@ const simulation_setup::NamedBodyMap& bodyMap,
 const std::shared_ptr< estimatable_parameters::EstimatableParameterSet< double > >
 parametersToEstimate );
 
+<<<<<<< HEAD
 #if( BUILD_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+=======
+#if( BUILD_WITH_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+>>>>>>> origin/master
 extern template orbit_determination::StateDerivativePartialsMap createAccelerationPartialsMap< long double >(
 const basic_astrodynamics::AccelerationMap& accelerationMap,
 const simulation_setup::NamedBodyMap& bodyMap,

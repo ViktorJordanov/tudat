@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -303,7 +307,11 @@ private:
 
 extern template class NBodyEnckeStateDerivative< double, double >;
 
+<<<<<<< HEAD
 #if( BUILD_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+=======
+#if( BUILD_WITH_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+>>>>>>> origin/master
 extern template class NBodyEnckeStateDerivative< long double, double >;
 extern template class NBodyEnckeStateDerivative< double, Time >;
 extern template class NBodyEnckeStateDerivative< long double, Time >;

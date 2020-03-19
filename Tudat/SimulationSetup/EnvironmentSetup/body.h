@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -21,6 +25,7 @@
 #include "Tudat/Astrodynamics/Aerodynamics/atmosphereModel.h"
 #include "Tudat/Astrodynamics/Aerodynamics/aerodynamicCoefficientInterface.h"
 #include "Tudat/Astrodynamics/Aerodynamics/flightConditions.h"
+#include "Tudat/Astrodynamics/Propulsion/thrustGuidance.h"
 #include "Tudat/Astrodynamics/BasicAstrodynamics/timeConversions.h"
 #include "Tudat/Astrodynamics/BasicAstrodynamics/accelerationModel.h"
 #include "Tudat/Astrodynamics/BasicAstrodynamics/bodyShapeModel.h"
@@ -784,7 +789,14 @@ public:
                             std::dynamic_pointer_cast< reference_frames::AerodynamicAngleCalculator >(
                                 dependentOrientationCalculator_ ) );
             }
-            else
+            else if( ( std::dynamic_pointer_cast< propulsion::BodyFixedForceDirectionGuidance >(
+                           dependentOrientationCalculator_ ) != nullptr ) &&
+                     ( std::dynamic_pointer_cast< propulsion::BodyFixedForceDirectionGuidance >(
+                           dependentOrientationCalculator ) != nullptr ) )
+            {
+                dependentOrientationCalculator_ = dependentOrientationCalculator;
+            }
+            else if( !suppressDependentOrientationCalculatorWarning_ )
             {
                 std::cerr << "Warning, cannot reset dependentOrientationCalculator, incompatible object already exists" << std::endl;
             }
@@ -1277,6 +1289,14 @@ public:
      */
     void setIsBodyInPropagation( const bool isBodyInPropagation );
 
+<<<<<<< HEAD
+=======
+    void setSuppressDependentOrientationCalculatorWarning( const bool suppressDependentOrientationCalculatorWarning )
+    {
+        suppressDependentOrientationCalculatorWarning_ = suppressDependentOrientationCalculatorWarning;
+    }
+
+>>>>>>> origin/master
 protected:
 
 private:
@@ -1368,12 +1388,23 @@ private:
 
     //! List of ground station objects on Body
     std::map< std::string, std::shared_ptr< ground_stations::GroundStation > > groundStationMap;
+<<<<<<< HEAD
 
     //! Container object with hardware systems present on/in body (typically only non-nullptr for a vehicle).
     std::shared_ptr< system_models::VehicleSystems > vehicleSystems_;
 
     //!  Boolean defining whether the body is currently being propagated, or not
     bool isBodyInPropagation_ = false;
+=======
+
+    //! Container object with hardware systems present on/in body (typically only non-nullptr for a vehicle).
+    std::shared_ptr< system_models::VehicleSystems > vehicleSystems_;
+
+    //!  Boolean defining whether the body is currently being propagated, or not
+    bool isBodyInPropagation_ = false;
+
+    bool suppressDependentOrientationCalculatorWarning_ = false;
+>>>>>>> origin/master
 };
 
 //! Typdef for a list of body objects (as unordered_map for efficiency reasons)

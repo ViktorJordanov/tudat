@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -162,6 +166,34 @@ Eigen::VectorXd evaluateListOfVectorFunctions(
     return variableList;
 }
 
+Eigen::VectorXd getNormsOfAccelerationDifferencesFromLists(
+                       const std::function< Eigen::VectorXd( ) > firstAccelerationFunction,
+                       const std::function< Eigen::VectorXd( ) > secondAccelerationFunction )
+{
+    Eigen::VectorXd firstAcceleration = firstAccelerationFunction( );
+    Eigen::VectorXd secondAcceleration = secondAccelerationFunction( );
+
+    if( firstAcceleration.rows( ) != secondAcceleration.rows( ) )
+    {
+        throw std::runtime_error( "Error when computing acceleration difference norms, inputs are inconsistent." );
+    }
+
+    if( firstAcceleration.rows( ) % 3 != 0 )
+    {
+        throw std::runtime_error( "Error when computing acceleration difference norms, input size is inconsistent." );
+    }
+
+    Eigen::VectorXd accelerationDifference = Eigen::VectorXd::Zero(
+                firstAcceleration.rows( ) / 3 );
+    for( int i = 0; i < accelerationDifference.rows( ); i++ )
+    {
+        accelerationDifference( i ) =
+                ( firstAcceleration.segment( i * 3, 3 ) - secondAcceleration.segment( i * 3, 3 ) ).norm( );
+    }
+
+    return accelerationDifference;
+}
+
 //! Funtion to get the size of a dependent variable save settings
 int getDependentVariableSaveSize(
         const std::shared_ptr< SingleDependentVariableSaveSettings >& singleDependentVariableSaveSettings )
@@ -288,18 +320,49 @@ int getDependentVariableSize(
     case keplerian_state_dependent_variable:
         variableSize = 6;
         break;
+<<<<<<< HEAD
     case spherical_harmonic_acceleration_terms_dependent_variable:
     {
         if( std::dynamic_pointer_cast< SphericalHarmonicAccelerationTermsDependentVariableSaveSettings >(
                     dependentVariableSettings ) == nullptr )
+=======
+    case spherical_harmonic_acceleration_norm_terms_dependent_variable:
+    {
+        std::shared_ptr< SphericalHarmonicAccelerationTermsDependentVariableSaveSettings >
+                sphericalHarmonicAccelerationTermsDependentVariableSaveSettings =
+                std::dynamic_pointer_cast< SphericalHarmonicAccelerationTermsDependentVariableSaveSettings >(
+                                    dependentVariableSettings );
+        if( sphericalHarmonicAccelerationTermsDependentVariableSaveSettings == nullptr )
         {
              std::string errorMessage = "Error, input for spherical_harmonic_acceleration_terms_dependent_variable inconsistent when getting parameter size ";
              throw std::runtime_error( errorMessage );
         }
         else
         {
+            variableSize = sphericalHarmonicAccelerationTermsDependentVariableSaveSettings->componentIndices_.size( );
+        }
+        break;
+    }
+    case spherical_harmonic_acceleration_terms_dependent_variable:
+    {
+        std::shared_ptr< SphericalHarmonicAccelerationTermsDependentVariableSaveSettings >
+                sphericalHarmonicAccelerationTermsDependentVariableSaveSettings =
+                std::dynamic_pointer_cast< SphericalHarmonicAccelerationTermsDependentVariableSaveSettings >(
+                                    dependentVariableSettings );
+        if( sphericalHarmonicAccelerationTermsDependentVariableSaveSettings == nullptr )
+>>>>>>> origin/master
+        {
+             std::string errorMessage = "Error, input for spherical_harmonic_acceleration_terms_dependent_variable inconsistent when getting parameter size ";
+             throw std::runtime_error( errorMessage );
+        }
+        else
+        {
+<<<<<<< HEAD
             variableSize = 3 * std::dynamic_pointer_cast< SphericalHarmonicAccelerationTermsDependentVariableSaveSettings >(
                         dependentVariableSettings )->componentIndices_.size( );
+=======
+            variableSize = 3 * sphericalHarmonicAccelerationTermsDependentVariableSaveSettings->componentIndices_.size( );
+>>>>>>> origin/master
         }
         break;
     }

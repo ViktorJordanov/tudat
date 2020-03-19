@@ -1,4 +1,8 @@
+<<<<<<< HEAD
  #    Copyright (c) 2010-2018, Delft University of Technology
+=======
+ #    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  #    All rigths reserved
  #
  #    This file is part of the Tudat. Redistribution and use in source and
@@ -25,6 +29,10 @@ set(EPHEMERIDES_SOURCES
   "${SRCROOT}${EPHEMERIDESDIR}/compositeEphemeris.cpp"
   "${SRCROOT}${EPHEMERIDESDIR}/tabulatedRotationalEphemeris.cpp"
   "${SRCROOT}${EPHEMERIDESDIR}/synchronousRotationalEphemeris.cpp"
+<<<<<<< HEAD
+=======
+  "${SRCROOT}${EPHEMERIDESDIR}/fullPlanetaryRotationModel.cpp"
+>>>>>>> origin/master
 )
 
 # Set the header files.
@@ -49,6 +57,10 @@ set(EPHEMERIDES_HEADERS
   "${SRCROOT}${EPHEMERIDESDIR}/constantRotationalEphemeris.h"
   "${SRCROOT}${EPHEMERIDESDIR}/multiArcEphemeris.h"
   "${SRCROOT}${EPHEMERIDESDIR}/tabulatedRotationalEphemeris.h"
+<<<<<<< HEAD
+=======
+  "${SRCROOT}${EPHEMERIDESDIR}/fullPlanetaryRotationModel.h"
+>>>>>>> origin/master
   "${SRCROOT}${EPHEMERIDESDIR}/synchronousRotationalEphemeris.h"
 )
 
@@ -109,3 +121,7 @@ add_executable(test_GcrsToItrsRotation "${SRCROOT}${EPHEMERIDESDIR}/UnitTests/un
 setup_custom_test_program(test_GcrsToItrsRotation "${SRCROOT}${EPHEMERIDESDIR}")
 target_link_libraries(test_GcrsToItrsRotation tudat_ephemerides tudat_spice_interface tudat_reference_frames tudat_earth_orientation tudat_sofa_interface tudat_basic_astrodynamics tudat_basic_mathematics tudat_input_output cspice sofa ${Boost_LIBRARIES})
 endif( )
+
+add_executable(test_PlanetaryRotationModel "${SRCROOT}${EPHEMERIDESDIR}/UnitTests/unitTestPlanetaryRotationModel.cpp")
+setup_custom_test_program(test_PlanetaryRotationModel "${SRCROOT}${EPHEMERIDESDIR}")
+target_link_libraries(test_PlanetaryRotationModel ${TUDAT_PROPAGATION_LIBRARIES} ${Boost_LIBRARIES})

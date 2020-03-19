@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -16,6 +20,7 @@
 #include <functional>
 
 #include "Tudat/Astrodynamics/OrbitDetermination/EstimatableParameters/estimatableParameter.h"
+#include "Tudat/Astrodynamics/OrbitDetermination/EstimatableParameters/sphericalHarmonicCosineCoefficients.h"
 
 namespace tudat
 {
@@ -156,6 +161,17 @@ private:
     //! Number of coefficients that are to be estimated (i.e. length of blockIndices_ vector).
     int parameterSize_;
 };
+
+//! Function to get a list of Kaula constraint values for gravity field coefficients for given parameter
+/*!
+ * Function to get a list of Kaula constraint values for gravity field coefficients for given parameter
+ * \param parameter Parameter that defines the list of sine spherical harmonic coefficients
+ * \param constraintMultiplier Multiplier A for Kaula constraint, obtained from A/l^{2}, which l the current coefficient's degree
+ * \return Vector of Kaula constraint values on gravity field coefficients
+ */
+Eigen::VectorXd getKaulaConstraintVector(
+        const std::shared_ptr< SphericalHarmonicsSineCoefficients > parameter,
+        const double constraintMultiplier );
 
 } // namespace estimatable_parameters
 

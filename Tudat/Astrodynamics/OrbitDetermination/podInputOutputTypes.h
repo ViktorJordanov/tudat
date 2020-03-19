@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -492,7 +496,6 @@ struct PodOutput
                 inverseUnnormalizedCovarianceMatrix( i, j ) *=
                         informationMatrixTransformationDiagonal_( i ) * informationMatrixTransformationDiagonal_( j );
             }
-
         }
 
         return inverseUnnormalizedCovarianceMatrix;
@@ -505,8 +508,40 @@ struct PodOutput
      */
     Eigen::MatrixXd getUnnormalizedCovarianceMatrix( )
     {
-        return getUnnormalizedInverseCovarianceMatrix( ).inverse( );
+        Eigen::MatrixXd unnormalizedCovarianceMatrix = inverseNormalizedCovarianceMatrix_.inverse( );
+
+        for( int i = 0; i < informationMatrixTransformationDiagonal_.rows( ); i++ )
+        {
+            for( int j = 0; j < informationMatrixTransformationDiagonal_.rows( ); j++ )
+            {
+                unnormalizedCovarianceMatrix( i, j ) /=
+                        informationMatrixTransformationDiagonal_( i ) * informationMatrixTransformationDiagonal_( j );
+            }
+        }
+
+        return unnormalizedCovarianceMatrix;
     }
+
+    //! Function to retrieve the matrix of unnormalized partial derivatives
+    /*!
+     * Function to retrieve the matrix of unnormalized partial derivatives (typically detnoed as H)
+     * \return Matrix of unnormalized partial derivatives
+     */
+    Eigen::MatrixXd getUnnormalizedPartialDerivatives( )
+    {
+        Eigen::MatrixXd unnormalizedPartialDerivatives = Eigen::MatrixXd::Zero(
+                    normalizedInformationMatrix_.rows( ), normalizedInformationMatrix_.cols( ) );
+
+        for( int i = 0; i < informationMatrixTransformationDiagonal_.rows( ); i++ )
+        {
+            unnormalizedPartialDerivatives.block( 0, i, normalizedInformationMatrix_.rows( ), 1 ) =
+            normalizedInformationMatrix_.block( 0, i, normalizedInformationMatrix_.rows( ), 1 ) *
+                    informationMatrixTransformationDiagonal_( i );
+        }
+        return unnormalizedPartialDerivatives;
+
+    }
+
 
     //! Function to retrieve the unnormalized formal error vector of the estimation result.
     /*!
@@ -633,7 +668,11 @@ struct PodOutput
 extern template class PodInput< double, double >;
 extern template struct PodOutput< double >;
 
+<<<<<<< HEAD
 #if( BUILD_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+=======
+#if( BUILD_WITH_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+>>>>>>> origin/master
 extern template class PodInput< long double, double >;
 extern template class PodInput< double, Time >;
 extern template class PodInput< long double, Time >;

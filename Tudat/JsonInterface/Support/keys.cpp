@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -202,6 +206,11 @@ const std::string Keys::Body::RotationModel::initialOrientation = "initialOrient
 const std::string Keys::Body::RotationModel::initialTime = "initialTime";
 const std::string Keys::Body::RotationModel::rotationRate = "rotationRate";
 const std::string Keys::Body::RotationModel::precessionNutationTheory = "precessionNutationTheory";
+<<<<<<< HEAD
+=======
+const std::string Keys::Body::RotationModel::centralBodyName = "centralBodyName";
+
+>>>>>>> origin/master
 
 // //  Body::ShapeModel
 const std::string Keys::Body::shapeModel = "shapeModel";
@@ -236,6 +245,10 @@ const std::string Keys::Variable::dependentVariableType = "dependentVariableType
 const std::string Keys::Variable::body = "body";
 const std::string Keys::Variable::componentIndex = "componentIndex";
 const std::string Keys::Variable::componentIndices = "componentIndices";
+<<<<<<< HEAD
+=======
+const std::string Keys::Variable::useAccelerationNorm = "useAccelerationNorm";
+>>>>>>> origin/master
 const std::string Keys::Variable::relativeToBody = "relativeToBody";
 const std::string Keys::Variable::accelerationType = "accelerationType";
 //const std::string Keys::Variable::bodyUndergoingAcceleration = "bodyUndergoingAcceleration";

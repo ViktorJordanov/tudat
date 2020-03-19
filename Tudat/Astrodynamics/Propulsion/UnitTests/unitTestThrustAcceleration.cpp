@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -2050,7 +2054,11 @@ BOOST_AUTO_TEST_CASE( testMomentumWheelDesaturationThrust )
 
     // Create parameters
     std::shared_ptr< estimatable_parameters::EstimatableParameterSet< double > > parametersToEstimate =
+<<<<<<< HEAD
             createParametersToEstimate( parameterNames, bodyMap, accelerationModelMap );
+=======
+            createParametersToEstimate< double >( parameterNames, bodyMap, propagatorSettings );
+>>>>>>> origin/master
 
     // Create simulation object and propagate dynamics.
     SingleArcVariationalEquationsSolver< > dynamicsSimulator(
@@ -2066,7 +2074,11 @@ BOOST_AUTO_TEST_CASE( testMomentumWheelDesaturationThrust )
 
     // Compute thrust start times from maneuvers mid-times.
     std::vector< double > thrustStartTimes;
+<<<<<<< HEAD
     for( int i = 0; i < thrustMidTimes.size( ); i++ )
+=======
+    for( unsigned int i = 0; i < thrustMidTimes.size( ); i++ )
+>>>>>>> origin/master
     {
         thrustStartTimes.push_back( thrustMidTimes.at( i ) - totalManeuverTime / 2.0 );
     }

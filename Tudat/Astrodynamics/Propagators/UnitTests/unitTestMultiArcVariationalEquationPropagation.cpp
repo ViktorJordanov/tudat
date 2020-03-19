@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* git    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/* git    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -256,11 +260,6 @@ executeMultiArcEarthMoonSimulation(
             Eigen::Matrix< StateScalarType, Eigen::Dynamic, 1 > testStates =
                     Eigen::Matrix< StateScalarType, Eigen::Dynamic, 1 >::Zero( 12 );
             testStates.block( 0, 0, 6, 1 ) = bodyMap[ "Moon" ]->getStateInBaseFrameFromEphemeris( testEpoch );
-
-            if( centralBodyMap[ "Moon" ] == "Earth" )
-            {
-                testStates.block( 0, 0, 6, 1 ) -= bodyMap[ "Earth" ]->getStateInBaseFrameFromEphemeris( testEpoch );
-            }
 
             testStates.block( 6, 0, 6, 1 ) = bodyMap[ "Earth" ]->getStateInBaseFrameFromEphemeris( testEpoch );
 

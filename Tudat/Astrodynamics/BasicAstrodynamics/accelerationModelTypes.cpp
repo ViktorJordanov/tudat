@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -67,6 +71,12 @@ std::string getAccelerationModelName( const AvailableAcceleration accelerationTy
         break;
     case momentum_wheel_desaturation_acceleration:
         accelerationName  = "momentum wheen desaturation acceleration ";
+<<<<<<< HEAD
+=======
+        break;
+    case solar_sail_acceleration:
+        accelerationName = "solar sail acceleration";
+>>>>>>> origin/master
         break;
     default:
         std::string errorMessage = "Error, acceleration type " +
@@ -149,6 +159,7 @@ AvailableAcceleration getAccelerationModelType(
         accelerationType = empirical_acceleration;
     }
     else if( std::dynamic_pointer_cast<  gravitation::DirectTidalDissipationAcceleration >( accelerationModel ) != nullptr )
+<<<<<<< HEAD
     {
         std::shared_ptr< gravitation::DirectTidalDissipationAcceleration > dissipationAcceleration =
              std::dynamic_pointer_cast<  gravitation::DirectTidalDissipationAcceleration >( accelerationModel );
@@ -164,6 +175,27 @@ AvailableAcceleration getAccelerationModelType(
     else if( std::dynamic_pointer_cast< PanelledRadiationPressureAcceleration >( accelerationModel ) != NULL )
     {
         accelerationType = panelled_radiation_pressure_acceleration;
+=======
+    {
+        std::shared_ptr< gravitation::DirectTidalDissipationAcceleration > dissipationAcceleration =
+             std::dynamic_pointer_cast<  gravitation::DirectTidalDissipationAcceleration >( accelerationModel );
+        if( dissipationAcceleration->getModelTideOnPlanet( ) )
+        {
+            accelerationType = direct_tidal_dissipation_in_central_body_acceleration;
+        }
+        else
+        {
+            accelerationType = direct_tidal_dissipation_in_orbiting_body_acceleration;
+        }
+    }
+    else if( std::dynamic_pointer_cast< PanelledRadiationPressureAcceleration >( accelerationModel ) != NULL )
+    {
+        accelerationType = panelled_radiation_pressure_acceleration;
+    }
+    else if ( std::dynamic_pointer_cast< SolarSailAcceleration >( accelerationModel) != NULL )
+    {
+        accelerationType = solar_sail_acceleration;
+>>>>>>> origin/master
     }
     else
     {

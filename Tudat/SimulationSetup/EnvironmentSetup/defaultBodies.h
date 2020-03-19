@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -92,6 +96,11 @@ std::shared_ptr< RotationModelSettings > getDefaultRotationModelSettings(
         const std::string& bodyName,
         const double initialTime,
         const double finalTime );
+
+double marsTimeDependentPhaseAngleCorrectionFunction( const double secondsSinceJ2000 );
+
+std::shared_ptr< RotationModelSettings > getHighAccuracyMarsRotationModel(
+        const double initialTime, const double finalTime );
 
 //! Function to create default settings for a body's shape model.
 /*!

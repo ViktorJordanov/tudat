@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -27,7 +31,12 @@ static std::map< RotationModelType, std::string > rotationModelTypes =
 {
     { simple_rotation_model, "simple" },
     { spice_rotation_model, "spice" },
+<<<<<<< HEAD
     { gcrs_to_itrs_rotation_model, "gcrsToItrs" }
+=======
+    { gcrs_to_itrs_rotation_model, "gcrsToItrs" },
+    { synchronous_rotation_model, "synchronous" }
+>>>>>>> origin/master
 };
 
 //! `RotationModelType`s not supported by `json_interface`.

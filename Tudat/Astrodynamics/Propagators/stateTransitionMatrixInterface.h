@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -123,6 +127,7 @@ public:
      * \param numberOfInitialDynamicalParameters Size of the estimated initial state vector (and size of square
      * state transition matrix.
      * \param numberOfParameters Total number of estimated parameters (initial states and other parameters).
+     * \param statePartialAdditionIndices Vector of pair providing indices of column blocks of variational equations to add to other column blocks
      */
     SingleArcCombinedStateTransitionAndSensitivityMatrixInterface(
             const std::shared_ptr< interpolators::OneDimensionalInterpolator< double, Eigen::MatrixXd > >
@@ -130,10 +135,12 @@ public:
             const std::shared_ptr< interpolators::OneDimensionalInterpolator< double, Eigen::MatrixXd > >
             sensitivityMatrixInterpolator,
             const int numberOfInitialDynamicalParameters,
-            const int numberOfParameters ):
+            const int numberOfParameters,
+            const std::vector< std::pair< int, int > >& statePartialAdditionIndices ):
         CombinedStateTransitionAndSensitivityMatrixInterface( numberOfInitialDynamicalParameters, numberOfParameters ),
         stateTransitionMatrixInterpolator_( stateTransitionMatrixInterpolator ),
-        sensitivityMatrixInterpolator_( sensitivityMatrixInterpolator )
+        sensitivityMatrixInterpolator_( sensitivityMatrixInterpolator ),
+        statePartialAdditionIndices_( statePartialAdditionIndices )
     {
         combinedStateTransitionMatrix_ = Eigen::MatrixXd::Zero(
                         stateTransitionMatrixSize_, stateTransitionMatrixSize_ + sensitivityMatrixSize_ );
@@ -147,12 +154,18 @@ public:
      * Function to reset the state transition and sensitivity matrix interpolators
      * \param stateTransitionMatrixInterpolator New interpolator returning the state transition matrix as a function of time.
      * \param sensitivityMatrixInterpolator New interpolator returning the sensitivity matrix as a function of time.
+     * \param statePartialAdditionIndices Vector of pair providing indices of column blocks of variational equations to add to other column blocks
      */
     void updateMatrixInterpolators(
             const std::shared_ptr< interpolators::OneDimensionalInterpolator< double, Eigen::MatrixXd > >
             stateTransitionMatrixInterpolator,
             const std::shared_ptr< interpolators::OneDimensionalInterpolator< double, Eigen::MatrixXd > >
+<<<<<<< HEAD
             sensitivityMatrixInterpolator );
+=======
+            sensitivityMatrixInterpolator,
+            const std::vector< std::pair< int, int > >& statePartialAdditionIndices );
+>>>>>>> origin/master
 
     //! Function to get the interpolator returning the state transition matrix as a function of time.
     /*!
@@ -219,6 +232,9 @@ private:
     //! Interpolator returning the sensitivity matrix as a function of time.
     std::shared_ptr< interpolators::OneDimensionalInterpolator< double, Eigen::MatrixXd > >
     sensitivityMatrixInterpolator_;
+
+    std::vector< std::pair< int, int > > statePartialAdditionIndices_;
+
 };
 
 //! Interface object of interpolation of numerically propagated state transition and sensitivity matrices for multi-arc
@@ -235,9 +251,11 @@ public:
      * \param sensitivityMatrixInterpolators Interpolators returning the sensitivity matrix as a function of time, vector
      * entries represent matrix history for each arc.
      * \param arcStartTimes Times at which the multiple arcs start
+     * \param arcEndTimes Times at which the multiple arcs end
      * \param numberOfInitialDynamicalParameters Size of the estimated initial state vector (and size of square
      * sing-arc state transition matrix times number of arcs.)
      * \param numberOfParameters Total number of estimated parameters (initial states and other parameters).
+     * \param statePartialAdditionIndices Vector of pair providing indices of column blocks of variational equations to add to other column blocks
      */
     MultiArcCombinedStateTransitionAndSensitivityMatrixInterface(
             const std::vector< std::shared_ptr< interpolators::OneDimensionalInterpolator< double, Eigen::MatrixXd > > >
@@ -245,8 +263,10 @@ public:
             const std::vector< std::shared_ptr< interpolators::OneDimensionalInterpolator< double, Eigen::MatrixXd > > >
             sensitivityMatrixInterpolators,
             const std::vector< double >& arcStartTimes,
+            const std::vector< double >& arcEndTimes,
             const int numberOfInitialDynamicalParameters,
-            const int numberOfParameters );
+            const int numberOfParameters,
+            const std::vector< std::vector< std::pair< int, int > > >& statePartialAdditionIndices );
 
     //! Destructor
     ~MultiArcCombinedStateTransitionAndSensitivityMatrixInterface( ){ }
@@ -258,13 +278,17 @@ public:
      * function of time.
      * \param sensitivityMatrixInterpolators New vector of interpolator returning the sensitivity matrix as a function of time.
      * \param arcStartTimes Times at which the multiple arcs start.
+     * \param arcEndTimes Times at which the multiple arcs end
+     * \param statePartialAdditionIndices Vector of pair providing indices of column blocks of variational equations to add to other column blocks
      */
     void updateMatrixInterpolators(
             const std::vector< std::shared_ptr< interpolators::OneDimensionalInterpolator< double, Eigen::MatrixXd > > >
             stateTransitionMatrixInterpolators,
             const std::vector< std::shared_ptr< interpolators::OneDimensionalInterpolator< double, Eigen::MatrixXd > > >
             sensitivityMatrixInterpolators,
-            const std::vector< double >& arcStartTimes );
+            const std::vector< double >& arcStartTimes,
+            const std::vector< double >& arcEndTimes,
+            const std::vector< std::vector< std::pair< int, int > > >& statePartialAdditionIndices  );
 
     //! Function to get the vector of interpolators returning the state transition matrix as a function of time.
     /*!
@@ -298,6 +322,9 @@ public:
         return sensitivityMatrixSize_ + numberOfStateArcs_ * stateTransitionMatrixSize_;
     }
 
+    Eigen::MatrixXd getCombinedStateTransitionAndSensitivityMatrix(
+            const double evaluationTime, const bool addCentralBodySensitivity = true );
+
     //! Function to get the concatenated single-arc state transition and sensitivity matrix at a given time.
     /*!
      *  Function to get the concatenated single-arc state transition and sensitivity matrix at a given time, evaluates matrices
@@ -306,6 +333,9 @@ public:
      *  \return Concatenated state transition and sensitivity matrices.
      */
     Eigen::MatrixXd getCombinedStateTransitionAndSensitivityMatrix( const double evaluationTime );
+
+    Eigen::MatrixXd getFullCombinedStateTransitionAndSensitivityMatrix(
+            const double evaluationTime, const bool addCentralBodySensitivity = true );
 
     //! Function to get the concatenated state transition matrices for each arc and sensitivity matrix at a given time.
     /*!
@@ -335,6 +365,13 @@ public:
         return arcStartTimes_.size( );
     }
 
+    std::vector< std::pair< int, int > > getStatePartialAdditionIndices(
+            const int arcIndex )
+    {
+        return statePartialAdditionIndices_.at( arcIndex );
+    }
+
+
 private:
 
     //! List of interpolators returning the state transition matrix as a function of time.
@@ -348,11 +385,25 @@ private:
     //! Times at which the multiple arcs start
     std::vector< double > arcStartTimes_;
 
+    std::vector< double > arcEndTimes_;
+
     //! Number of arcs.
     int numberOfStateArcs_;
 
     //! Look-up algorithm to determine the arc of a given time.
     std::shared_ptr< interpolators::HuntingAlgorithmLookupScheme< double > > lookUpscheme_;
+<<<<<<< HEAD
+=======
+
+    //! Vector of pair providing indices of column blocks of variational equations to add to other column blocks
+    /*!
+     * Vector of pair providing indices of column blocks of variational equations to add to other column blocks,
+     * which is needed by the hierarchical estimation fo dynamics. The second pair entry is the start of the column
+     * block (of size 3) to where it should be copied. The first entry denotes from where it should be copied.
+     * \sa setTranslationalStatePartialFrameScalingFunctions
+     */
+    std::vector< std::vector< std::pair< int, int > > > statePartialAdditionIndices_;
+>>>>>>> origin/master
 
 };
 
@@ -379,7 +430,7 @@ public:
             const std::shared_ptr< MultiArcCombinedStateTransitionAndSensitivityMatrixInterface > multiArcInterface ):
         CombinedStateTransitionAndSensitivityMatrixInterface(
             multiArcInterface->getStateTransitionMatrixSize( ),
-            multiArcInterface->getSensitivityMatrixSize( ) + multiArcInterface->getStateTransitionMatrixSize( )),
+            multiArcInterface->getSensitivityMatrixSize( ) + multiArcInterface->getStateTransitionMatrixSize( ) ),
         singleArcInterface_( singleArcInterface ), multiArcInterface_( multiArcInterface )
     {
         // Check input consistency

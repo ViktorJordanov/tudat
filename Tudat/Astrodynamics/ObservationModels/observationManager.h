@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -201,7 +205,7 @@ public:
     std::shared_ptr< ObservationModel< ObservationSize, ObservationScalarType, TimeType > > getObservationModel(
             const LinkEnds linkEnds )
     {
-       return observationSimulator_->getObservationModel( linkEnds );
+        return observationSimulator_->getObservationModel( linkEnds );
     }
 
     //! Function to return the object used to simulate noise-free observations
@@ -366,8 +370,13 @@ protected:
             std::vector< std::pair< Eigen::Matrix< double, ObservationSize, Eigen::Dynamic >, double > > singlePartialSet =
                     partialIterator->second->calculatePartial( states, times, linkEndAssociatedWithTime, currentObservation.template cast< double >( ) );
 
+<<<<<<< HEAD
 //            std::cout<<"Obs. "<<currentObservation.transpose( )<<std::endl;
 //            std::cout<<"Partial "<<singlePartialSet.at( 0 ).first<<std::endl<<std::endl;
+=======
+            //            std::cout<<"Obs. "<<currentObservation.transpose( )<<std::endl;
+            //            std::cout<<"Partial "<<singlePartialSet.at( 0 ).first<<std::endl<<std::endl;
+>>>>>>> origin/master
 
             // If start index is smaller than size of state transition,
             // current partial is w.r.t. to a body to be estimated current state.
@@ -398,7 +407,6 @@ protected:
                 }
             }
         }
-
         return partialMatrix;
     }
 
@@ -427,7 +435,11 @@ extern template class ObservationManager< 2, double, double >;
 extern template class ObservationManager< 3, double, double >;
 extern template class ObservationManager< 6, double, double >;
 
+<<<<<<< HEAD
 #if( BUILD_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+=======
+#if( BUILD_WITH_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+>>>>>>> origin/master
 extern template class ObservationManagerBase< double, Time >;
 extern template class ObservationManagerBase< long double, double >;
 extern template class ObservationManagerBase< long double, Time >;

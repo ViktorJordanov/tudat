@@ -34,6 +34,10 @@
   "keplerElements",
   "modifiedEquinoctialElements",
   "sphericalHarmonicsAccelerationTerms",
+<<<<<<< HEAD
+=======
+  "sphericalHarmonicsAccelerationTermNorms",
+>>>>>>> origin/master
   "bodyFixedRelativeCartesianPosition",
   "bodyFixedRelativeSphericalPosition",
   "totalGravityFieldVariationAcceleration",

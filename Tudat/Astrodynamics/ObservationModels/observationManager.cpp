@@ -12,7 +12,11 @@ template class ObservationManager< 2, double, double >;
 template class ObservationManager< 3, double, double >;
 template class ObservationManager< 6, double, double >;
 
+<<<<<<< HEAD
 #if( BUILD_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+=======
+#if( BUILD_WITH_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+>>>>>>> origin/master
 template class ObservationManagerBase< double, Time >;
 template class ObservationManagerBase< long double, double >;
 template class ObservationManagerBase< long double, Time >;

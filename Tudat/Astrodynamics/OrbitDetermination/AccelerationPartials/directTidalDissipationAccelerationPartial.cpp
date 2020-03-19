@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -252,17 +256,20 @@ void DirectTidalDissipationAccelerationPartial::wrtGravitationalParameterOfSatel
 }
 
 //! Function to compute derivative w.r.t. tidal time lag parameter.
-void DirectTidalDissipationAccelerationPartial::wrtTidalTimeLag( Eigen::MatrixXd& gravitationalParameterPartial )
+void DirectTidalDissipationAccelerationPartial::wrtTidalTimeLag( Eigen::MatrixXd& timeLagPartial )
 {
-    Eigen::Vector3d tidalAccelerationWithoutScaling = tidalAcceleration_->getAcceleration( ) /
-            tidalAcceleration_->getCurrentTidalAccelerationMultiplier( );
-    if( tidalAcceleration_->getIncludeDirectRadialComponent( ) )
+    if( !tidalAcceleration_->getModelTideOnPlanet( ) )
     {
-        tidalAccelerationWithoutScaling -= ( 1.0 + static_cast< double >( !tidalAcceleration_->getModelTideOnPlanet( ) ) ) *
-                tidalAcceleration_->getCurrentRelativeState( ).segment( 0, 3 );
+        timeLagPartial = gravitation::computeDirectTidalAccelerationDueToTideOnSatellite(
+                    tidalAcceleration_->getCurrentRelativeState( ),
+                    tidalAcceleration_->getCurrentTidalAccelerationMultiplier( ), 1.0, false );
     }
-    gravitationalParameterPartial.block( 0, 0, 3, 1 ) =  tidalAcceleration_->getCurrentTidalAccelerationMultiplier( ) *
-            tidalAccelerationWithoutScaling / tidalAcceleration_->getTimeLag( );
+    else
+    {
+        timeLagPartial = gravitation::computeDirectTidalAccelerationDueToTideOnPlanet(
+                    tidalAcceleration_->getCurrentRelativeState( ), tidalAcceleration_->getCurrentAngularVelocityVectorOfBodyUndergoingTide( ),
+                    tidalAcceleration_->getCurrentTidalAccelerationMultiplier( ), 1.0, false );
+    }
 }
 
 

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* git    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/* git    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -209,11 +213,6 @@ executeEarthMoonSimulation(
         Eigen::Matrix< StateScalarType, Eigen::Dynamic, 1 > testStates =
                 Eigen::Matrix< StateScalarType, Eigen::Dynamic, 1 >::Zero( 12 );
         testStates.block( 0, 0, 6, 1 ) = bodyMap[ "Moon" ]->getStateInBaseFrameFromEphemeris( testEpoch );
-        if( centralBodyMap[ "Moon" ] == "Earth" )
-        {
-            testStates.block( 0, 0, 6, 1 ) -= bodyMap[ "Earth" ]->getStateInBaseFrameFromEphemeris( testEpoch );
-        }
-
         testStates.block( 6, 0, 6, 1 ) = bodyMap[ "Earth" ]->getStateInBaseFrameFromEphemeris( testEpoch );
 
         if( propagateVariationalEquations )
@@ -330,6 +329,9 @@ BOOST_AUTO_TEST_CASE( testEarthMoonVariationalEquationCalculation )
                 manualPartial.block( 0, j + 12, 12, 1 ) =
                         ( upPerturbedState - downPerturbedState ) / ( 2.0 * parameterPerturbation( j ) );
             }
+
+            std::cout<<"Run "<<i<<std::endl<<stateTransitionAndSensitivityMatrixAtEpoch<<std::endl;
+            std::cout<<"Run "<<i<<std::endl<<manualPartial<<std::endl;
 
             // Check results
             TUDAT_CHECK_MATRIX_CLOSE_FRACTION(
@@ -917,14 +919,28 @@ BOOST_AUTO_TEST_CASE( testPhobosRotationVariationalEquationCalculation )
 //                                              ( stateTransitionAndSensitivityMatrixAtEpoch * appliedStateDifferenceUp )<<std::endl<<std::endl;
             if( test == 0 )
             {
+<<<<<<< HEAD
                 TUDAT_CHECK_MATRIX_CLOSE_FRACTION(
                             ( ( stateTransitionAndSensitivityMatrixAtEpoch.block( 0, 0, 13, 13 ) * appliedStateDifferenceUp ).segment( 0, 6 ) ),
+=======
+                Eigen::VectorXd testMatrix =
+                        ( stateTransitionAndSensitivityMatrixAtEpoch.block( 0, 0, 13, 13 ) * appliedStateDifferenceUp );
+                TUDAT_CHECK_MATRIX_CLOSE_FRACTION(
+                            ( testMatrix.segment( 0, 6 ) ),
+>>>>>>> origin/master
                             ( stateDifferenceUp.segment( 0, 6 ) ), 1.0E-3 );
             }
             else
             {
+<<<<<<< HEAD
                 TUDAT_CHECK_MATRIX_CLOSE_FRACTION(
                             ( ( stateTransitionAndSensitivityMatrixAtEpoch.block( 0, 0, 13, 13 ) * appliedStateDifferenceUp ).segment( 6, 7 ) ),
+=======
+                Eigen::VectorXd testMatrix =
+                        ( stateTransitionAndSensitivityMatrixAtEpoch.block( 0, 0, 13, 13 ) * appliedStateDifferenceUp );
+                TUDAT_CHECK_MATRIX_CLOSE_FRACTION(
+                            ( testMatrix.segment( 6, 7 ) ),
+>>>>>>> origin/master
                             ( stateDifferenceUp.segment( 6, 7 ) ), 1.0E-5 );
             }
         }

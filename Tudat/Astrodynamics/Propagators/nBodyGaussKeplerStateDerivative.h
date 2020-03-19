@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -101,8 +105,13 @@ public:
      *  \param bodiesToIntegrate List of names of bodies that are to be integrated numerically.
      */
     NBodyGaussKeplerStateDerivative( const basic_astrodynamics::AccelerationMap& accelerationModelsPerBody,
+<<<<<<< HEAD
                                const std::shared_ptr< CentralBodyData< StateScalarType, TimeType > > centralBodyData,
                                const std::vector< std::string >& bodiesToIntegrate ):
+=======
+                                     const std::shared_ptr< CentralBodyData< StateScalarType, TimeType > > centralBodyData,
+                                     const std::vector< std::string >& bodiesToIntegrate ):
+>>>>>>> origin/master
         NBodyStateDerivative< StateScalarType, TimeType >(
             accelerationModelsPerBody, centralBodyData, gauss_keplerian, bodiesToIntegrate )
     {
@@ -150,10 +159,10 @@ public:
                         currentCartesianLocalSolution_.segment( i * 6, 6 ) ) *
                     stateDerivative.block( i * 6 + 3, 0, 3, 1 ).template cast< double >( );
 
-                stateDerivative.block( i * 6, 0, 6, 1 ) = computeGaussPlanetaryEquationsForKeplerElements(
-                            ( Eigen::Vector6d( ) << stateOfSystemToBeIntegrated.block( i * 6, 0, 5, 1 ).template cast< double >( ),
-                              currentTrueAnomalies_.at( i ) ).finished( ), currentAccelerationInRswFrame,
-                            centralBodyGravitationalParameters_.at( i )( ) ).template cast< StateScalarType >( );
+            stateDerivative.block( i * 6, 0, 6, 1 ) = computeGaussPlanetaryEquationsForKeplerElements(
+                        ( Eigen::Vector6d( ) << stateOfSystemToBeIntegrated.block( i * 6, 0, 5, 1 ).template cast< double >( ),
+                          currentTrueAnomalies_.at( i ) ).finished( ), currentAccelerationInRswFrame,
+                        centralBodyGravitationalParameters_.at( i )( ) ).template cast< StateScalarType >( );
         }
     }
 
@@ -215,6 +224,7 @@ public:
         Eigen::Matrix< StateScalarType, 6, 1 > currentKeplerianState;
         for( unsigned int i = 0; i < this->bodiesToBeIntegratedNumerically_.size( ); i++ )
         {
+<<<<<<< HEAD
             currentKeplerianState = internalSolution.block( i * 6, 0, 6, 1 );
             StateScalarType currentEccentricAnomaly = orbital_element_conversions::convertMeanAnomalyToEccentricAnomaly(
                         currentKeplerianState( 1 ), currentKeplerianState( 5 ) );
@@ -225,6 +235,38 @@ public:
             currentTrueAnomalies_[ i ] = currentTrueAnomaly;
             currentCartesianLocalSolution.segment( i * 6, 6 ) = orbital_element_conversions::convertKeplerianToCartesianElements(
                         currentKeplerianState, static_cast< StateScalarType >( centralBodyGravitationalParameters_.at( i )( ) ) );
+=======
+            try
+            {
+                currentKeplerianState = internalSolution.block( i * 6, 0, 6, 1 );
+                StateScalarType currentTrueAnomaly;
+                if( currentKeplerianState( 1 ) < 1.0 )
+                {
+                    StateScalarType currentEccentricAnomaly = orbital_element_conversions::convertMeanAnomalyToEccentricAnomaly(
+                                currentKeplerianState( 1 ), currentKeplerianState( 5 ) );
+                    currentTrueAnomaly = orbital_element_conversions::convertEccentricAnomalyToTrueAnomaly(
+                                currentEccentricAnomaly, currentKeplerianState( 1 ) );
+                    currentKeplerianState( 5 ) = currentTrueAnomaly;
+                }
+                else
+                {
+                    StateScalarType currentEccentricAnomaly = orbital_element_conversions::convertMeanAnomalyToHyperbolicEccentricAnomaly(
+                                currentKeplerianState( 1 ), currentKeplerianState( 5 ) );
+                    currentTrueAnomaly = orbital_element_conversions::convertHyperbolicEccentricAnomalyToTrueAnomaly(
+                                currentEccentricAnomaly, currentKeplerianState( 1 ) );
+                    currentKeplerianState( 5 ) = currentTrueAnomaly;
+                }
+
+                currentTrueAnomalies_[ i ] = currentTrueAnomaly;
+                currentCartesianLocalSolution.segment( i * 6, 6 ) = orbital_element_conversions::convertKeplerianToCartesianElements(
+                            currentKeplerianState, static_cast< StateScalarType >( centralBodyGravitationalParameters_.at( i )( ) ) );
+            }
+            catch( std::runtime_error )
+            {
+                currentTrueAnomalies_[ i ] = TUDAT_NAN;
+                currentCartesianLocalSolution.segment( i * 6, 6 ) = Eigen::Matrix< StateScalarType, 6, 1 >::Constant( TUDAT_NAN );
+            }
+>>>>>>> origin/master
 
         }
 
@@ -268,7 +310,11 @@ private:
 
 extern template class NBodyGaussKeplerStateDerivative< double, double >;
 
+<<<<<<< HEAD
 #if( BUILD_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+=======
+#if( BUILD_WITH_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+>>>>>>> origin/master
 extern template class NBodyGaussKeplerStateDerivative< long double, double >;
 extern template class NBodyGaussKeplerStateDerivative< double, Time >;
 extern template class NBodyGaussKeplerStateDerivative< long double, Time >;

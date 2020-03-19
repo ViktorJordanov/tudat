@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -188,7 +192,12 @@ void determineInitialStates(
 template< typename StateScalarType >
 void resetDependentVariableSaveSettings(
         std::shared_ptr< propagators::MultiTypePropagatorSettings< StateScalarType > >& propagatorSettings,
+<<<<<<< HEAD
         const std::vector< std::shared_ptr< ExportSettings > >& exportSettingsVector )
+=======
+        const std::vector< std::shared_ptr< ExportSettings > >& exportSettingsVector,
+        const bool printOutputVariables = false )
+>>>>>>> origin/master
 {
     using namespace propagators;
 
@@ -214,7 +223,11 @@ void resetDependentVariableSaveSettings(
     }
 
     propagatorSettings->resetDependentVariablesToSave(
+<<<<<<< HEAD
                 std::make_shared< DependentVariableSaveSettings >( dependentVariables, false ) );
+=======
+                std::make_shared< DependentVariableSaveSettings >( dependentVariables, printOutputVariables ) );
+>>>>>>> origin/master
 }
 
 //! Get end epoch for propagator. Returns `TUDAT_NAN` if there is no time termination condition.

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
  #    Copyright (c) 2010-2018, Delft University of Technology
+=======
+ #    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  #    All rigths reserved
  #
  #    This file is part of the Tudat. Redistribution and use in source and
@@ -42,7 +46,11 @@ set(ORBIT_DETERMINATION_HEADERS
 add_library(tudat_orbit_determination STATIC ${ORBIT_DETERMINATION_SOURCES} ${ORBIT_DETERMINATION_HEADERS})
 setup_tudat_library_target(tudat_orbit_determination "${SRCROOT}{ORBITDETERMINATIONDIR}")
 
+<<<<<<< HEAD
 if( BUILD_PROPAGATION_TESTS )
+=======
+if( BUILD_WITH_PROPAGATION_TESTS )
+>>>>>>> origin/master
 
 add_executable(test_EstimationFromPositionDoubleDouble "${SRCROOT}${ORBITDETERMINATIONDIR}/UnitTests/unitTestEstimationFromIdealDataDoubleDouble.cpp")
 setup_custom_test_program(test_EstimationFromPositionDoubleDouble "${SRCROOT}${ORBITDETERMINATIONDIR}")
@@ -85,7 +93,15 @@ add_executable(test_DesaturationDeltaVsEstimation "${SRCROOT}${ORBITDETERMINATIO
 setup_custom_test_program(test_DesaturationDeltaVsEstimation "${SRCROOT}${ORBITDETERMINATIONDIR}")
 target_link_libraries(test_DesaturationDeltaVsEstimation ${TUDAT_ESTIMATION_LIBRARIES} ${Boost_LIBRARIES})
 
+<<<<<<< HEAD
 if( BUILD_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+=======
+add_executable(test_FullPlanetaryRotationModelEstimation "${SRCROOT}${ORBITDETERMINATIONDIR}/UnitTests/unitTestFullPlanetaryRotationModelEstimation.cpp")
+setup_custom_test_program(test_FullPlanetaryRotationModelEstimation "${SRCROOT}${ORBITDETERMINATIONDIR}")
+target_link_libraries(test_FullPlanetaryRotationModelEstimation ${TUDAT_ESTIMATION_LIBRARIES} ${Boost_LIBRARIES})
+
+if( BUILD_WITH_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+>>>>>>> origin/master
 
 add_executable(test_EstimationFromPositionDoubleLongDouble "${SRCROOT}${ORBITDETERMINATIONDIR}/UnitTests/unitTestEstimationFromIdealDataDoubleLongDouble.cpp")
 setup_custom_test_program(test_EstimationFromPositionDoubleLongDouble "${SRCROOT}${ORBITDETERMINATIONDIR}")

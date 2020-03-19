@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -632,6 +636,20 @@ void castDynamicToFixedSizeEigenVectorMap(
     }
 }
 
+<<<<<<< HEAD
+=======
+//! Function to return the sign (+1 or -1) of a variable of type T
+/*!
+ *  \param val Variable for which sign is to be determined
+ *  \return Sign of variable
+ */
+template < typename T > int sgn( const T& val )
+{
+    return ( T( 0 ) < val ) - ( val < T( 0 ) );
+}
+
+
+>>>>>>> origin/master
 } // namespace utilities
 
 } // namespace tudat

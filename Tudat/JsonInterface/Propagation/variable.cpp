@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -136,10 +140,17 @@ void to_json( nlohmann::json& jsonObject,
                     dependentVariableSettings );
         assertNonnullptrPointer( accelerationVariableSettings );
         jsonObject[ K::accelerationType ] = accelerationVariableSettings->accelerationModelType_;
+<<<<<<< HEAD
 
         jsonObject[ K::bodyExertingAcceleration ] = dependentVariableSettings->secondaryBody_;
         return;
     }
+=======
+        jsonObject[ K::bodyExertingAcceleration ] = dependentVariableSettings->secondaryBody_;
+        return;
+    }
+    case spherical_harmonic_acceleration_norm_terms_dependent_variable:
+>>>>>>> origin/master
     case spherical_harmonic_acceleration_terms_dependent_variable:
     {
         std::shared_ptr< SphericalHarmonicAccelerationTermsDependentVariableSaveSettings > sphericalHarmonicsSettings =
@@ -148,7 +159,10 @@ void to_json( nlohmann::json& jsonObject,
         assertNonnullptrPointer( sphericalHarmonicsSettings );
         jsonObject[ K::bodyExertingAcceleration ] = dependentVariableSettings->secondaryBody_;
         jsonObject[ K::componentIndices ] = sphericalHarmonicsSettings->componentIndices_;
+<<<<<<< HEAD
         jsonObject[ K::componentIndex ] = dependentVariableSettings->componentIndex_;
+=======
+>>>>>>> origin/master
         return;
     }
     case single_torque_norm_dependent_variable:
@@ -252,13 +266,22 @@ void from_json( const nlohmann::json& jsonObject,
                     componentIndex );
         return;
     }
+<<<<<<< HEAD
+=======
+    case spherical_harmonic_acceleration_norm_terms_dependent_variable:
+>>>>>>> origin/master
     case spherical_harmonic_acceleration_terms_dependent_variable:
     {
         dependentVariableSettings = std::make_shared< SphericalHarmonicAccelerationTermsDependentVariableSaveSettings >(
                     getValue< std::string >( jsonObject, K::body ),
                     getValue< std::string >( jsonObject, K::bodyExertingAcceleration ),
                     getValue< std::vector< std::pair< int, int > > >( jsonObject, K::componentIndices ),
+<<<<<<< HEAD
                     componentIndex );
+=======
+                    componentIndex,
+                    dependentVariableType == spherical_harmonic_acceleration_norm_terms_dependent_variable );
+>>>>>>> origin/master
         return;
     }
     case single_torque_norm_dependent_variable:

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -868,7 +872,13 @@ BOOST_AUTO_TEST_CASE( testEmpiricalAccelerationPartial )
 
     // Create time-independent empirical acceleration object.
     std::shared_ptr< EmpiricalAccelerationCoefficientsParameter > empiricalAccelerationParameter = std::make_shared<
+<<<<<<< HEAD
             EmpiricalAccelerationCoefficientsParameter >( accelerationModel, "Vehicle", empiricalComponentsToEstimate );
+=======
+            EmpiricalAccelerationCoefficientsParameter >(
+    std::vector< std::shared_ptr< EmpiricalAcceleration > >( { accelerationModel } ), "Vehicle", "Earth",
+                empiricalComponentsToEstimate );
+>>>>>>> origin/master
 
     {
         // Calculate analytical partials.
@@ -931,7 +941,13 @@ BOOST_AUTO_TEST_CASE( testEmpiricalAccelerationPartial )
     arcStartTimes.push_back( 3.0E4 );
     arcStartTimes.push_back( 7.0E4 );
     std::shared_ptr< ArcWiseEmpiricalAccelerationCoefficientsParameter > arcWiseEmpiricalAccelerationParameter = std::make_shared<
+<<<<<<< HEAD
             ArcWiseEmpiricalAccelerationCoefficientsParameter >( accelerationModel, "Vehicle", empiricalComponentsToEstimate, arcStartTimes );
+=======
+            ArcWiseEmpiricalAccelerationCoefficientsParameter >(
+                std::vector< std::shared_ptr< EmpiricalAcceleration > >( { accelerationModel } ), "Vehicle", "Earth",
+                empiricalComponentsToEstimate, arcStartTimes );
+>>>>>>> origin/master
 
     // Define list of times at which to test empirical acceleration
     std::vector< double > evaluationTimes;

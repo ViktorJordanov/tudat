@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -93,6 +97,7 @@ std::map< double, Eigen::Vector6d > performCR3BPIntegration(
 }
 
 
+<<<<<<< HEAD
 template std::vector< std::shared_ptr< SingleStateTypeDerivative< double, double > > > createStateDerivativeModels< double, double >(
         const std::shared_ptr< SingleArcPropagatorSettings< double > > propagatorSettings,
         const simulation_setup::NamedBodyMap& bodyMap,
@@ -128,6 +133,45 @@ template std::shared_ptr< SingleStateTypeDerivative< long double, Time > > creat
         const simulation_setup::NamedBodyMap& bodyMap,
         const Time propagationStartTime );
 #endif
+=======
+//template std::vector< std::shared_ptr< SingleStateTypeDerivative< double, double > > > createStateDerivativeModels< double, double >(
+//        const std::shared_ptr< SingleArcPropagatorSettings< double > > propagatorSettings,
+//        const simulation_setup::NamedBodyMap& bodyMap,
+//        const double propagationStartTime );
+//template std::shared_ptr< SingleStateTypeDerivative< double, double > > createStateDerivativeModel< double, double >(
+//        const std::shared_ptr< SingleArcPropagatorSettings< double > > propagatorSettings,
+//        const simulation_setup::NamedBodyMap& bodyMap,
+//        const double propagationStartTime );
+
+//#if( BUILD_WITH_EXTENDED_PRECISION_PROPAGATION_TOOLS )
+//template std::vector< std::shared_ptr< SingleStateTypeDerivative< long double, double > > > createStateDerivativeModels< long double, double >(
+//        const std::shared_ptr< SingleArcPropagatorSettings< long double > > propagatorSettings,
+//        const simulation_setup::NamedBodyMap& bodyMap,
+//        const double propagationStartTime );
+//template std::vector< std::shared_ptr< SingleStateTypeDerivative< double, Time > > > createStateDerivativeModels< double, Time >(
+//        const std::shared_ptr< SingleArcPropagatorSettings< double > > propagatorSettings,
+//        const simulation_setup::NamedBodyMap& bodyMap,
+//        const Time propagationStartTime );
+//template std::vector< std::shared_ptr< SingleStateTypeDerivative< long double, Time > > > createStateDerivativeModels< long double, Time >(
+//        const std::shared_ptr< SingleArcPropagatorSettings< long double > > propagatorSettings,
+//        const simulation_setup::NamedBodyMap& bodyMap,
+//        const Time propagationStartTime );
+//template std::shared_ptr< SingleStateTypeDerivative< long double, double > > createStateDerivativeModel< long double, double >(
+//        const std::shared_ptr< SingleArcPropagatorSettings< long double > > propagatorSettings,
+//        const simulation_setup::NamedBodyMap& bodyMap,
+//        const double propagationStartTime );
+//template std::shared_ptr< SingleStateTypeDerivative< double, Time > > createStateDerivativeModel< double, Time >(
+//        const std::shared_ptr< SingleArcPropagatorSettings< double > > propagatorSettings,
+//        const simulation_setup::NamedBodyMap& bodyMap,
+//        const Time propagationStartTime );
+//template std::shared_ptr< SingleStateTypeDerivative< long double, Time > > createStateDerivativeModel< long double, Time >(
+//        const std::shared_ptr< SingleArcPropagatorSettings< long double > > propagatorSettings,
+//        const simulation_setup::NamedBodyMap& bodyMap,
+//        const Time propagationStartTime );
+//#endif
+
+}
+>>>>>>> origin/master
 
 }
 

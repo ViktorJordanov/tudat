@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*   Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*   Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *   All rigths reserved
  *
  *   This file is part of the Tudat. Redistribution and use in source and
@@ -103,6 +107,7 @@ enum PropagationDependentVariables
     keplerian_state_dependent_variable = 32,
     modified_equinocial_state_dependent_variable = 33,
     spherical_harmonic_acceleration_terms_dependent_variable = 34,
+<<<<<<< HEAD
     body_fixed_relative_cartesian_position = 35,
     body_fixed_relative_spherical_position = 36,
     total_gravity_field_variation_acceleration = 37,
@@ -114,6 +119,20 @@ enum PropagationDependentVariables
     euler_angles_to_body_fixed_313 = 43,
     current_body_mass_dependent_variable = 44,
     radiation_pressure_coefficient_dependent_variable = 45
+=======
+    spherical_harmonic_acceleration_norm_terms_dependent_variable = 35,
+    body_fixed_relative_cartesian_position = 36,
+    body_fixed_relative_spherical_position = 37,
+    total_gravity_field_variation_acceleration = 38,
+    single_gravity_field_variation_acceleration = 39,
+    single_gravity_field_variation_acceleration_terms = 40,
+    acceleration_partial_wrt_body_translational_state = 41,
+    local_dynamic_pressure_dependent_variable = 42,
+    local_aerodynamic_heat_rate_dependent_variable = 43,
+    euler_angles_to_body_fixed_313 = 44,
+    current_body_mass_dependent_variable = 45,
+    radiation_pressure_coefficient_dependent_variable = 46
+>>>>>>> origin/master
 };
 
 //! Functional base class for defining settings for dependent variables that are to be saved during propagation
@@ -218,6 +237,7 @@ public:
             const std::string& bodyUndergoingAcceleration,
             const std::string& bodyExertingAcceleration,
             const std::vector< std::pair< int, int > >& componentIndices,
+<<<<<<< HEAD
             const int componentIndex = -1 ):
         SingleDependentVariableSaveSettings(
             spherical_harmonic_acceleration_terms_dependent_variable, bodyUndergoingAcceleration, bodyExertingAcceleration,
@@ -254,7 +274,50 @@ public:
 
     //! List of degree/order terms that are to be saved
     std::vector< std::pair< int, int > > componentIndices_;
+=======
+            const int componentIndex = -1,
+            const bool useAccelerationNorm = false ):
+        SingleDependentVariableSaveSettings(
+            useAccelerationNorm ? spherical_harmonic_acceleration_norm_terms_dependent_variable :
+                                  spherical_harmonic_acceleration_terms_dependent_variable,
+            bodyUndergoingAcceleration, bodyExertingAcceleration,
+            componentIndex ), componentIndices_( componentIndices ){ }
+>>>>>>> origin/master
 
+    //! Constructor.
+    /*!
+     *  Constructor. for saving all terms up to a given degree/order.
+     *  \param bodyUndergoingAcceleration Name of body undergoing the acceleration.
+     *  \param bodyExertingAcceleration Name of body exerting the acceleration.
+     *  \param maximumDegree Maximum degree to which terms are to be saved.
+     *  \param maximumOrder Maximum order to which terms are to be saved.
+     *  \param componentIndex Index of the acceleration vectors component to be saved. By default -1, i.e. all the components
+     *  are saved.
+     */
+    SphericalHarmonicAccelerationTermsDependentVariableSaveSettings(
+            const std::string& bodyUndergoingAcceleration,
+            const std::string& bodyExertingAcceleration,
+            const int maximumDegree,
+            const int maximumOrder,
+            const int componentIndex = -1,
+            const bool useAccelerationNorm = false ):
+        SingleDependentVariableSaveSettings(
+            useAccelerationNorm ? spherical_harmonic_acceleration_norm_terms_dependent_variable :
+                                  spherical_harmonic_acceleration_terms_dependent_variable,
+            bodyUndergoingAcceleration, bodyExertingAcceleration,
+            componentIndex )
+    {
+        for( int i = 0; i <= maximumDegree; i++ )
+        {
+            for( int j = 0; ( j <= i && j <= maximumOrder ); j++ )
+            {
+                componentIndices_.push_back( std::make_pair( i, j ) );
+            }
+        }
+    }
+
+    //! List of degree/order terms that are to be saved
+    std::vector< std::pair< int, int > > componentIndices_;
 };
 
 //! Class to define settings for saving a single torque (norm or vector) during propagation.

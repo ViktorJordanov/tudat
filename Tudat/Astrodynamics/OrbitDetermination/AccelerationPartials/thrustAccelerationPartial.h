@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -129,7 +133,11 @@ protected:
     //! Function to compute the partial derivative w.r.t. the deltaV values of the momentum desaturation maneuvers
     /*!
      * Function to compute the partial derivative w.r.t. the deltaV values of the momentum desaturation maneuvers
+<<<<<<< HEAD
      * \param partial Partial derivative w.r.t. deltaV values of the momentum desaturation maneuvers
+=======
+     * \param accelerationPartial Partial derivative w.r.t. deltaV values of the momentum desaturation maneuvers
+>>>>>>> origin/master
      */
     void wrtDesaturationDeltaVValues( Eigen::MatrixXd& accelerationPartial );
 

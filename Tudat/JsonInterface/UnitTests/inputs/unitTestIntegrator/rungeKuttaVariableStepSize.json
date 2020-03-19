@@ -11,4 +11,8 @@
   "type": "rungeKuttaVariableStepSize",
   "initialTime": -0.3,
   "areTolerancesDefinedAsScalar": true
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/master

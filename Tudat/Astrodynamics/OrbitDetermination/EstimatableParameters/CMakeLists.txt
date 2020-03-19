@@ -1,4 +1,8 @@
+<<<<<<< HEAD
  #    Copyright (c) 2010-2018, Delft University of Technology
+=======
+ #    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  #    All rigths reserved
  #
  #    This file is part of the Tudat. Redistribution and use in source and
@@ -36,6 +40,13 @@ set(ESTIMATABLE_PARAMETERS_HEADERS
   "${SRCROOT}${ESTIMATABLEPARAMETERSDIR}/directTidalTimeLag.h"
   "${SRCROOT}${ESTIMATABLEPARAMETERSDIR}/meanMomentOfInertiaParameter.h"
   "${SRCROOT}${ESTIMATABLEPARAMETERSDIR}/desaturationDeltaV.h"
+<<<<<<< HEAD
+=======
+  "${SRCROOT}${ESTIMATABLEPARAMETERSDIR}/periodicSpinVariation.h"
+  "${SRCROOT}${ESTIMATABLEPARAMETERSDIR}/polarMotionAmplitude.h"
+  "${SRCROOT}${ESTIMATABLEPARAMETERSDIR}/coreFactor.h"
+  "${SRCROOT}${ESTIMATABLEPARAMETERSDIR}/freeCoreNutationRate.h"
+>>>>>>> origin/master
 )
 
 # Add static libraries.

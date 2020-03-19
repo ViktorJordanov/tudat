@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*    Copyright (c) 2010-2018, Delft University of Technology
+=======
+/*    Copyright (c) 2010-2019, Delft University of Technology
+>>>>>>> origin/master
  *    All rigths reserved
  *
  *    This file is part of the Tudat. Redistribution and use in source and
@@ -364,7 +368,10 @@ void solveLambertProblemGooding( const Eigen::Vector3d& cartesianPositionAtDepar
     if ( !rootFinder.get( ) )
     {
         rootFinder = std::make_shared< root_finders::NewtonRaphson >( 1.0e-12, 1000 );
+<<<<<<< HEAD
 //        rootFinder = std::make_shared< root_finders::NewtonRaphson >( 1.0e-10, 2000 );
+=======
+>>>>>>> origin/master
     }
 
     // Normalize positions.
